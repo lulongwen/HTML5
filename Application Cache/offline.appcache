@@ -1,0 +1,18 @@
+
+CACHE MANIFEST
+
+#version 1.0
+
+CACHE:
+    # 需要缓存的文件
+    /css/index.css
+    /img/1.jpg
+    /logo.png
+
+NETWORK:
+    # 每次重新拉取的文件，* 代表所有
+    *
+
+FALLBACK:
+    # 离线状态下代替文件
+    / offline.html

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localStorage 本地存储</title>
+
+</head>
+<body>
+<script>
+
+  localStorage.setItem('age', 100);
+
+  localStorage.name = 'langwen'; // 以对象方式设置
+
+  var name = localStorage.getItem('name');
+
+  // var name = localStorage.name;
+
+  console.log(name)
+
+
+  localStorage.removeItem('name'); // 清除单个
+
+  localStorage.clear(); // 清除所有
+
+  localStorage.key(0); // 获取第一个
+  localStorage.key(1); // 获取第二个
+
+  localStorage.length // 长度
+
+
+  // 遍历输出 本地存储
+  function showStorage(){
+    var length = localStorage.length;
+    if(!length) return;
+    for(var i=0; i<length; i++){
+      var key = localStorage.key(i);
+      var val = localStorage.getItem(key);
+      console.log(key, val);
+    }
+  }
+
+
+  // localStorage Event
+  window.addEventListener('storage', storageHandle, false);
+  function storageHandle(ev){
+    var key = ev.key; // 数据名称
+    var old_value = ev.oldValue; // 以前的值
+    var new_value = ev.newValue; // 新的值
+    var url = ev.url; // 链接
+    var area = ev.storageArea; // 存储
+  }
+</script>
+</body>
+</html>
