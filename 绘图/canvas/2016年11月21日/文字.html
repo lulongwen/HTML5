@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400" style="border: 1px solid #f60;"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		cxt.beginPath();
+		cxt.moveTo(0,200);
+		cxt.lineTo(600,200);
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.moveTo(300,0);
+		cxt.lineTo(300,400);
+		cxt.stroke();
+
+		cxt.font = 'bold 80px Arial';
+		cxt.textAlign = 'center';  // left  right
+		cxt.textBaseline = 'middle';  //bottom    top
+		// cxt.fillStyle = 'red';
+		// cxt.fillText('hello canvas',300,200);
+		// cxt.lineWidth = 4;
+		// cxt.strokeStyle = 'pink'
+		// cxt.strokeText('hello canvas',300,200);
+
+		var str = 'hello canvas';
+
+		var w = cxt.measureText(str).width;
+
+		console.log(w);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

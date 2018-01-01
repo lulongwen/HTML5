@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>图片缩略图 兼容IE9以下</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <style>
+    div{
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>兼容 IE9以下浏览器</h1>
+  <input type="file" size="20" id="file">
+
+  <div id="box"></div>
+  <div id="text"></div>
+
+  <script>
+    var file = document.getElementById('file');
+    file.onchange = function preview(){
+      var box = document.getElementById('box');
+      var div = document.createElement('div');
+      document.body.appendChild(div);
+
+      div.style.width = '120px';
+      div.style.height = '120px';
+      // css滤镜过滤器，主要用来设置图片透明度，
+      // 设置或检索滤镜作用的对象的图片在对象容器边界内的显示方式
+      div.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod= scale)";
+      div.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src= this.value;
+      box.appendChild(div);
+
+      document.getElementById('text').innerHTML = this.value;
+    }
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

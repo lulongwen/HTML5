@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>HTML5 file API - 卢珑文</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="keywords" content="files">
+	<meta name="description" content="fileReader">
+	<meta name="generator" content="Visual Studio Code">
+	<meta name="author" content="卢珑文">
+	<meta name="robots" content="index,follow">
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/fira/fira_code.css">
+  <style>
+    .list-group{
+      margin-top: 1rem;
+    }
+    .list-group-item{
+      border: 2px dashed #eee;
+    }
+    img.rounded{
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+    <div class="col-12">
+      <h1>window.URL.createObjectURL(item)</h1><hr>
+      <p>
+        <code>document.form.upload.files 获取文件</code><br>
+        <code>window.URL.createObjectURL(obj) 创建 URL</code><br>
+        <code>window.URL.revokeObjectURL(obj) 删除 URL</code><br>
+      </p>
+
+      <form action="" name="form">
+        <p>
+          <button class="btn btn-success">上传文件</button>
+          <span class="badge badge-pill badge-success float-right">0</span>
+        </p>
+        <!-- multiple 同时选择多个 -->
+        <input type="file" name="upload"  id="upload" multiple class="d-none">
+        <ul class="list-group">
+          <li class="list-group-item">没有图片！</li>
+        </ul>
+      </form>
+
+    </div>
+	</div>
+</div>
+
+<script>
+  // 获取 form
+  var form = document.forms[0];
+	var btn = form.querySelector('.btn');
+  var list = form.querySelector('.list-group');
+  var badge = form.querySelector('.badge');
+
+
+	// 事件伪装，点击按钮触发 input的 change
+  // 真正的input框被隐藏了，按钮点击时触发 input的 click 事件
+	btn.addEventListener('click', function(ev){
+	  ev.preventDefault();
+    form.upload.click();
+  }, false);
+
+
+  form.addEventListener('change', fileInfo, false);
+  function fileInfo(ev){
+    console.log(this, 'this')
+    // console.log(ev);
+    var files = ev.target.files; // this.upload.files
+    var length = files.length;
+    var li = '';
+    list.innerHTML = '';
+
+    badge.innerText = length;
+    for(var i=0; i<length; i++){
+      var item = files.item(i); // & files[i]
+
+      var size = Math.round(item.size/1024/1024 *100) /100 + 'MB'; // size 是字节
+      var alt = item.name;
+      var type = item.type;
+      // dateObject.toDateString() 把 Date对象日期转换为字符串并返回
+      var time = item.lastModifiedDate.toLocaleDateString().replace(/\//g, '-');
+
+      var url = window.URL.createObjectURL(item);
+      li = `<li class="list-group-item">
+              <img src="${url}" width="100" class="rounded float-left">
+              ${alt} ${time}
+              <span class="badge badge-success badge-pill">${size}</span>
+              <button class="btn btn-sm btn-danger float-right">删除</button>
+             </li>`;
+      list.innerHTML += li;
+      // 加载成功后 吊销图片
+      window.URL.revokeObjectURL(item);
+    }
+  }
+
+
+
+  // 点击删除
+  list.addEventListener('click', removeLi, false);
+  function removeLi(ev){
+    // ev.preventDefault();
+    var self = ev.target.tagName.toLocaleLowerCase() == 'button';
+    var li = ev.target.parentElement;
+    var length = this.childNodes.length;
+
+    this.removeChild(li);
+    length -= 1;
+    badge.innerText = length;
+    if(!length)
+      location.reload(); // 重载页面
+  }
+
+
+
+</script>
+</body>    
+</html>

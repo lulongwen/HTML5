@@ -1,0 +1,27 @@
+CACHE MANIFEST
+
+# #号是注释的意思，更新 HTML文件需要更新版本号
+#version 1.6
+
+
+# 缓存的文件
+# 相对路径是相对于 .offline.appcache文件
+CACHE:
+/favicon.ico
+../../assets/css/bootstrap.css
+../../assets/js/jquery.min.js
+../../assets/js/bootstrap.min.js
+
+
+# 需要联网的资源，不走缓存，直接读取服务器的文件
+NETWORK:
+# ../../assets/
+*
+
+
+# 离线状态下代替文件，中间要有空格，一定要换行
+FALLBACK:
+offline.html
+../../assets/images/ ../../assets/images/default.jpg
+
+

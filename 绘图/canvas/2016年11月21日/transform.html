@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400" style="border: 1px solid red;"></canvas>
+	<script>
+	var canvas = document.getElementById('canvas');
+	var cxt = canvas.getContext('2d');
+	
+	// x = x + dx;  y = y + dy;
+	// x = x * dx;  y = y * dy;
+	// x = Math.cos(angle)*x - Math.sin(angle)*y;
+	// y = Math.cos(angle)*y + Math.sin(angle)*x;
+	// x = ax + cy + e;
+	// y = bx + dy + f;
+	cxt.rotate(Math.PI / 4)
+	//cxt.transform(1,0,0,1,50,50);
+	cxt.setTransform(1,0,0,1,50,50);
+	cxt.beginPath();
+	cxt.fillStyle = '#f88';
+	cxt.fillRect(150,50,200,100);
+	
+	
+
+	
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Notifications 向用户配置和显示桌面通知</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-warning d-none" role="alert">
+        您已关闭桌面通知
+      </div>
+
+      <h1>Notification 桌面通知</h1>
+      <hr>
+      <button class="btn btn-success">显示通知</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // 判断浏览器是否支持 桌面通知
+  if(!window.Notification){
+    alert('您的浏览器不支持通知消息');
+  }
+  // 检查用户是否同意接受通知
+  else if(Notification.permission === 'granted'){
+    // 创建通知
+    showMsg();
+    // var notification = new Notification('你好呀！');
+  }
+  else if( Notification.permission !== 'denied'){
+    // 调用requestPermission方法，让用户选择是否允许桌面提醒
+    Notification.requestPermission(function(permission){
+      // 如果用户同意，就可以向他发送通知
+      if(permission === 'granted'){
+        // 创建通知
+        showMsg();
+      }
+    });
+  }
+
+
+  function showMsg(){
+    // 桌面应用-消息通知
+    var notify = new Notification('新年提醒',{
+      body: '明天是新年，恭喜发财',
+      icon: 'icon.png',
+      tag: 1
+    });
+
+    // 显示通知
+    notify.onshow = function(){
+      setTimeout(function(){
+        notify.close();
+      }, 5000)
+    }
+
+    // 点击通知
+    notify.onclick = function(){
+      location.href="http://www.jd.com";
+    }
+
+    // 关闭桌面通知
+    notify.onclose = function(){
+      var alert = document.querySelector('.alert');
+      alert.classList.remove('d-none');
+    }
+  }
+
+</script>
+</body>
+</html>

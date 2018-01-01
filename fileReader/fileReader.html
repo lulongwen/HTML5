@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="utf-8">
+  <title>HTML5 fileReader - 卢珑文</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="keywords" content="files">
+  <meta name="description" content="fileReader">
+  <meta name="generator" content="Visual Studio Code">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/fira/fira_code.css">
+  <style>
+    .list-group, .progress{
+      margin-top: 1rem;
+    }
+    .list-group-item{
+      border: 2px dashed #eee;
+    }
+    img.rounded{
+      margin-right: 10px;
+    }
+
+    .progress-bar{
+      animation: round 20s linear infinite;
+    }
+    @keyframes round{
+      from {
+        background-position: 0% 0%;
+      }
+      to {
+        background-position: 600px 0%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1> new FileReader()</h1><hr>
+      <p>
+        <code> readAsArrayBuffer(blob) </code><br>
+        <code> readAsBinaryString  二进制，非标准，W3C不推荐</code><br>
+        <code> readAsDataURL 把文件解析为base64格式的编码</code><br>
+        <code> readAsText 解析文本</code><br>
+      </p>
+
+      <form action="" name="form">
+        <p>
+          <button class="btn btn-success">上传文件</button>
+          <b class="size"></b>
+          <span class="badge badge-pill badge-success float-right">0</span>
+        </p>
+        <!-- multiple 同时选择多个 -->
+        <input type="file" name="upload"  id="upload" multiple class="d-none">
+        <ul class="list-group">
+          <li class="list-group-item">没有图片！</li>
+        </ul>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // 获取 form
+  var form = document.forms[0];
+  var btn = form.querySelector('.btn');
+  var list = form.querySelector('.list-group');
+  var badge = form.querySelector('.badge');
+
+
+  // 事件伪装，点击按钮触发 input的 change
+  // 真正的input框被隐藏了，按钮点击时触发 input的 click 事件
+  btn.addEventListener('click', function(ev){
+    ev.preventDefault();
+    return form.upload.click();
+  }, false);
+
+
+  form.addEventListener('change', fileInfo, false);
+  function fileInfo(ev){
+    // console.log(ev);
+    var files = ev.target.files; // this.upload.files
+    var length = files.length;
+    var li = '';
+    var totalSize = 0;
+
+    var progress = document.createElement('div');
+    progress.classList.add('progress');
+    progress.innerHTML = `<div class="progress-bar progress-bar-striped bg-success" style="width: 16%" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100">16%</div>`;
+
+    if(!length) return;
+    list.innerHTML = '';
+    badge.innerText = length;
+    for(var i=0; i<length; i++){
+      var item = files.item(i); // & files[i]
+
+      // 每次循环都需要实例化一个 new FileReader() 对象
+      var reader = new FileReader();
+      reader.readAsDataURL(item);
+      reader.onloadstart = function(){
+        form.insertBefore(progress, list);
+      }
+      reader.onprogress = function(ev){
+        /**
+         * ev.loaded 上传进度
+         * ev.total 文件大小
+         * ev.timeStamp 时间戳
+         */
+        var status = Math.round( ev.loaded / ev.total *100) +'%';
+        var bar = form.querySelector('.progress-bar');
+        bar.style.width = status;
+        bar.innerText = status;
+        bar.setAttribute('aria-valuenow', status);
+      }
+
+      reader.onload = function(ev){
+        var url = this.result;
+        var size = Math.round(item.size/1024/1024 *100) /100 + 'MB'; // size 是字节
+        var alt = item.name;
+        var type = item.type;
+        var time = item.lastModifiedDate.toLocaleDateString().replace(/\//g, '-');
+
+        totalSize += item.size;
+        form.querySelector('.size').innerText = `${totalSize} 字节`;
+        // form.querySelector('.size').innerText = Math.round(totalSize/1024/1024*100)/100+ 'MB';
+
+        li = `<li class="list-group-item">
+              <img src="${url}" width="100" class="rounded float-left">
+              ${alt} ${time}
+              <span class="badge badge-success badge-pill">${size}</span>
+              <button class="btn btn-sm btn-danger float-right">删除</button>
+             </li>`;
+        list.innerHTML += li;
+
+        // var status = form.querySelector('.progress-bar').style.width;
+        // var lock = parseInt(status) == 100;
+        // if(lock)
+        //   form.removeChild(progress);
+        // form.removeChild(progress);
+      }
+    }
+
+    console.log(form.querySelector('.progress-bar'))
+  }
+
+
+
+  // 点击删除
+  list.addEventListener('click', removeLi, false);
+  function removeLi(ev){
+    // ev.preventDefault();
+    var self = ev.target.tagName.toLocaleLowerCase() == 'button';
+    var li = ev.target.parentElement;
+    var length = this.childNodes.length;
+
+    this.removeChild(li);
+    length -= 1;
+    badge.innerText = length;
+    if(!length)
+      location.reload(); // 重载页面
+  }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <canvas id="canvas" style="border:1px solid; display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
+        <script>
+
+            var canvas = document.getElementById("canvas");
+            canvas.height = 500;
+            canvas.width = 400;
+            var cxt = canvas.getContext("2d");
+            cxt.moveTo(33,43) ;
+            cxt.quadraticCurveTo(55,40,120, 83);
+            cxt.moveTo(33,43);
+            cxt.lineTo(64,145);
+            cxt.moveTo(33,43);        
+            cxt.quadraticCurveTo(73,92, 89,130);        
+            cxt.quadraticCurveTo(75,127,81,136);
+            cxt.lineTo(73,136) ;
+            cxt.lineTo(74,139);            
+            cxt.quadraticCurveTo(36,164,24,213);
+            cxt.bezierCurveTo(52,215,49,223,41,233) ;            
+            cxt.quadraticCurveTo(45,228,71,260);            
+            cxt.bezierCurveTo(71,350,300,350,300,260);            
+            cxt.quadraticCurveTo(310,245,330,240);
+            cxt.bezierCurveTo(320,238,325,225,345,220);
+            cxt.quadraticCurveTo(335,190,300,145);
+            cxt.lineTo(305,120);
+            cxt.bezierCurveTo(290,114,299,100,310,100);
+            cxt.lineTo(330,50);                        
+            cxt.quadraticCurveTo(288,100,277,137);
+            cxt.quadraticCurveTo(297,122,286,137);            
+            cxt.quadraticCurveTo(303,128,293,142);            
+            cxt.quadraticCurveTo(303,130,300,142);
+            
+            
+            
+            cxt.moveTo(330,50);
+            cxt.quadraticCurveTo(280,60,246,83);
+            cxt.moveTo(247,89);
+            cxt.quadraticCurveTo(250,50,180,56);
+            cxt.quadraticCurveTo(140,60,100,105);            
+            cxt.bezierCurveTo(90,145,250,120,247,89);
+            cxt.moveTo(105,100);
+            cxt.quadraticCurveTo(120,115,145,113);
+            cxt.quadraticCurveTo(240,110,243,74);                                    
+            cxt.stroke();    
+                
+            cxt.beginPath();
+            cxt.moveTo(100,130);
+            cxt.lineTo(160,160);
+            cxt.moveTo(210,170);
+            cxt.lineTo(270,140);
+            cxt.lineWidth=8;
+            cxt.closePath();
+            cxt.stroke();
+            
+            cxt.beginPath();
+            cxt.moveTo(90,180);
+            cxt.lineTo(170,190);            
+            cxt.moveTo(200,183);
+            cxt.lineTo(280,193);
+            cxt.lineWidth=1;
+            cxt.moveTo(102,183);            
+            cxt.bezierCurveTo(120,215,150,200,160,188);
+            cxt.moveTo(212,186);
+            cxt.bezierCurveTo(230,213,260,203,273,193);            
+            cxt.stroke();
+            
+            cxt.beginPath();
+            cxt.arc(130,184,7,0.1*Math.PI,Math.PI);
+            cxt.fillStyle="#6f6f6f";            
+            cxt.fill();
+            
+            cxt.beginPath();
+            cxt.arc(240,187,7,0.1*Math.PI,Math.PI);
+            cxt.fillStyle="#6f6f6f";
+            cxt.closePath();
+            cxt.stroke();
+            cxt.fill();
+            
+            cxt.beginPath();
+            cxt.moveTo(160,235);            
+            cxt.quadraticCurveTo(180,210,205,233);
+            cxt.lineTo(205,238);
+            cxt.quadraticCurveTo(180,255,160,239);
+            cxt.closePath();
+            cxt.fillStyle = "black";
+            cxt.stroke();
+            cxt.fill();
+            
+            cxt.beginPath();
+            cxt.moveTo(165,229);
+            cxt.quadraticCurveTo(173,223,180,233);
+            cxt.quadraticCurveTo(169,243,161,232);
+            cxt.fillStyle = "white";            
+            cxt.stroke();
+            cxt.fill();
+                                    
+            cxt.moveTo(120,255);                
+            cxt.quadraticCurveTo(182,285,255,255);
+            cxt.bezierCurveTo(250,300,130,300,120,255);            
+            
+            cxt.moveTo(123,263);
+            cxt.lineTo(133,268);
+            cxt.lineTo(133,263);
+            cxt.lineTo(138,269);
+            cxt.lineTo(153,274);
+            
+            cxt.moveTo(252,265);
+            cxt.lineTo(240,270);
+            cxt.lineTo(238,263);
+            cxt.lineTo(236,272);
+            cxt.lineTo(223,274);
+                    
+                    
+            cxt.moveTo(88,188);
+            cxt.lineTo(120,280);
+            cxt.moveTo(75,210);
+            cxt.lineTo(104,198);
+            cxt.moveTo(81,220);
+            cxt.lineTo(105,210);
+            cxt.moveTo(83,230);
+            cxt.lineTo(110,218);            
+            cxt.moveTo(95,240);
+            cxt.lineTo(115,230);                        
+            cxt.moveTo(95,255);
+            cxt.lineTo(124,240);            
+            cxt.moveTo(103,265);
+            cxt.lineTo(120,255);            
+            cxt.moveTo(110,273);
+            cxt.lineTo(122,265);
+            
+            //绘制的是头上缝补的那个地方
+            cxt.moveTo(190,55);
+            cxt.lineTo(175,75);            
+            cxt.quadraticCurveTo(210,68,227,80);
+            cxt.quadraticCurveTo(235,66,241,66);
+            cxt.lineTo(241,66);            
+            cxt.moveTo(180,61);
+            cxt.lineTo(192,61);            
+            cxt.moveTo(173,67);
+            cxt.lineTo(186,67);
+            cxt.moveTo(180,80);
+            cxt.lineTo(191,67);
+            cxt.moveTo(189,78);
+            cxt.lineTo(199,67);
+            cxt.moveTo(200,78);
+            cxt.lineTo(205,67);
+            cxt.moveTo(205,78);
+            cxt.lineTo(213,67);
+            cxt.moveTo(212,78);
+            cxt.lineTo(224,67);
+            cxt.moveTo(225,73);
+            cxt.lineTo(236,78);
+            cxt.moveTo(229,67);
+            cxt.lineTo(240,73);
+            
+            cxt.moveTo(100,307);
+            cxt.quadraticCurveTo(160,356,210,360);            
+            cxt.quadraticCurveTo(250,350,281,300);
+            
+            cxt.moveTo(115,320);            
+            cxt.quadraticCurveTo(120,430,220,427);
+            cxt.quadraticCurveTo(305,410,275,310);
+            cxt.stroke();    
+            cxt.closePath();
+            
+            //肚子上的圆圈
+            cxt.beginPath();
+            cxt.arc(210,395,10,0,Math.PI*0.3,true);
+            cxt.moveTo(200,390);
+            cxt.lineTo(213,398);
+            cxt.moveTo(208,390);
+            cxt.lineTo(208,400);
+            cxt.lineWidth = 2;
+            cxt.stroke();        
+                        
+            //左腿
+            cxt.beginPath();
+            cxt.lineWidth = 1;
+            cxt.moveTo(150,408);
+            cxt.lineTo(139,433);
+            cxt.lineTo(148,450);
+            cxt.quadraticCurveTo(110,451,126,473);
+            cxt.moveTo(160,413);
+            cxt.lineTo(151,435);
+            cxt.lineTo(161,453);
+            cxt.lineTo(148,450);
+            cxt.quadraticCurveTo(193,460,166,473);
+            cxt.lineTo(126,473);
+            cxt.moveTo(145,455);
+            cxt.quadraticCurveTo(122,458,130,470);
+            cxt.moveTo(155,458);            
+            cxt.quadraticCurveTo(138,458,140,470);                    
+            cxt.stroke();                            
+            
+            //右腿
+            cxt.moveTo(250,415);
+            cxt.lineTo(258,435);
+            cxt.lineTo(247,450);
+            cxt.moveTo(262,409);
+            cxt.lineTo(272,435);
+            cxt.lineTo(262,450);            
+            cxt.quadraticCurveTo(204,458,242,469);
+            cxt.moveTo(262,450);
+            cxt.quadraticCurveTo(294,448,276,469);
+            cxt.lineTo(242,469);
+            cxt.moveTo(260,455);
+            cxt.quadraticCurveTo(274,456,273,469);
+            cxt.moveTo(247,458);
+            cxt.quadraticCurveTo(260,456,263,469);
+            
+            //左手
+            cxt.moveTo(97,307);
+            cxt.quadraticCurveTo(77,330,74,380);
+            cxt.quadraticCurveTo(63,380,64,403);
+            cxt.quadraticCurveTo(68,440,77,417);
+            cxt.moveTo(74,400);
+            cxt.quadraticCurveTo(80,440,86,420);
+            cxt.moveTo(84,400);
+            cxt.quadraticCurveTo(78,420,93,420);
+            cxt.quadraticCurveTo(97,410,93,400);
+            cxt.moveTo(95,410);                
+            cxt.quadraticCurveTo(113,430,100,395);
+            cxt.quadraticCurveTo(104,387,91,380);
+            cxt.quadraticCurveTo(90,357,116,318);
+            
+            //右脚
+            cxt.moveTo(285,295);
+            cxt.quadraticCurveTo(315,330,330,370);
+            cxt.moveTo(275,310);
+            cxt.quadraticCurveTo(295,330,310,375);
+            cxt.quadraticCurveTo(302,380,305,396);
+            cxt.quadraticCurveTo(303,420,316,403);
+            cxt.moveTo(316,399);
+            cxt.quadraticCurveTo(322,426,325,393);
+            
+            cxt.moveTo(325,400);
+            cxt.quadraticCurveTo(329,428,333,395);
+            cxt.moveTo(333,400);
+            cxt.quadraticCurveTo(344,425,341,390);
+            cxt.quadraticCurveTo(338,368,330,370);        
+            cxt.stroke();
+            
+        </script>
+    </head>
+</html>

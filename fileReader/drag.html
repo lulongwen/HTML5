@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>URL.createObjectURL(obj)-drag drop拖拽上传-卢珑文</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="keywords" content="files">
+	<meta name="description" content="fileReader">
+	<meta name="generator" content="Visual Studio Code">
+	<meta name="author" content="卢珑文">
+	<meta name="robots" content="index,follow">
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/fira/fira_code.css">
+	<style>
+		.list-group{
+			margin-top: 1rem;
+		}
+		.list-group-item{
+			border: 2px dashed #eee;
+		}
+		img.rounded{
+			margin-right: 10px;
+		}
+    .drag{
+      height: 160px;
+      text-align: center;
+      color:#666;
+    }
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<section class="col-12">
+			<h1>document.form.upload.files - file API</h1><hr>
+			<p>
+				<code>dropover</code><br>
+				<code>dataTransfer Event</code><br>
+				<code>window.URL.revokeObjectURL(obj) 删除 URL</code><br>
+				关闭页面，自动删除创建的 URL
+			</p>
+
+			<form action="" name="form">
+				<!-- multiple 同时选择多个 accept="image/*" -->
+				<input type="file" name="upload" accept="image/gif, image/jpeg, image/png"  id="upload" multiple class="form-control">
+
+				<ul class="list-group">
+					<li class="list-group-item drag">拖拽图片到这里</li>
+				</ul>
+			</form>
+
+		</section>
+	</div>
+</div>
+
+<script>
+
+  var form = document.forms[0];
+  var list = form.querySelector('.list-group');
+
+  form.addEventListener('change', fileInfo, false);
+  function fileInfo(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    // 点击 & 拖拽
+    var files = ev.target.files || ev.dataTransfer.files;
+    var li = '';
+    list.innerHTML = '';
+    for(var i=0; len= files.length, i<len; i++){
+      var item = files.item(i); // & files[i]
+
+      var size = Math.round(item.size/1024/1024 *100) /100 + 'MB'; // size 是字节
+      var alt = item.name;
+      var type = item.type;
+      var time = item.lastModifiedDate.toLocaleDateString().replace(/\//g, '-');
+
+      var url = window.URL.createObjectURL(item);
+      li = `<li class="list-group-item">
+              <img src="${url}" width="100" class="rounded float-left">
+              ${alt} ${time} ${type}
+              <span class="badge badge-success badge-pill">${size}</span>
+              <button class="btn btn-sm btn-danger float-right">删除</button>
+             </li>`;
+      list.innerHTML += li;
+      window.URL.revokeObjectURL(item);
+    }
+  }
+
+
+  /**
+   * 监听 drop & dragover Event
+   * 必须要阻止 drag 和 dropover 的事件，才能触发 drop
+   */
+  list.addEventListener('drop', fileInfo, false);
+  list.addEventListener('dragover', dragOver, false);
+  function dragOver(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    console.log('drag over');
+    console.log(ev)
+  }
+
+
+  // 点击删除
+  list.addEventListener('click', removeLi, false);
+  function removeLi(ev){
+    // ev.preventDefault();
+    var self = ev.target.tagName.toLocaleLowerCase() == 'button';
+    var li = ev.target.parentElement;
+    var length = this.childNodes.length;
+
+    this.removeChild(li);
+    length -= 1;
+    if(!length)
+      location.reload(); // 重载页面
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" context="IE=edge">
+	<title></title>
+<style>
+	body{
+		margin:0;
+		background: #333;
+	}
+	div{
+		width:800px;
+		height:600px;
+		margin:30px auto;
+	}
+	#canvas{
+		background-color: #fff;
+	}
+</style>
+</head>
+<body>
+
+<div>
+
+	<!-- canvas 默认宽 300px， 高 150px -->
+	<canvas id="canvas" width="600" height="600">
+		浏览器不支持canvans
+	</canvas>
+
+</div>
+	
+<script>
+	var canvas =document.getElementById('canvas');
+	var context =canvas.getContext('2d');
+	
+	// 绘制路径
+		// .beginPath() 开始绘制路径
+		// .closePath() 结束绘制路径
+		// .moveTo() 移动到绘制的新目标点
+		// .lineTo() 新的目标点
+		// 
+		// .stroke() 画线，默认黑色
+		// .fill() 填充，默认黑色
+		// .rect() 矩形区域
+		// .clearRect() 删除一个画布的矩形区域
+		// .save() 保存路径
+		// .restore() 回复路径
+		
+
+	// 开始绘制
+	context.beginPath();
+		context.moveTo(100, 50); // 开始
+		context.lineTo(200, 200); // 新线条
+		context.lineTo(400, 200);
+	// 结束绘制
+	context.closePath();
+
+	// 画线，不写stroke 什么都没有
+	context.stroke();
+
+/***    针对不同的绘制，要闭合路径      ***/
+
+	// 开始绘制
+	context.beginPath();
+		context.moveTo(100, 200); // 开始
+		context.lineTo(200, 400); // 新线条
+		context.lineTo(400, 400);
+	// 结束绘制
+	context.closePath();
+
+	context.fillStyle="#f60"; // 填充颜色
+	// 画线
+	context.fill();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localStorage 本地存储</title>
+
+</head>
+<body>
+<script>
+
+  // .setItem() 存储，如果key存在，就是更新value
+  localStorage.setItem('age', 100);
+
+  localStorage.name = 'langwen'; // 以对象方式设置
+
+  // .getItem() 获取，如果不存在，返回 null
+  var name = localStorage.getItem('name');
+
+  // var name = localStorage.name;
+
+  console.log(name)
+
+  // .removeItem(key) 删除指定的 key
+  localStorage.removeItem('name'); // 清除单个
+
+  // .clear() 全部清除
+  localStorage.clear(); // 清除所有
+
+  // .key(index) 获取key
+  localStorage.key(0); // 获取第一个
+  localStorage.key(1); // 获取第二个
+
+
+  // 存储 json数据,将一个对象转换成JSON格式的字符串，返回转换后的字符串
+  // var data =  {"title": "langwen"}
+  JSON.stringify(data);
+
+  // 获取 json数据 将数据解析成对象，返回解析后的对象
+  JSON.parse(data);
+
+
+  // .length 长度，遍历存储的key
+  localStorage.length // 长度
+
+  // 遍历输出 本地存储
+  function showStorage(){
+    var length = localStorage.length;
+    if(!length) return;
+    for(var i=0; i<length; i++){
+      var key = localStorage.key(i);
+      var val = localStorage.getItem(key);
+      console.log(key, val);
+    }
+  }
+
+
+  // localStorage Event
+  window.addEventListener('storage', storageHandle, false);
+  function storageHandle(ev){
+    console.log(ev);
+    var key = ev.key; // 数据名称
+    var old_value = ev.oldValue; // 以前的值
+    var new_value = ev.newValue; // 新的值
+    var url = ev.url; // 链接
+    var area = ev.storageArea; // 存储
+  }
+</script>
+</body>
+</html>

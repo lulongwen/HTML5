@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="utf-8">
+  <title>input file API 上传图片预览 - 卢珑文</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="keywords" content="files">
+  <meta name="description" content="fileReader">
+  <meta name="generator" content="Visual Studio Code">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <style>
+    form{
+      max-width: 600px;
+      margin: 3em auto;
+    }
+    .box{
+      margin-top: 15px;
+      padding: 15px;
+      border: 2px dashed #999;
+      border-radius: 2px;
+    }
+    .box span{
+      display: inline-block;
+      margin-right: 15px;
+      position: relative;
+    }
+    .box a{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100px;
+      line-height: 30px;
+      text-align: center;
+      color: #fafafa;
+      z-index: 9;
+      font-size: 12px;
+    }
+    .box a::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,.6);
+      width: 100%;
+      height: 30px;
+      z-index: -1;
+    }
+    .box img{
+      display: block;
+      width: 100px;
+      height: 100px;
+    }
+
+    .btn{
+      display: block;
+      width: 120px;
+      border-radius: 5px;
+      padding: 10px 15px;
+      text-shadow: rgba(0,0,0,.5) 0px -1px 0px;
+      font-size: 16px;
+      font-weight: 600;
+      transition-property: background-color;
+      transition-duration: .15s;
+      transition-timing-function: ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+      background-color: #64a8a6;
+      color: #dafffe;
+      box-shadow: 0px 0px 0px 1px #74b6b4 inset, 0px 4px 0px 0px #4a7c7b, 0px 5px 0px 0px #579291;
+      text-align: center;
+    }
+    .btn:active, .btn:focus{
+      background-color: #5a9896;
+      box-shadow: 0px 0px 0px 1px #65a9a7 inset, 0px 1px 0px 0px #355655, 0px 2px 0px 0px rgba(0,0,0,.15);
+    }
+  </style>
+</head>
+<body>
+  <!--
+  获取input:file 本地文件路径
+  // MDN
+  document.getElementById("imagePreview").filters
+      .item("DXImageTransform.Microsoft.AlphaImageLoader")
+      .src = document.getElementById("inputID").value;
+
+
+  // IE 6,7,8 能用
+      document.selection.createRange().text
+      document.selection.createRange() 获取用户选择文本
+
+  // IE9 如果 file获得焦点，则 document.selection.createRange() 拒绝访问
+      解决方法：
+      input.blur()
+      让页面的其他元素如 div，button获得焦点
+
+  // 火狐7.0
+      url = files.getAsDataURL();
+
+  // 获取 8.0及以上
+      url = window.URL.createObjectURL(files);
+
+
+  range = document.createRange();
+      var range = document.createRange();
+      range.setStart(startNode, startOffset);
+      range.setEnd(endNode, endOffset);
+
+  // HTML5
+      var reader = new FileReader();
+      reader.readAsDataURL(files);
+      reader.onload = function(ev){
+          url = ev.target.result;
+      };
+  -->
+  <form name="form">
+    <a class="btn">选择图片</a>
+    <input type="file" name="file" id="file" multiple style="display:none">
+    <div class="box"></div>
+  </form>
+
+
+  <script>
+    var form = document.form;
+    var upload = form.file;
+    var btn = form.querySelector('.btn');
+    var box = form.querySelector('.box');
+
+    btn.onclick = function(){
+        upload.click();
+    };
+
+    // if(upload.files) alert('支持 HTML5 files');
+
+    
+    upload.addEventListener('change', function fileFn(ev){
+      var files = ev.target.files; // this.files
+
+      for(var i=0; len= files.length, i<len; i++){
+        var item = files[i];
+        var url = window.URL.createObjectURL(item); // createObjectURL(obj)
+        var reader = new FileReader();
+
+        var span = document.createElement('span');
+        var a = document.createElement('a');
+        var img = new Image();
+
+        reader.readAsDataURL(item);
+        span.classList.add('view-img');
+        a.innerHTML = item.name;
+
+        img.classList.add('thumb');
+        img.width = img.height = '100';
+        img.src = url;
+
+        span.appendChild(img);
+        span.appendChild(a);
+        box.appendChild(span);
+      }
+    });
+  </script>
+</body>
+</html>

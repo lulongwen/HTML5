@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" style="border: 1px solid #f66;"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		var W = canvas.width = 600;
+		var H = canvas.height = 400;
+
+		var Particale = function(color){
+			this.x = Math.random() * W;
+			this.y = Math.random() * H;
+			this.r = Math.random() * 10 + 10;
+			this.vx = (Math.random() - 0.5) * 10;
+			this.vy = (Math.random() - 0.5) * 12;
+			this.color = color;
+			return this;
+		};
+
+		Particale.prototype.move = function(){
+			this.x += this.vx;
+			this.y += this.vy;
+			if(this.x - this.r < 0 || this.x + this.r > W){
+				this.vx = -this.vx;
+			}
+			if(this.y - this.r < 0 || this.y + this.r > H){
+				this.vy = -this.vy;
+			}
+			return this;
+		};
+		Particale.prototype.draw = function(cxt){
+			cxt.save();
+			cxt.fillStyle = this.color;
+			cxt.beginPath();
+			cxt.arc(this.x, this.y, this.r, 0, 2*Math.PI);
+			cxt.fill();
+			cxt.restore()
+
+			return this;
+		};
+
+		var p = [];
+
+		for(var i=0; i<3; i++){
+			var color = `rgba(${~~(Math.random() * 200 + 55)},${~~(Math.random() * 200 + 55)},${~~(Math.random() * 200 + 55)},${Math.round((Math.random() * 9 + 1))/10})`
+			p.push(new Particale(color))
+		}
+
+		function update(){
+			cxt.clearRect(0, 0, W, H);
+			p.forEach((item,i)=>{
+				item.move().draw(cxt);
+			});
+			requestAnimationFrame(update);
+		}
+
+		requestAnimationFrame(update);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

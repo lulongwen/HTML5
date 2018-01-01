@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" manifest="offline.appcache">
+<head>
+  <meta charset="UTF-8">
+  <title>Application Cache 离线缓存</title>
+  <!-- 是否做成 webAPP -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- 做成webAPP后，再次打开全屏显示，不显示浏览器的搜索框和按钮 -->
+  <meta name="apple-touch-fullscreen" content="yes">
+  <!-- webAPP图标 -->
+  <meta rel="apple-touch-icon" href="icon.png">
+  
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <section class="col-12">
+        <h1>Application Cache 离线缓存</h1>
+        <hr>
+      </section>
+      <div class="col-6">
+        <img src="../../assets/images/snow.jpg" class="rounded float-left img-fluid" alt="雪人">
+      </div>
+      <div class="col-6">
+        <img src="../../assets/images/gift.jpg" class="rounded float-left img-fluid" alt="礼物">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+
+<script>
+  window.addEventListener('load', cacheHandle, false);
+
+  function cacheHandle(){
+    // updateready 缓存事件
+    window.applicationCache.addEventListener('updateready', function(ev){
+      console.log(window.applicationCache.status);
+
+      if(window.applicationCache.status == window.applicationCache.UPDATEREADY){
+        window.applicationCache.swapCache();
+
+        if(confirm('A new version of this site is available. Load it?')){
+          window.location.reload();
+        }
+      }
+      else{
+        console.log('manifest did\'t change');
+      }
+    }, false)
+  }
+</script>
+</body>
+</html>

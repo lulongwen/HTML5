@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localStorage 本地存储-模拟百度存储CSS</title>
+  <style id="css"></style>
+</head>
+<body>
+<script>
+  var css = document.getElementById('css');
+  var cssItem = localStorage.getItem('css');
+
+  // 当本地没有才去请求接口
+  if(!cssItem){
+    console.log('not found');
+    function fn1(data){
+      var style = data[0].css;
+      localStorage.setItem('css', style);
+      css.innerHTML = style;
+    }
+    var script = document.createElement('script');
+    script.src= 'css.js';
+    document.head.appendChild(script);
+  }
+  else{
+    css.innerHTML = cssItem;
+  }
+</script>
+</body>
+</html>

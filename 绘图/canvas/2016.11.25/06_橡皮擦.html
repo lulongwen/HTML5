@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="500" style="border: 1px solid red;"></canvas>
+	<script src="drawPolygon.js"></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		var p = new Polygon({
+			x:200, y:200,
+			sides:5,
+			R: 100,
+			fc:'rgba(80,190,222,.5)'
+		});
+
+		p.fill(cxt).stroke(cxt);
+
+		var lastx,lasty;
+		var mouse = {x:0, y:0}
+		var down = false;
+
+		function easer(x,y){
+			cxt.save()
+			cxt.beginPath();
+			cxt.arc(x,y,18,0,2*Math.PI);
+			cxt.stroke();
+			cxt.clip();
+			cxt.restore();
+		}
+
+		function drawEaser(x,y){
+			cxt.beginPath();
+			cxt.arc(x,y,20,0,2*Math.PI);
+			cxt.clip();
+		}
+
+		function lastEase(x,y){
+			cxt.save();
+			drawEaser(x,y);
+			cxt.clearRect(0,0,600,500);
+			cxt.restore();
+		}
+
+		canvas.onmousedown = function(e){
+			down = true;
+			lastx = e.offsetX;
+			lasty = e.offsetY;
+		};
+
+		canvas.onmousemove = function(e){
+			if(!down) return false;
+
+			lastEase(lastx,lasty);
+			easer(e.offsetX,e.offsetY)
+			lastx = e.offsetX;
+			lasty = e.offsetY;
+		};
+
+		canvas.onmouseup = function(e){
+			down = false;
+		};
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

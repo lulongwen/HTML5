@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		var W = canvas.width;
+		var H = canvas.height;
+
+		/*var linerColor = cxt.createLinearGradient(0,0,canvas.width,canvas.height);
+		linerColor.addColorStop(0,'#FC3522');
+		linerColor.addColorStop(0.25,'#FE9C1E');
+		linerColor.addColorStop(0.5,'#FBFF19');
+		linerColor.addColorStop(0.75,'#51FF11');
+		linerColor.addColorStop(1,'#3D94F8');*/
+
+		var radialColor = cxt.createRadialGradient(W/2,H,0,W/2,H,400);
+		radialColor.addColorStop(0,'#FC3522');
+		radialColor.addColorStop(0.25,'#FE9C1E');
+		radialColor.addColorStop(0.5,'#FBFF19');
+		radialColor.addColorStop(0.75,'#51FF11');
+		radialColor.addColorStop(1,'#3D94F8');
+
+
+		cxt.beginPath();
+		cxt.fillStyle = radialColor;
+		cxt.fillRect(0,0,600,400);
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

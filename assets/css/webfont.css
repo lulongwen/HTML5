@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fira/eot/FiraCode-Medium.eot');
+  src: url('fira/eot/FiraCode-Medium.eot') format('embedded-opentype'), url('fira/woff2/FiraCode-Medium.woff2') format('woff2'), url('fira/woff/FiraCode-Medium.woff') format('woff'), url('fita/ttf/FiraCode-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}

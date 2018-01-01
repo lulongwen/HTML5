@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="box" style="width: 100px;height: 100px;position: absolute; left: 100px;top: 100px;background: red;"></div>
+	<script>
+		var div = document.getElementById('box');
+
+		// var timer = setInterval(function(){
+		// 	if(div.offsetLeft < 300){
+		// 		div.style.left = div.offsetLeft + 5 + 'px';
+		// 	}else{
+		// 		clearInterval(timer);
+		// 	}
+		// }, 8);
+
+		// function update(){
+		// 	div.style.left = div.offsetLeft + 5 + 'px';
+		// 	if(div.offsetLeft < 300){
+		// 		setTimeout(update, 16);
+		// 	}
+		// }
+		// update()
+
+		function update(){
+			div.style.left = div.offsetLeft + 5 + 'px';
+			if(div.offsetLeft < 300){
+				requestAnimationFrame(update);
+			}
+		}
+
+		requestAnimationFrame(update);
+
+
+	</script>
+</body>
+</html>

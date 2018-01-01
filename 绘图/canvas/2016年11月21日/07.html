@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400"></canvas>
+	<script>
+	var canvas = document.getElementById('canvas');
+	var cxt = canvas.getContext('2d');
+	
+	cxt.beginPath()
+	cxt.lineWidth = 5;
+	cxt.fillStyle = '#f88';
+	cxt.strokeStyle = 'rgba(80,190,230,1)';
+	//填充规则，非0环绕规则
+	cxt.arc(200,200,150,0,Math.PI*2,true);
+	cxt.arc(200,200,100,0,Math.PI*2);
+	cxt.stroke();
+	cxt.fill();
+	
+
+
+
+
+
+	</script>
+</body>
+</html>

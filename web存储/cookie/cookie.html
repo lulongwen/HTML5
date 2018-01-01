@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+<script>
+  /**
+   * document.cookie = 'key=value; expires';
+   * cookie默认生命周期是 关闭浏览器
+   *  - 延长声明周期： key=vlaue; expires= 设置的时间
+   *  - 延长声明周期： key=vlaue; expires= 1000*60*24
+   * cookie 当用户设置了 cookie，每个浏览器中都能看到
+   *  1. 每个域名下的 cookie的大小是有限制的
+   */
+
+  var nowTime = new Date().getTime();
+  setCookie('user', '霍去病', nowTime, 2);
+
+  var user = getCookie('user');
+  console.log(user);
+  console.log(getCookie('pass'));
+
+
+  document.onclick = function(){
+    removeCookie('user');
+  }
+
+
+  // 设置 cookie
+  function setCookie(key, val, setTime, time){
+    time = time || 0;
+    var date = new Date(setTime);
+    date.setDate( date.getDate()+ time );
+    if(time){
+      document.cookie = `${key}= ${val};expires=${date}`;
+    }
+    else{
+      document.cookie = `${key}=${val}`;
+    }
+  }
+
+
+  // 获取 cookie
+  function getCookie(key){
+    var str = document.cookie;
+    var arr = str.split(';');
+    var val = '';
+
+    arr.forEach(function(elem){
+      var lock = elem.split('=')[0] == key;
+      if(lock){
+        val = elem.split('=')[1];
+      }
+    });
+    if(!val)
+      return false;
+    else
+      return val;
+    // return val ? val : false;
+  }
+
+
+  // 删除 cookie
+  function removeCookie(key){
+    setCookie(key, 'remove', nowTime, -1);
+  }
+</script>
+</body>
+</html>
