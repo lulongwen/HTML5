@@ -1,14 +1,17 @@
 
-# HTML5 API
-- HTML5 API 更好的完成性能上的提升
+# HTML5 API的总结：
+    - HTML5 API更好的完成性能上的提升
+    - 已废弃的API
+        + ** Web SQL, 推荐 IndexedDB **
+        + ** Application Cache, 推荐 Service Workers **
+        + 从Firefox44起，当使用 AppCache 来提供离线页面支持时，会提示一个警告消息，来建议开发者使用 Service workers 来实现离线页面
 
-- HTML5存储的优势：
-    1. 存储空间大
-    2. 接口丰富
-    3. 数据相对安全
-    4. 关系型
-    5. 减少HTTP请求，省流量
-
+    - HTML5存储的优势：
+        1. 存储空间大
+        2. 接口丰富
+        3. 数据相对安全
+        4. 关系型
+        5. 减少HTTP请求，省流量，减轻服务器压力
 
 ## 本地存储
     1. localStorage
@@ -26,7 +29,15 @@
     2. SVG
     3. webGL
 
+## 动画
+- requestAnimationFrame
 
+## 图片
+- base64
+
+    HTML5 桌面通知
+    地理位置
+    websocket
 
 移动端总结
 响应式
