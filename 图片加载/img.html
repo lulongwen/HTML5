@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>图片加载</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <style>
+    html,body{
+      margin: 0;
+      height:100%;
+      overflow: hidden;
+    }
+    body img{
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!--
+  对于图片
+  onload 事件监听是否加载完成
+  onerror 图片加载失败
+
+  某张图片报错，用这个属性，查看是那张图片
+  ev.path[0].attributes[0].nodeValue
+  -->
+  <progress value="0" max="100"></progress>
+  <script>
+    let img = document.createElement('img');
+    img.src= "https://static.ioliu.cn/bing/PrudhoeOx_ZH-CN9011398773_1920x1080.jpg";
+    img.onload = function(){
+      document.body.appendChild(img);
+    }
+    img.onerror = function(ev){
+      console.log(ev.path[0]);
+      console.log(ev.path[0].attributes[0]);
+      console.log(ev.path[0].attributes[0].nodeValue);
+      document.body.append('图片加载失败');
+    }
+  </script>
+</body>
+</html>

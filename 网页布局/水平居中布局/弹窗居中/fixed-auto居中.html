@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>fixed - auto 居中</title>
+<style>
+	body{
+		margin:0;
+	}
+	.box{
+		position:fixed;
+		/*核心代码
+			left与right 必须出现，来控制水平方向，x
+			top与bottom 必须出现，来控制垂直方向，y
+			margin:auto; 必须出现，用来控制盒子居中
+		*/
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		margin: auto;
+
+		z-index:2;
+		width:500px;
+		height:500px;
+		background-color: rgba(0,0,0,.6);
+	}
+</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

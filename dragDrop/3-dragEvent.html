@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <hr>
+      <div>
+        <figure class="figure">
+          <img src="../assets/images/rock.png" id="img" class="figure-img img-fluid rounded" alt="rock" draggable>
+          <figcaption class="figure-caption">石头</figcaption>
+        </figure>
+
+        <figure class="figure" id="dropzone">
+          <img src="../assets/images/dropzone.png" class="figure-img img-fluid rounded" alt="拖放">
+          <figcaption class="figure-caption">拖拽到这里</figcaption>
+        </figure>
+      </div>
+      <p class="alert alert-success" id="statusMessage" role="alert">&nbsp;</p>
+    </header>
+  </div>
+</div>
+
+<script src="../assets/js/support.js"></script>
+<script>
+  var count = 0;
+  init();
+  function init(){
+    if(!delectDragAndDrop()){
+      statusMessage('浏览器不支持HTML5 拖拽');
+      return false;
+    }
+    // statusMessage('浏览器支持HTML5 drag & drop');
+
+    // 从操作系统向浏览器中拖动文件时，不会触发dragstart 和dragend 事件
+    element('img').addEventListener('dragstart',dragStart, false);
+
+    element('dropzone').addEventListener('dragover', dragOver, false);
+    element('dropzone').addEventListener('drop', drop, false);
+
+    // element('img').addEventListener('dragend',dragEnd, false);
+  }
+
+  function dragStart(){
+    statusMessage('drag Started');
+  }
+  function dragEnd(){
+    statusMessage('drag End');
+  }
+
+  function dragOver(ev){
+    ev.preventDefault();
+
+    return false;
+  }
+
+  function drop(ev){
+    ev.preventDefault();
+    console.log('drop')
+    statusMessage(`拖拽次数： ${++count}`);
+  }
+
+
+
+  function delectDragAndDrop(){
+    // IE 10 及以下
+    var browser = navigator.appName == 'Microsoft Internet Explorer';
+    if(browser){
+      var UA = navigator.userAgent;
+      var REG = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+      if(REG.exec(UA)){
+        var version = parseFloat( RegExp.$1 );
+        if(version >= 6.0) return true;
+      }
+      return false;
+    }
+
+    if('draggable' in document.createElement('span')) return true;
+    return false;
+  }
+
+
+
+</script>
+</body>
+</html>

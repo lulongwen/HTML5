@@ -1,0 +1,27 @@
+@charset "utf-8";html,body{height:100%;}html{overflow-y:auto;}
+
+header,nav,section,article,aside,details,figcaption,figure,footer,hgroup,menu{display:block;}
+
+html,body,p,a,img,h1,h2,h3,h4,h5,h6,ul,ol,dl,dd,blockquote,label,cite,pre,canvas,caption,summary,time,mark,audio,video,q,del,dfn,samp,form{margin:0;padding:0;letter-spacing: normal;}
+
+table{border-collapse:collapse;border-spacing:0;}
+input,select{vertical-align:middle;}
+blockquote,q{quotes:none;}
+del {text-decoration:line-through;}
+abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help;}
+ins{background-color:#ff9;color:#000;text-decoration:none;}
+mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold;}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+
+img{vertical-align:top;border: 0 none;}
+ul,ol{list-style-type:none;}
+fieldset,a,img,button,form{border:0 none;outline:none;}
+a:link,a:visited{color:#3c3c3c;text-decoration:none;vertical-align:baseline;border:none;}
+a:hover{color:#f60;}
+a:focus{outline:thin dotted;}
+a:hover,a:active{outline:none;}
+address{display:inline;}
+address,caption,cite,code,dfn,th,var,th,i,q,em{font-weight:normal;font-style:normal;}
+
+body{font:12px/1.5 'Microsoft Yahei',tahoma,Arial,sans-serif,'宋体';}

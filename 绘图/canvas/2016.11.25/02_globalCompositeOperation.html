@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		cxt.globalCompositeOperation = 'lighter';
+
+		cxt.fillStyle = 'rgba(80,190,222,1)';
+		cxt.fillRect(100,100,280,140);
+
+		cxt.beginPath();
+		cxt.fillStyle = 'rgba(222,90,22,1)';
+		cxt.arc(300,250,100,0,2*Math.PI);
+		cxt.fill();
+
+
+	</script>
+</body>
+</html>

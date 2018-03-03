@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <hr>
+      <div>
+        <figure class="figure">
+          <img src="../assets/images/rock.png" id="img" class="figure-img img-fluid rounded" alt="rock" draggable>
+          <figcaption class="figure-caption">石头</figcaption>
+        </figure>
+
+        <figure class="figure" id="dropzone">
+          <img src="../assets/images/dropzone.png" class="figure-img img-fluid rounded dropzone" alt="拖放">
+          <figcaption class="figure-caption">拖拽到这里</figcaption>
+        </figure>
+      </div>
+      <p class="alert alert-success" id="statusMessage" role="alert">&nbsp;</p>
+    </header>
+  </div>
+</div>
+
+<script>
+  var dragging;
+
+  document.addEventListener('drag', function(ev){
+
+  }, false);
+
+  // 拖拽开始
+  document.addEventListener('dragstart', function(ev){
+    dragging = ev.target;
+    dragging.style.opacity = .4;
+    console.log('dragging',dragging)
+
+    ev.dataTransfer.effectAllowed = 'nomove';
+  }, false);
+
+  // 拖拽结束
+  document.addEventListener('dragend', function(ev){
+    ev.target.style.opacity = 1;
+  }, false);
+
+
+  document.addEventListener('dragexit', function(ev){
+    ev.target.style.opacity = 1;
+  }, false);
+
+  // 拖拽在目标元素上移动
+  document.addEventListener('dragover', function(ev){
+    ev.preventDefault();
+
+  }, false);
+
+  // 拖拽进入目标元素
+  document.addEventListener('dragenter', function(ev){
+    console.log('dragenter',ev.target)
+    if(ev.target.className.indexOf('dropzone') != -1){
+      ev.target.style.border = '2px dashed #ccc';
+    }
+  }, false);
+
+  // 拖拽离开目标元素
+  document.addEventListener('draleave', function(ev){
+    console.log('dragleave',ev.target)
+    if(ev.target.className.indexOf('dropzone') != -1){
+      ev.target.style.border = '2px dashed #f09';
+    }
+  }, false);
+
+  // 拖拽放在目标元素上
+  document.addEventListener('drop', function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    console.log('drop',ev.target, dragging)
+
+    if(ev.target.className.indexOf('dropzone') != -1){
+      var current = ev.target.src;
+      ev.target.style.border = '2px dashed #90f';
+      ev.target.src= dragging.src;
+      dragging.src = current;
+    }
+  }, false);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

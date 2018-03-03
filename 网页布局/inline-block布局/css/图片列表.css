@@ -1,0 +1,28 @@
+.out{font-size:0;letter-spacing:-5px;}
+.in{display:inline-block;vertical-align:top;}.in{*display:inline;}
+/*inline-block 核心代码 END*/
+
+header{width:990px;height:285px;margin:50px auto;padding:10px;background-color:#f00056;}
+.header-title{width:225px;height:284px;margin-right:3px;background-color:#b8d022;border:1px solid #95b718;border-bottom:none;}
+
+.header-title a{width:74px;*width:73px;height:70px;line-height:70px;text-align:center;color:#fff;border-bottom:1px solid #9FC53E;border-right:1px solid #9FC53E; }
+.list,.ol{width:760px;height:285px;}
+.header-title cite,.article cite{font-size:14px;}
+/*{hover效果}*/
+.header-title a:nth-child(odd){background-color:#95B718;transition:background-color 1s ease 0.2s;-webkit-transition:background-color 1s ease 0.2s;-ms-transition:background-color 1s ease 0.2s;}
+.header-title a:hover{background-color:#b8d022;border-color:#95B718;}
+/*{header END}*/
+
+/*{section start}*/
+.section{ width:990px;height:285px;margin:50px auto;padding:10px;background-color:#dc3023;}
+
+.article{width:225px;height:284px;margin-right:3px;border:1px solid #FC7064;border-bottom:none;background-color:#FA8F84;}
+.article a{width:74px;*width:73px;height:70px;line-height:70px;text-align:center;border-bottom:1px solid #FC7064;border-right:1px solid #FC7064;color:#fff;}
+/*{hover效果}*/
+.article>a:nth-child(odd){background-color:#fc7064;transition:background-color 1s ease 0.2s;-webkit-transition:background-color 1s ease 0.2s;}
+.article a:hover{background-color:#fa8f84;border-color:#fc7064;}
+section img{border-radius:1px;}
+.imgTop{display:block;margin-top:3px;}
+.ol>li:first-child{width:210px;}
+.ol>li:nth-child(2){width:131px;}
+.ol>li:nth-child(3){width:262px;}

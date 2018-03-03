@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		//http://www.j--d.com/bezier
+
+		canvas = document.getElementById("canvas");
+		cxt = canvas.getContext("2d")
+		cxt.lineWidth = 6;
+		cxt.strokeStyle = "#0090D2";
+		cxt.beginPath();
+		cxt.moveTo(100, 250);
+		cxt.quadraticCurveTo(231, 44, 390, 248);  //前两个 控制点  后两个锚点
+		cxt.stroke();
+
+		canvas = document.getElementById("canvas");
+		cxt = canvas.getContext("2d")
+		cxt.lineWidth = 6;
+		cxt.strokeStyle = "#0090D2";
+		cxt.beginPath();
+		cxt.moveTo(24, 204);
+		cxt.bezierCurveTo(147, 385, 316, 74, 591, 222);  // 控制点  控制点  锚点
+		cxt.stroke();
+
+
+	</script>
+</body>
+</html>

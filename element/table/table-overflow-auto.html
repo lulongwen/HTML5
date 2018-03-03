@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>table overlfow-auto</title>
+  <style>
+  *{
+    margin:0;
+    padding:0;
+  }
+  body {
+    color: #000;
+    font: 300 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  }
+  /*定义可滚动区域宽、高样式，增加滚动条的16px*/
+  .box {
+    width:800px;
+    height: 300px;
+    margin: 3em auto;
+    border: 1px solid #963;
+    overflow: hidden;
+  }
+  .thead{
+    /* 让出右侧滚动条的宽度 */
+    padding-right:16px; 
+    border-bottom: 1px solid #ddd;
+    background-color: #fafafa;
+  }
+  .tbody{
+    height:270px;
+    overflow: auto;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    border-spacing:0; 
+  }
+  table tr:nth-child(odd){
+    background-color: #fafafa;
+  }
+  thead th{
+    padding:8px 10px;
+    text-align: center;
+  }
+  thead th + th, tbody td + td{
+    border-left:1px solid #ddd;
+  }
+
+ /*  tbody{
+     给 tbody设置 display:block 属性，
+     宽度等于最外侧的容器宽，高度固定，overflow:auto;
+   display: block;
+   width:800px;
+   height:270px;
+   overflow: auto;
+ } */
+  tbody td{
+    text-align: center;
+    padding:5px 10px;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    /*word-wrap: break-word;  内容将在边界内换行,这里显示省略号,所以不需要了*/
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+  </style>
+
+</head>
+<body>
+  
+<div class="box">
+  <div class="thead">
+    <table>
+      <thead>
+        <tr>
+          <th>固定表头 1</th>
+          <th>固定表头 2</th>
+          <th>固定表头 3</th>
+          <th>固定表头 4</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+    
+  <div class="tbody">
+    <table>
+      <tbody>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+        <tr>
+          <td>固定表头的CSS表格 1</td>
+          <td>固定表头的CSS表格 2</td>
+          <td>固定表头的CSS表格 3</td>
+          <td>固定表头的CSS表格 3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    
+</div>
+
+<h2 style="width:800px;margin:3em auto">
+  table 锁定表头，内容滚动 解决方法<br>
+    thead 和 tbody 放在 2个 table里面
+</h2>
+
+</body>
+</html>

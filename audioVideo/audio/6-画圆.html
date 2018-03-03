@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+    canvas{
+        background:#000;
+        /* width: 500px;
+        height: 500px; */
+    }
+    </style>
+</head>
+<body>
+<!-- <input type="color" name="" id="" /> -->
+<canvas width="500" height="500">
+
+</canvas>
+<script type="text/javascript">
+var canvas = document.querySelector('canvas');
+//创建2d绘图环境
+var ctx = canvas.getContext("2d");
+
+/*
+
+//绘制一个带边框的圆。
+//ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise)
+
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 5;
+ctx.arc(200, 200, 100, 0, 2*Math.PI, true);
+ctx.stroke();*/
+
+
+/*ctx.fillStyle = 'red';
+ctx.arc(200, 200, 100, 0, 2*Math.PI, true);
+ctx.fill();*/
+// ctx.arcTo()
+//
+
+ctx.strokeStyle = 'yellow';
+ctx.beginPath();
+ctx.arc(200, 200, 100, 0, 2*Math.PI, true);
+ctx.stroke();
+// ctx.moveTo(280, 200);
+ctx.beginPath();
+ctx.arc(200, 200, 80, .2*Math.PI, .6*Math.PI, false);
+
+ctx.moveTo(170, 160);
+ctx.arc(160, 160, 10, 0, 2*Math.PI, true);
+
+ctx.moveTo(250, 160);
+ctx.arc(240, 160, 10, 0, 2*Math.PI, true);
+
+ctx.stroke();
+</script>
+</body>
+</html>

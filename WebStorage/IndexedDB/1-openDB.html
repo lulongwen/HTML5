@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>indexedDB</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+  <!--
+  Web SQL Database实际上已经被废弃
+  -->
+  <script>
+    /**
+     * IndexedDB大部分操作并不是我们常用的调用方法返回结果的模式，
+     * 而是请求——响应的模式，比如打开数据库的操作
+     */
+    // var request = window.indexedDB.open('testDB');
+    // console.log(request, 'request');
+
+    var myDB = {
+      name : 'test',
+      version: '1.0',
+      db: null
+    };
+    openDB(myDB.name);
+
+    function openDB(name) {
+      var request = window.indexedDB.open(name);
+
+      // 请求失败
+      request.onerror = function (ev) {
+        console.log(ev.currentTarget.error.message);
+      }
+      /** 请求成功
+       * 把request 获取的DB对象赋值给了myDB的db属性，
+       * 这样就可以使用myDB.db来访问创建的indexedDB
+       */
+      request.onsuccess = function (ev) {
+        myDB.db = ev.target.result;
+      }
+      // 请求的数据库的版本 和已存在的数据库版本号不一致的时候调用
+      request.onupgradeneeded = function(ev){
+        console.log(ev);
+      }
+    }
+
+
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

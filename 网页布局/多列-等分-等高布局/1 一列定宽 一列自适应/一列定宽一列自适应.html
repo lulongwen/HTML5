@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>一列定宽一列自适应</title>
+	<!--[if lte IE 9]>
+			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+	<style>
+		*{box-sizing:border-box}
+		body,h2{
+			margin:0;
+		}
+		ul{
+			margin:0;
+			padding:0;
+			list-style:none;
+		}
+		ul li{
+			height:50px;
+			line-height: 50px;
+			padding-left:50px;
+			color:#eee;
+			font-weight:600;
+			border-bottom:1px solid #42454d;
+			border-top:1px solid #2e3036;
+		}
+		/* 布局样式 */
+		.aside{
+			position:absolute;
+			top:0;
+			left:0;
+			width:200px;
+			height:100%;
+			background-color: #383b43;
+			box-shadow:-4px 0 10px rgba(15,15,15, .5)
+		}
+		.main{
+			height:100%;
+			padding-left:200px;
+			background-color: rgba(221,221,221,1);
+		}
+		.main header{
+			height:50px;
+			line-height: 50px;
+			background-color: #fff;
+			border-bottom:1px solid #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="aside">
+		<nav>
+			<ul>
+				<li>产品</li>
+				<li>设计</li>
+				<li>交互</li>
+				<li>前端</li>
+				<li>后台</li>
+				<li>运营</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="main">
+		<header>
+			<h2>自适应区域</h2>
+		</header>
+
+	</div>
+</body>
+</html>

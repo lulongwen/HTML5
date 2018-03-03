@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript">
+window.onload = function(){
+	var v = document.querySelector('video');
+	var playBtn = document.querySelector('input');
+	//播放
+	playBtn.onclick = function(){
+		if(v.paused){
+			v.play();
+			this.value = "暂停";
+		} else {
+			v.pause();
+			this.value = "播放";
+		}
+	};
+	/*
+	document.ontouchstart = function(){
+		
+	}
+	*/
+};
+
+</script>	
+</head>
+<body>
+<video width="600" autobuffer>
+	<source src="video/Intermission-Walk-in_512kb.mp4">
+</video>
+<br/>
+<input type="button" value="播放">
+<span class="palyTime">00:00</span>
+<input type="range" value="0" min="0" max="100" step="1">
+<span class="time">00:00</span>
+<input type="button" value="静音">
+<input type="range" value="0" min="0" max="100" step="1">
+<input type="button" value="全屏播放">
+</body>
+</html>

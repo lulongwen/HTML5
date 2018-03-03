@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localForage- indexedDB</title>
+</head>
+<body>
+  <script src="dist/localforage.js"></script>
+  <script>
+    var user = [
+      {id: 1, name: 'langwen', phone: '魅族'},
+      {id: 2, name: 'anHaiyin', phone: '华为'},
+      {id: 2, name: 'zhuli', phone: '苹果'}
+    ];
+
+    // setItem
+    localforage.setItem('user', user).then(function (value) {
+      // Do other things once the value has been saved.
+      console.log(value, 'setItem');
+    }).catch(function(err) {
+      // This code runs if there were any errors
+      console.log(err);
+    });
+
+
+    // getItem
+    localforage.getItem('user').then(function(value) {
+      // This code runs once the value has been loaded
+      // from the offline store.
+      console.log(value, 'getItem');
+    }).catch(function(err) {
+      // This code runs if there were any errors
+      console.log(err);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片热点链接-图像区域映射</title>
+</head>
+<body>
+	<!-- 
+		 base64:URL 格式的图片
+
+		 img的 usemap 属性引用了 map的 id 或 name属性
+		 area 标记热点
+		 	shape形状 
+		 	- rect 矩形 左上角顶点坐标为（x1,y1），右下角顶点坐标为（x2,y2）
+		 		<area shape="rect" coords="x1,y1, x2,y2" href=”url”>
+
+		 	- circle 圆形 圆心坐标为（x1,y1），半径为 r
+		 		<area shape="circle" coords="x1, y1,r" href=url>
+
+		 	- poligon 多边形，各顶点坐标依次为（x1,y1）、（x2,y2）、（x3,y3）等
+		 		<area shape="poligon" coords="x1, y1,x2,y2 ......" href=url>
+
+		 	coords 图片热点区域坐标，坐标取决于 shape中的形状
+	 -->
+	<img src="./img/newyear.png" border="0" usemap="#newyear" alt="春节大促" />
+	<map name="newyear" id="newyear">
+		<area shape="circle" coords="20,20,15" href="/spring-festival.php#yz" alt="亚洲专区" />
+		<area shape="rect" coords="320,0,440,50" href="/spring-festival.php#hd" alt="温暖海岛" />
+		<area shape="rect" coords="440,0,560,50" href="/spring-festival.php#gn" alt="国内度假" />
+		<area shape="rect" coords="560,0,680,50" href="/spring-festival.php#zb" alt="周边游" />
+		<area shape="rect" coords="680,0,800,50" href="/spring-festival.php#om" alt="欧美澳新" />
+		<area shape="rect" coords="800,0,920,50" href="/spring-festival.php#jhs" target="_blank" alt="聚划算" />
+	</map>
+</body>
+</html>

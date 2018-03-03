@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>indexedDB</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <style>
+    .form-row .col-auto{
+      padding-top: 2rem;
+    }
+    .table th:last-child{
+      width:120px;
+    }
+    .table td{
+      position: relative;
+    }
+    .table td[colspan]{
+      text-align: center;
+      color:#999;
+    }
+    .table td .btn-group{
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>IndexedDB 实例</h1>
+      <hr>
+      <form name="form">
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="">姓名：</label>
+            <input type="text" name="name" class="form-control is-valid">
+          </div>
+          <div class="form-group col">
+            <label for="">电话：</label>
+            <input type="number" name="phone" class="form-control is-valid">
+          </div>
+          <div class="form-group col">
+            <label for="">地址：</label>
+            <input type="text" name="address" class="form-control is-valid">
+          </div>
+          <div class="form-group col-auto">
+            <button class="btn btn-success" name="add">添加</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="">姓名：</label>
+            <input type="text" name="search" class="form-control is-valid">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-info" name="searchBtn">查询</button>
+            <button class="btn btn-danger" name="delete">删除数据库</button>
+          </div>
+        </div>
+      </form>
+
+      <table class="table table-bordered" id="table">
+        <thead class="thead-light">
+          <tr>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>地址</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td colspan="4">请添加数据</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  var APP ={
+    db_name: 'person',
+    db_version: 1,
+    db_table_name: 'test',
+    indexedDB: window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB,
+    key: [],
+    last_cursor: null,
+    request: null,
+    DB: null,
+
+    form: document.form,
+    table: document.getElementById('table'),
+    empty: function(){
+      return `<tr><td colspan="4">请添加数据</td></tr>`;
+    },
+    renderHTML: function(obj){
+      var rows = '';
+      rows += `<tr data-id="${obj.id}">
+                  <td>${obj.name}</td>
+                  <td>${obj.phone}</td>
+                  <td>${obj.address}</td>
+                  <td>
+                  <div class="btn-group btn-group-sm">
+                    <button class="btn btn-info">编辑</button>
+                    <button class="btn btn-danger delete" data-id="${obj.id}">删除</button>
+                  </div>
+                  </td>
+                  </tr>`;
+
+      APP.tbody.innerHTML+= rows;
+    }
+  };
+  // 打开数据库
+  APP.request = indexedDB.open(APP.db_name, APP.db_version);
+  APP.tbody = APP.table.children[1];
+
+  // 当数据库的版本号变化 & 新的数据库被创建
+  APP.request.onupgradeneeded = function(ev){
+    var self = ev.target.result;
+    console.log('upgradeneed', self);
+
+    // 查看数据库是否包含这个存储空间
+    if(!self.objectStoreNames.contains(APP.db_table_name)){
+      console.log('要创建一个数据库');
+      // 如果没有，就创建一个存储空间
+      var objectStore = self.createObjectStore(APP.db_table_name, {keyPath: 'id', autoIncrement: true});
+      // 创建索引，那些字段是可以被索引的，这2个字段都不是唯一的
+      objectStore.createIndex('name','name',{unique: false});
+      objectStore.createIndex('phone','name',{unique: false})
+    }
+  }
+
+  // 数据库打开失败
+  APP.request.onerror = function(){
+    console.log(ev.target.errorCode);
+  }
+
+  // 数据库打开成功
+  APP.request.onsuccess = function(ev){
+    APP.DB = ev.target.result;
+    APP.DB.onerror = function(){
+      console.log(`Error: ${ev.target.errorCode}, ${ev.target}`);
+    }
+    console.log(APP.DB.version);
+    // 如果数据库不存在，return
+    if( !APP.DB.objectStoreNames.contains(APP.db_table_name) ) return false;
+    //创建一个事务
+    var transaction = APP.DB.transaction([APP.db_table_name], 'readwrite');
+    // 事务完成时
+    transaction.oncomplete = function(ev){
+      console.log('all done');
+    }
+    transaction.onerror = function(ev){
+      console.dir(ev);
+    }
+
+    // 获取存储对象里面的对象
+    var objectStore = transaction.objectStore(APP.db_table_name);
+    // 对存储对象进行 游标遍历
+    objectStore.openCursor().onsuccess = function(ev){
+      var cursor = ev.target.result;
+      // 如果数据对象不存在，return
+      if(!cursor) return false;
+
+      APP.renderHTML({
+        id: cursor.key,
+        name: cursor.value.name,
+        phone: cursor.value.phone,
+        address: cursor.value.address
+      });
+      APP.last_cursor = cursor.key;
+      cursor.continue();
+    }
+
+    objectStore.openCursor().onerror = function(ev){
+      console.log(ev);
+    }
+  }
+
+
+  // 添加数据
+  APP.form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    if(this.checkValidity() === false){
+      this.classList.add('was-validated');
+    }
+  }, false);
+  APP.form.add.addEventListener('click', addData, false);
+
+  // 删除所有数据
+  APP.form.delete.addEventListener('click', deleteAll, false);
+
+  // table 删除事件
+  APP.table.addEventListener('click', deleteRow, false);
+
+  // 查询数据
+  APP.form.searchBtn.addEventListener('click', searchData, false);
+
+  function addData(ev){
+    var person = {}; // 获取值
+    person.name = APP.form.name.value;
+    person.phone = APP.form.phone.value;
+    person.address = APP.form.address.value;
+    for(var key in person){
+      if(!person[key]){
+        APP.form.classList.add('was-validated');
+        return false;
+      }
+    }
+
+    // 创建一个事务
+    transaction = APP.DB.transaction([APP.db_table_name], 'readwrite');
+    transaction.oncomplete = function(ev){
+      APP.form.reset(); // 重置form
+      console.log('add transaction');
+    }
+    transaction.onerror = function(ev){
+      console.dir(ev)
+    }
+
+    // 得到事务存储对象
+    var objectStore = transaction.objectStore(APP.db_table_name);
+    // 添加到数据库
+    objectStore.add(person);
+    // 游标遍历
+    objectStore.openCursor().onsuccess = function(ev){
+      var self = ev.target.result;
+      var id;
+      if(APP.last_cursor == null){
+        id = self.id;
+        APP.last_cursor = id;
+      }
+      else{
+        key = ++APP.last_cursor;
+      }
+
+      APP.renderHTML(person);
+    }
+  }
+
+  function deleteAll(ev){
+    var deleteDB = APP.indexedDB.deleteDatabase(APP.db_name);
+    APP.tbody.innerHTML = APP.empty();
+
+    deleteDB.onsuccess = function(ev){
+      console.log(`delete success ${APP.db_name}`);
+    }
+    deleteDB.onerror = function(ev){
+      console.dir(ev.target);
+    }
+  }
+
+  function deleteRow(ev){
+    var lock = ev.target.className.indexOf('delete') != -1;
+    if(!lock) return;
+    var id = ev.target.dataset.id;
+
+    // 删除数据库，创建一个事务
+    var transaction = APP.DB.transaction([APP.db_table_name], 'readwrite');
+    transaction.oncomplete = function(ev){
+      console.log(`delete transaction complete`);
+    }
+    transaction.onerror = function(ev){
+      console.dir(ev)
+    }
+
+    var objectStore = transaction.objectStore(APP.db_table_name);
+    // 删除元素
+    var trs = APP.table.querySelectorAll('tr');
+    for(var i=0; length =trs.length, i<length; i++){
+      var tr = trs[i];
+      var attr = tr.dataset.id;
+      if(id == attr){
+        APP.tbody.removeChild(tr);
+      }
+    }
+
+    var getRequest = objectStore.get(id);
+    getRequest.onsuccess = function(ev){
+      var result = ev.target.result;
+      console.log(result, ev);
+    }
+
+    // 删除数据库
+    var deleteRequest = objectStore.delete(id);
+    deleteRequest.onsuccess = function(ev){
+      console.log(`delete tr success`);
+    }
+    deleteRequest.onerror = function(){
+      console.dir(`delete tr error`);
+    }
+
+  }
+
+  function searchData(ev){
+    var value = APP.form.search.value;
+    // 创建事务
+    transaction = APP.DB.transaction([APP.db_table_name], 'readwrite');
+    transaction.oncomplete = function(ev){
+      console.log(`transaction complete Search`);
+    }
+    transaction.onerror = function(ev){
+      console.log(ev)
+    }
+
+    var objectStore = transaction.objectStore(APP.db_table_name);
+    var keyRange = IDBKeyRange.only(value);
+
+    // 通过游标范围进行查询
+    objectStore.index('name').openCursor(keyRange).onsuccess = function(ev){
+      var cursor = ev.target.result;
+      if(!cursor) return false;
+
+      var row = cursor.value;
+      APP.tbody.innerHTML = '';
+      APP.renderHTML({
+        id: row.id,
+        name: row.name,
+        phone: row.phone,
+        address: row.address
+      });
+      cursor.continue();
+    }
+  }
+
+</script>
+</body>
+</html>

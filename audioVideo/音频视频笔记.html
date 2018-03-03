@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>音频视频笔记</title>
+</head>
+<body>
+
+<!--音频视频 audio vedio 
+
+	autoplay 自动播放
+	controls 显示控制面板
+	loop 循环播放
+	
+	.play()  播放
+	.paused() true播放， false 暂停
+	.pause() 暂停
+		if(v.paused){ // true
+		v.play();
+		this.value = "暂停";
+		
+		}else{ // false
+		v.pause();
+		this.value = "播放";
+		}
+		
+	.duration()
+	
+	
+	.onfocus 获得焦点
+	
+	.oninput 移动完改变
+	
+	.onchange 时时改变
+	
+	.onblur 抬起
+
+	音频操作和视频操作类似
+-->	
+
+<!--视频-->
+<vedio controls autoplay loop width="600">
+	<source src="my.mp4">
+	<source src="my.ogv">
+	<source src="my.ogg">
+	您的浏览器不识别视频文件
+</vedio>
+
+
+<audio src="my.mp4" controls></audio>
+
+<!--音频-->
+<audio controls>
+	<source src="my.mp3">
+	<source src="my.ogv">
+	<source src="my.ogg">
+	您的浏览器不识别音频文件
+</audio>
+
+
+
+
+
+<!--音频，视频解码器，浏览器无法播放，是因为浏览器没有解码器-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+

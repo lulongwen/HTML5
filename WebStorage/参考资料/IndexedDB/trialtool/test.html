@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Test Page</title>
+    </head>
+    <body>
+        <div id = "console">
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript">
+        </script>
+        <script type = "text/javascript" src = "/trialtool/js/ConsoleHelper.js">
+        </script>
+        <script type = "text/javascript">
+            function axe(){
+
+				// Initialising the window.IndexedDB Object
+				window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+				window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+				window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+				var DAO = DAO || {};
+
+				/*Open Database*/
+
+				document.write("Trying to open database ...");
+				var db = null;
+				var dbOpenRequest = window.indexedDB.open("BookShop1");
+				dbOpenRequest.onsuccess = function(event){
+					db = dbOpenRequest.result;
+					DAO.version = db.version;
+					var thisDB = db; // Need to create this variable since the variable db is assigned to other things later
+					db.onversionchange = function(e){
+					  write("Version change triggered, so closing database connection", e.oldVersion, e.newVersion, thisDB);
+					  thisDB.close();
+					};
+					write("Database Opened", db, event);
+					
+					document.write("Opening a new transaction.");
+					var transaction = db.transaction(["ObjectStore_BookList"], 1);
+					
+				}
+			}
+        </script>
+    </body>
+</html>

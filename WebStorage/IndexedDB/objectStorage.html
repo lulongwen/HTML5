@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>indexedDB - objectStore</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+</head>
+<body>
+  <div class="btn btn-success" onclick="read()">获取</div>
+  <div class="result"></div>
+
+  <script>
+
+    const DATA =[ // 数据
+      {title: "架构师", name: "关云长", like: "玉可碎而不可改其白"},
+      {title: "产品经理", name: "霍去病", like: "匈奴未灭,何以家为"},
+      {title: "交互设计", name: "曹操", like: "老骥伏枥 志在千里"},
+      {title: "前端工程师", name: "王阳明", like: "此心光明 亦复何言"},
+      {title: "大数据工程师", name: "吕布", like: "人中吕布，马中赤兔"},
+    ];
+    const DBNAME = 'hero';
+    var request = indexedDB.open(DBNAME, 1);
+    var db;
+
+    // error
+    request.onerror = function(ev){
+      console.log(ev, '错误信息');
+    }
+
+    // success
+    request.onsuccess = function(ev){
+      // db = ev.target.result;
+      db = request.result;
+      console.log( db, 'success');
+      var transaction = db.transaction(['person'], 'readwrite');
+      transaction.oncomplete = function(ev){
+        alert('All done');
+      }
+    }
+
+    /** onupgradeneeded 是唯一可以修改数据库结构的地方，
+     * 在这里面，我们可以创建和删除对象存储空间以及构建和删除索引。
+     */
+    request.onupgradeneeded = function(ev){
+      console.log(ev, 'upgrad');
+      var db = ev.target.result;
+      /** 创建一个对象存储空间来保存数据
+       * 使用 id 作为 key path，保证唯一性
+       */
+      var objectStorage = db.createObjectStore('person', {keyPath: "id", autoIncrement: true});
+
+      /**
+       * 创建一个索引通过 name 搜索客户
+       * 可能会有重复的，因此不能使用 unique 索引
+       */
+      objectStorage.createIndex("name", "name", {unique: false});
+
+      /**
+       * 创建一个索引通过 id 搜索客户
+       * 确保id 的唯一性，因此使用 unique 索引
+       */
+      objectStorage.createIndex('id', "id", {unique: true});
+
+      // 在新建的对象存储空间中保存数据
+      for(var i in DATA){
+        objectStorage.add(DATA[i]);
+      }
+    }
+
+
+    /** 增加和删除数据
+     * 对新数据库做任何事情之前，需要开始一个事务。事务来自于数据库对象，而且你必须指定你想让这个事务跨越哪些对象存储空间
+     * 另外，你需要决定你是否将要对数据库进行更改 或者你只是需要从它里面进行读取。
+     * 事务具有三种模式（只读，读写，和版本变更），在可以的情况下你最好还是使用只读事务，因为它们可以并发运行。
+     *
+     * transaction() 方法接受三个参数（虽然两个是可选的）并返回一个事务对象
+     * 1 是事务希望跨越的对象存储空间的列表。如果你希望事务能够跨越所有的对象存储空间你可以传入一个空数组。
+     * 2 如果你没有为第二个参数指定任何内容，你得到的是只读事务。因为这里我们是想要写入所以我们需要传入 "readwrite" 标识。
+     *
+     * 事务的生命周期
+     * 事务和事件循环的联系非常密切。如果你创建了一个事务但是并没有使用它就返回给事件循环，那么事务将变得无效。
+     * 保持事务活跃的唯一方法就是在其上构建一个请求。当请求完成时你将会得到一个 DOM 事件
+     * TRANSACTION_INACTIVE_ERR 错误代码，那么你已经把某些事情搞乱了
+     *
+     * 事务可以接收三种不同类型的 DOM 事件：
+     *  error，abort，complete
+     *  - error事件冒泡，所以一个事务要接收所有可能产生错误事件的请求所产生的错误事件
+     */
+    function read(){
+      var transaction = db.transaction(['person'], 'readwrite');
+      var objectStorage = transaction.objectStore('person');
+      var request = objectStorage.openCursor();
+
+      transaction.oncomplete = function(ev){
+        alert('All done');
+      }
+
+      transaction.onerror = function(ev){
+        //错误的处理方法
+        console.log(ev);
+      }
+
+      request.onsuccess = function(ev){
+        var result = document.querySelector('.result');
+        result.innerHTML = '';
+        var cursor = ev.target.result;
+        if(cursor){
+          var employee = cursor.value;
+          var str = JSON.stringify(employee);
+          result.innerHTML = result.innerHTML + str;
+          cursor.continue();
+        }
+      }
+
+
+      // for(var i in DATA){
+      //   var request = objectStorage.add(DATA[i]);
+      //   request.onsuccess = function(ev){
+      //     console.log(ev.target.result == DATA[i].id);
+      //   }
+      // }
+    }
+  </script>
+</body>
+</html>

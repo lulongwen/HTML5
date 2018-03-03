@@ -1,0 +1,12 @@
+单元格table 是不能设置margin值的，table默认是跟着内容走的，宽度100%就没办法加上margin负值了
+
+table 默认值 display：table； table-layout：fixed；
+
+tr 默认值 display：table-cell
+
+table-layout：fixed；布局优先，加速布局渲染，加入单元格没有设置宽度，单元格的宽度是等分的
+
+table每列单元格的宽度都是等宽，每行单元格的高度都是等高
+
+
+怎么样让背景颜色只显示在 content-box里，

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="500" style="border: 1px solid red;"></canvas>
+	<script src="drawPolygon.js"></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		var p = new Polygon({
+			x:200, y:200,
+			sides:5,
+			R: 100,
+			fc:'rgba(80,190,222,.5)'
+		});
+
+		p.fill(cxt).stroke(cxt);
+
+		var dx, dy, down = false;
+
+		canvas.onmousedown = function(e){
+			dx = e.offsetX - p.x;
+			dy = e.offsetY - p.y;
+			down = true;
+		};
+
+		canvas.onmousemove = function(e){
+			if(!down) return false;
+			if(cxt.isPointInPath(e.offsetX, e.offsetY)){
+				var x = e.offsetX - dx;
+				var y = e.offsetY - dy;
+				cxt.clearRect(0,0,600,500);
+				p.x = x;
+				p.y = y;
+				p.fill(cxt).stroke(cxt);
+			}
+		};
+
+		canvas.onmouseup = function(e){
+			down = false;
+		};
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

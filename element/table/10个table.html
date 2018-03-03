@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>10个表格</title>
+	<style>
+body,p,table{margin: 0;padding: 0;}
+section{width: 990px;overflow: hidden;margin: 50px auto;background-color: #f9f9f9;}
+p{min-height: 30px;height:auto;margin-bottom: 5px;text-align: center;font-weight: bold;}
+table{text-align: center;margin: 0 auto 30px;}
+
+	</style>
+</head>
+<body>
+<section>
+	<p>1 基本表格 border=1</p>
+	<table width="600" bordercolor="#000" border="1" cellspacing="0" cellpadding="10">
+		<tr>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+
+	<p>2 无边框表格 border=0</p>
+	<table width="600" bordercolor="#000" border="0" cellspacing="0" cellpadding="10">
+		<tr>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+
+	<p>3 双线表格 表格默认的就是双线效果</p>
+	<table width="600" bordercolor="#000" border="1" cellspacing="2" cellpadding="10">
+		<tr>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+
+	<p>4 合并多列表格<br>
+		合并的思想：将多个内容的表格合并时，就会有多余的东西要删除，例如：有3个td，当合并时，就需要删除2个
+	</p>
+	<table width="600" bordercolor="#070" border="1" cellspacing="0" cellpadding="15">
+		<tr>
+			<td colspan="3">左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td colspan="2">右边表格</td>
+		</tr>
+	</table>
+
+	<p>5 合并多行表格 合并单元格，就是删除多余的td</p>
+	<table width="600" bordercolor="#070" border="1" cellspacing="0" cellpadding="15">
+		<tr>
+			<td rowspan="3" valign="bottom">左边表格</td>
+			<td>左边表格</td>
+			<td rowspan="2">右边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td colspan="2">右边表格</td>
+		</tr>
+	</table>
+
+	<p>6 复杂表格合并</p>
+	<table width="600" bgcolor="#090" border="0" cellspacing="1" cellpadding="15">
+		<tr bgcolor="#fff">
+			<td rowspan="3">左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td colspan="2">中间表格</td>
+			<td rowspan="2">右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td rowspan="2">中间表格</td>
+			<td colspan="3">中间表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+
+	<p>7 表格凸起(立体)效果 就是将表格亮边框颜色与暗边框颜色进行对比<br>
+		表格自身有边框，单元格tr自身也有边框</p>
+	<table width="600" bgcolor="#333" border="1"  cellpadding="15" bordercolorlight="#000" bordercolordark="#fff">
+		<tr>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+
+	<p>8 表格凹陷效果</p>
+	<table width="600" bgcolor="#333" border="1"  cellpadding="15" bordercolorlight="#fff" bordercolordark="#000">
+		<tr>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+		</tr>
+		<tr>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+		</tr>
+		<tr>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+	
+	<p>9 表格多列变色 colgroup span=2</p>
+	<table width="600" border="1" cellspacing="0" cellpadding="15">
+		<colgroup span="2"></colgroup>
+		<colgroup bgcolor="#090"></colgroup>
+		<thead>
+			<tr>
+				<th>左边表格</th>
+				<th>左边表格</th>
+				<th>左边表格</th>
+				<th>右边表格</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>中间表格</td>
+				<td>中间表格</td>
+				<td>中间表格</td>
+				<td>右边表格</td>
+			</tr>
+			<tr>
+				<td>右边表格</td>
+				<td>右边表格</td>
+				<td>右边表格</td>
+				<td>右边表格</td>
+			</tr>
+		
+			<tr>
+				<td>中间表格</td>
+				<td>中间表格</td>
+				<td>中间表格</td>
+				<td>右边表格</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>右边表格</td>
+				<td>右边表格</td>
+				<td>右边表格</td>
+				<td>右边表格</td>
+			</tr>
+		</tfoot>		
+	</table>
+
+	<p>10 细线表格 cellspacing=1 border=0</p>
+	<table width="600" bgcolor="#090" border="0" cellspacing="1" cellpadding="15">
+		<tr bgcolor="#fff">
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>左边表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>中间表格</td>
+			<td>右边表格</td>
+		</tr>
+		<tr bgcolor="#fff">
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+			<td>右边表格</td>
+		</tr>
+	</table>
+	<h2>
+table   定义表格<br>
+caption	定义表格标题<br>
+th	定义表格的表头<br>
+tr	定义表格的行<br>
+td	定义表格单元<br>
+thead	定义表格的页眉<br>
+tbody	定义表格的主体<br>
+tfoot	定义表格的页脚<br>
+col	 定义用于表格列的属性<br>
+colgroup	定义表格列的组<br>
+	</h2>
+<pre style="font-size:16px">
+rowspan 合并 行的数目
+colspan 合并 列的数目
+sellpadding 内边距
+sellspacing 外边距，单元格和单元格之间的距离，默认2
+bordercolorlight="" 设置表格边框亮部分的颜色 border大于或等于1时，有效果
+bordercolordark=""  设置边框暗部分的颜色
+colgroup span="2"前2列默认白色
+colgroup bgcolor="red" 第3列是红色
+
+
+细线表格思路
+1 先给整个表格设置背景颜色，背景颜色就是细线的颜色，表格border=0
+2 给表格设置单元格之间的距离，sellspacing=== 细线的粗细
+</pre>
+
+</section>
+</body>
+</html>

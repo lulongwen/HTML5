@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>太阳系</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+<style>
+    body{
+        margin:0;
+    }    
+    #canvas{
+        display: block;
+        margin:30px auto;
+    }
+</style>
+</head>
+<body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+<script>
+    var sun =new Image();
+    var moon =new Image();
+    var earth =new Image();
+    
+    init();
+    function init(){
+        sun.src ="sun.png";
+        moon.src ="moon.png";
+        earth.src ="earth.png";
+        window.requestAnimationFrame(draw);
+    };
+    
+    function draw(){
+        var canvas =document.getElementById('canvas');
+        var ctx =canvas.getContext('2d');
+        
+        ctx.globalCompositeOperation ="destination-over";
+        
+        // clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle ="rgba(0, 0, 0, 0.4)";
+        ctx.strokeStyle ="rgba(0, 153, 255, 0.4)";
+        ctx.save();
+        ctx.translate(150, 150);
+        
+        
+        // Earth
+        var time =new Date();
+        ctx.rotate( time.getSeconds() * ( (2*Math.PI)/60 ) + time.getMilliseconds() * ( (2*Math.PI)/60000 ) );
+        
+        ctx.translate(105, 0);
+        // shadow
+        ctx.fillRect(0, -12, 50, 24);
+        ctx.drawImage(earth, -12, -12);
+        
+        
+        //Moon
+        ctx.save();
+        ctx.rotate( time.getSeconds() *( (2*Math.PI)/6 ) + time.getMilliseconds() *( (2*Math.PI)/6000 ) );
+        
+        ctx.translate(0, 28.5);
+        ctx.drawImage(moon, -3.5, -3.5);
+        ctx.restore();
+        
+        ctx.restore();
+        
+        
+        // 地球轨道
+        ctx.beginPath();
+        ctx.arc(150, 150, 105, 0, Math.PI*2, false);
+        ctx.stroke();
+        
+        
+        // sun
+        ctx.drawImage(sun, 0, 0, 300, 300);
+        
+        
+        // 
+        window.requestAnimationFrame(draw);
+  
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+    AudioContext
+
+    音频解析对象。
+
+    解析音频为buffer类型
+    AudioContext.decodeAudioData(音源,function(buffer){
+        成功解析的时候调用这个函数，并且把音源当作参数传进来（buffer）。
+    },function(error){
+        失败调用这个函数，error是失败的错误信息。
+    });
+ */
+var ac = new AudioContext();
+var xhr = new XMLHttpRequest();
+
+xhr.open('get','mp3/陈奕迅-1874.mp3',true);
+
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(){
+
+    ac.decodeAudioData(xhr.response,function(buffer){
+        //创建音频节点。
+        var source = ac.createBufferSource();
+        //创建获取频谱能量值的analyser节点。
+        var analyser = ac.createAnalyser();
+        //音源=>频谱分析=>播放器
+        source.connect(analyser);
+        analyser.connect(ac.destination);
+        //添加播放数据。
+        source.buffer = buffer;
+
+        /*
+            每一帧的频谱长度。
+            analyser.frequencyBinCount
+
+
+
+         */
+        console.log('解析完成');
+        //播放
+        source.start(0);
+        //设置数组长度为频谱长度。
+        var arr = new Uint8Array(analyser.frequencyBinCount);
+       setTimeout(function(){
+        //获取频谱具体的数值。
+         analyser.getByteFrequencyData(arr);
+         console.log(arr);
+       },100);
+
+    },function(error){
+        console.log(error);
+    });
+
+};
+xhr.send();
+</script>
+</body>
+</html>

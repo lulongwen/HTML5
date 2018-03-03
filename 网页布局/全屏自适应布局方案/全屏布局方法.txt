@@ -1,0 +1,21 @@
+监控系统，
+统计系统
+html,body,.parent{height:100%;overflow:hidden;} 高度100%，禁止滚动条
+
+导航条
+	中间左右结构（左边固定宽度，右边全屏-右侧宽度是总宽减去左边）
+底部栏 
+
+实现方案
+1 position  常规方案
+
+2 flex CSS3 方案 IE9及以下不兼容
+
+
+全屏内容自适应 方案
+
+position 不能内容自适应
+
+flex 可以
+
+grid  可以

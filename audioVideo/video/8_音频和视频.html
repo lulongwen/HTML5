@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	#wrap {
+		float:  left;
+	}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var v = document.querySelector('video');
+	var playBtn = document.querySelector('input');
+	var timeSpan = document.querySelector('.time');
+	var currentSpan = document.querySelector('.palyTime');
+	var timer = 0;
+	var palyBar = document.querySelector('#palyBar');
+	var mute = document.querySelector('#mute');
+	var volume = document.querySelector('#volume');
+	var fullScreen = document.querySelector('#fullScreen');
+	var forward = document.querySelector('#forward');
+	var slow = document.querySelector('#slow');
+	//播放
+	getTime();
+	//console.log(v.volume);
+	//v.playbackRate = 4;
+	//console.log();
+	forward.onclick = function(){
+		v.playbackRate += .2;
+	};
+	slow.onclick = function(){
+		v.playbackRate = Number((v.playbackRate - .2).toFixed(2));
+		if(v.playbackRate < 0) {
+			v.playbackRate = 0;
+		}
+		console.log(v.playbackRate);
+	};
+	volume.value = Math.round(v.volume*10);
+	playBtn.onclick = function(){
+		if(v.paused){
+			v.play();
+			getCurrent();
+			this.value = "暂停";
+		} else {
+			clearInterval(timer);
+			v.pause();
+			this.value = "播放";
+		}
+	};
+	function getTime(){
+		var min = DB(parseInt(v.duration/60));
+		var sec = DB(Math.ceil(v.duration%60));
+		palyBar.max = v.duration*1000;
+		timeSpan.innerHTML = min+":"+sec;
+	}
+	function getCurrent(){
+		clearInterval(timer);
+		timer = setInterval(function(){
+			playIng();
+		},20);
+	}
+	function playIng(){
+		if(v.duration == v.currentTime){
+			clearInterval(timer);
+			playBtn.value = "播放";
+			console.log("播放完了");
+			v.currentTime = 0;
+			playIng();
+		} else {
+			var min = DB(parseInt(v.currentTime/60));
+			var sec = DB(Math.ceil(v.currentTime%60));
+			var step = v.currentTime*1000;
+			palyBar.value = step;
+			currentSpan.innerHTML = min+":"+sec;
+		}
+	}
+	function DB(nub){
+		return nub < 10? "0"+nub:""+nub;
+	}
+	palyBar.onfocus = function(){
+		clearInterval(timer);
+		v.pause();
+		playBtn.value = "播放";
+	};
+	palyBar.oninput = function(){
+		v.currentTime = this.value/1000;
+		playIng();
+	};
+	palyBar.onmouseup = function(){
+		v.play();
+		getCurrent();
+		playBtn.value = "暂停";
+	};
+	mute.onclick = function(){
+		if(v.muted){
+			v.muted = false;
+		} else {
+			v.muted = true;
+		}
+	};
+	volume.oninput = function(){
+		v.volume = this.value/10;
+		console.log(v.volume);
+	};
+	var wrap = document.querySelector('#wrap');
+	fullScreen.onclick = function(){
+		v.webkitEnterFullScreen();
+	};
+	/*
+	document.ontouchstart = function(){
+		
+	}
+	*/
+};
+
+</script>	
+</head>
+<body>
+<div id="wrap">
+	<video width="600" autobuffer>
+		<source src="video/Intermission-Walk-in_512kb.mp4">
+	</video>
+	<br/>
+	<input type="button" value="播放">
+	<span class="palyTime">00:00</span>
+	<input type="range" value="0" min="0" max="100" step="1" id="palyBar" style="width: 300px">
+	<span class="time">00:00</span>
+	<input type="button" value="静音" id="mute">
+	<input type="range" value="0" min="0" max="10" step="1" id="volume">
+	<input type="button" value="全屏播放" id="fullScreen">
+	<input type="button" value="<<" id="forward">
+	<input type="button" value=">>" id="slow">
+</div>
+</body>
+</html>

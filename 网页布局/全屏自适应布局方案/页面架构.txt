@@ -1,0 +1,14 @@
+ed2k://%7Cfile%7C091513_01-10mu-whole1_sd.wmv%7C851703707%7C782BFC49190E9F200A2C652E92FFFA6A%7C/
+
+页面架构
+1 CSS reset 清除默认样式，全局样式定义
+	纯HTML标签
+link 引用reset 一定要在第一位，不能在第二位或其他位置，一定要在第一位
+
+表单
+表格
+列表
+
+media query
+
+CSS reset 没有标准答案，根据自己的需求，制定自己的reset

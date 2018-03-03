@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 0;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/javascript">
+var box = document.getElementById('box');
+(function(){
+    var arg = arguments;
+    requestAnimationFrame(function(){
+        console.log(1);
+        box.style.width = box.offsetWidth+2+'px';
+        arg.callee();
+    });
+})();
+    console.log(2);
+</script>
+</body>
+</html>

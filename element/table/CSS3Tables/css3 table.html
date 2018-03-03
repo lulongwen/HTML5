@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Pimp your tables with CSS3</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="" />
+        <meta name="keywords" content=""/>
+        <link rel="stylesheet" href="css/style.css" media="screen"/>
+    </head>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: normal;
+            letter-spacing: normal;
+            background: #f0f0f0;
+        }
+section{
+background-color:#fff;
+width:750px;
+padding:40px;
+margin:0 auto;
+border-left:30px solid #1D81B6;
+border-right:1px solid #ddd;
+-moz-box-shadow:0px 0px 16px #aaa;
+}
+
+h2{
+font-family:"Trebuchet MS",sans-serif;
+font-size:34px;
+font-style:normal;
+background-color:#f0f0f0;
+margin:40px 0px 30px -40px;
+padding:0px 40px;
+clear:both;
+float:left;
+width:100%;
+color:#aaa;
+text-shadow:1px 1px 1px #fff;
+}
+</style>
+<body>
+<section>
+    <p>
+    td scope="col" 意思是这个单元格是下面单元格的表头；<br />
+    td scope="row" 意思是这个单元格是右边单元格的表头；
+    </p>
+            
+<h2>Table Style 1</h2>         
+<table class="table1">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col" abbr="Starter">Smart Starter</th>
+            <th scope="col" abbr="Medium">Smart Medium</th>
+            <th scope="col" abbr="Business">Smart Business</th>
+            <th scope="col" abbr="Deluxe">Smart Deluxe</th>
+        </tr>
+    </thead>
+
+    <tbody>
+                    <tr>
+                        <th scope="row">Storage Space</th>
+                        <td>512 MB</td>
+                        <td>1 GB</td>
+                        <td>2 GB</td>
+                        <td>4 GB</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bandwidth</th>
+                        <td>50 GB</td>
+                        <td>100 GB</td>
+                        <td>150 GB</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">MySQL Databases</th>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Setup</th>
+                        <td>19.90 $</td>
+                        <td>12.90 $</td>
+                        <td>free</td>
+                        <td>free</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">PHP 5</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ruby on Rails</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <th scope="row">Price per month</th>
+        <td>$ 2.90</td>
+        <td>$ 5.90</td>
+        <td>$ 9.90</td>
+        <td>$ 14.90</td>
+    </tr>
+    </tfoot>
+</table>
+
+<h2>Table Style 2</h2>
+<table class="table2">
+    <thead>
+        <tr>
+            <th></th>
+            <th scope="col" abbr="Starter">Smart Starter</th>
+            <th scope="col" abbr="Medium">Smart Medium</th>
+            <th scope="col" abbr="Business">Smart Business</th>
+            <th scope="col" abbr="Deluxe">Smart Deluxe</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+        <tr>
+            <th scope="row">Price per month</th>
+            <td>$ 2.90</td>
+            <td>$ 5.90</td>
+            <td>$ 9.90</td>
+            <td>$ 14.90</td>
+        </tr>
+    </tfoot>
+
+    <tbody>
+        <tr>
+            <th scope="row">Storage Space</th>
+            <td>512 MB</td>
+            <td>1 GB</td>
+            <td>2 GB</td>
+            <td>4 GB</td>
+        </tr>
+        <tr>
+            <th scope="row">Bandwidth</th>
+            <td>50 GB</td>
+            <td>100 GB</td>
+            <td>150 GB</td>
+            <td>Unlimited</td>
+        </tr>
+        <tr>
+            <th scope="row">MySQL Databases</th>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+            <td>Unlimited</td>
+        </tr>
+        <tr>
+            <th scope="row">Setup</th>
+            <td>19.90 $</td>
+                        <td>12.90 $</td>
+                        <td>free</td>
+                        <td>free</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">PHP 5</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ruby on Rails</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+    </tbody>
+</table>
+
+<h2>Table Style 3</h2>
+<table class="table3">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th scope="col" abbr="Starter">Smart Starter</th>
+                        <th scope="col" abbr="Medium">Smart Medium</th>
+                        <th scope="col" abbr="Business">Smart Business</th>
+                        <th scope="col" abbr="Deluxe">Smart Deluxe</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Price per month</th>
+                        <td>$ 2.90</td>
+                        <td>$ 5.90</td>
+                        <td>$ 9.90</td>
+                        <td>$ 14.90</td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <th scope="row">Storage Space</th>
+                        <td>512 MB</td>
+                        <td>1 GB</td>
+                        <td>2 GB</td>
+                        <td>4 GB</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Bandwidth</th>
+                        <td>50 GB</td>
+                        <td>100 GB</td>
+                        <td>150 GB</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">MySQL Databases</th>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Setup</th>
+                        <td>19.90 $</td>
+                        <td>12.90 $</td>
+                        <td>free</td>
+                        <td>free</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">PHP 5</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ruby on Rails</th>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                        <td><span class="check"></span></td>
+                    </tr>
+                </tbody>
+</table>
+
+</section> 
+</body>
+</html>

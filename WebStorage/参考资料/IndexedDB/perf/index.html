@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+<head>
+	<title>IndexedDB Performance Test cases</title>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script type="text/javascript" src = "//nparashuram.com/IndexedDBShim/dist/IndexedDBShim.js"></script>
+</head>
+<body data-feedly-processed="yes">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">IndexedDB Performance</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active">
+							<a href="../">Home</a>
+						</li>
+						<li>
+							<a href="//nparashuram.com">About Me</a>
+						</li>
+						<li>
+							<a href="//nparashuram.com/contact.html">Contact</a>
+						</li>
+						<li class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">
+								Quick Links <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="//nparashuram.com/IndexedDBShim">IndexedDB Polyfill</a>
+								</li>
+								<li>
+									<a href="http://www.w3.org/TR/IndexedDB/">IndexedDB Specification</a>
+								</li>
+								<li>
+									<a href="http://blog.nparashuram.com/search/label/indexeddb">Blog posts on IndexedDB</a>
+								</li>
+								<li class="divider"></li>
+								<li class="nav-header">IndexedDB Libraries</li>
+								<li>
+									<a href="//nparashuram.com/jquery-indexeddb">Jquery IndexedDB</a>
+								</li>
+								<li>
+									<a href="//pouchdb.com">PouchDB</a>
+								</li>
+								<li>
+									<a href="//github.com/superfeedr/indexeddb-backbonejs-adapter">Backbone-IndexedDB</a>
+								</li>
+								<li>
+									<a href="//nparashuram.com/Linq2IndexedDB">LINQ IndexedDB</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span3">
+				<div class = "well sidebar-nav">
+					<ul class="nav nav-list" id = "perfTestLinks">
+						<script type = "text/html">
+							<% _.each(_.groupBy(perf, 'category'), function(i, name) { %>
+								<li class = 'nav-header'>
+									<%= name %></li>
+								<% _.each(perf, function(val, key){ if (val.category === name){%>
+									<li data-name = "<%= key %>">
+										<a href="#<%=key%>" data-name = "<%=key%>"> <i class="icon-chevron-right pull-right"></i>
+											<%= key %></a>
+									</li>
+								<%}}) %>
+							<% }); %></script>
+					</ul>
+				</div>
+			</div>
+			<div class="span9">
+				<div id = "idbUnsupported" class = "hero alert alert-danger hide">
+					<h2>IndexedDB is not supported in your browser.</h2>
+					<p>
+						You could try using the
+						<a href = '//nparashuram.com/IndexedDBShim'>polyfill</a>
+						for IndexedDB API. I have not yet added the polyfill to this performance analysis.
+					</p>
+				</div>
+				<div id = "testContent">
+					<div class = "hero">
+						<h1>IndexedDB</h1>
+						<h3>Performance Test Scenarios</h3>
+					</div>
+				</div>
+				<script type = "text/html">
+					<h3>
+					<div class = "controls pull-right">
+						<a class = "abortTests btn btn-large btn-danger  pull-right hide" data-name ="<%=name%>">Abort Tests</a>
+						<a class = "runTests   btn btn-large btn-primary pull-right" data-name ="<%=name%>">Run Tests</a>
+					</div>
+						<%= name %></h3>
+					<p>
+						<%= desc %></p>
+					<div class="accordion" id="accordion2">
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<h4>
+									<a class="accordion-toggle " data-toggle="collapse" href="#preTest"> <i class = "icon-cog"></i>   Pre Test
+									</a>
+								</h4>
+							</div>
+							<div id="preTest" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul class="nav nav-tabs" id="preTestTabs">
+									  <li class="active"><a href = "#onStartCode" data-toggle="tab">onStart</a></li>
+									  <li><a href = "#onSetupCode" data-toggle="tab" >Setup</a></li>
+									  <li><a href = "#onTeardownCode" data-toggle="tab">Teardown</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane active" id="onStartCode">
+											<pre><%= onStart %></pre>
+										</div>
+										<div class="tab-pane" id="onSetupCode">
+											<pre><%= setup %></pre>
+										</div>
+										<div class="tab-pane" id="onTeardownCode">
+											<pre><%= teardown %></pre>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-group">
+						<div class="accordion-heading">
+							<h4 class = "img-rounded">
+								<a class="accordion-toggle" data-toggle="collapse" href="#testCases">
+									<i class = "icon-th"></i>  Test Cases
+								</a>
+							</h4>
+						</div>
+						<div id="testCases" class="accordion-body collapse in">
+							<div class="accordion-inner">
+								<ul class="nav nav-tabs" id="preTestTabs">
+									<% var count = 0%>
+									<% _.each(tests, function(obj, key){ %>
+										<li class = "<%= count === 0? 'active' : 'no'%>">
+											<a data-toggle="tab" href = "#testcase<%= count%>">
+												<span class = "badge rank hide" data-name="<%= key%>"></span>
+												<%= key %></a>
+										</li>
+										<% count++ %>
+
+									<%})%></ul>
+								<div class="tab-content">
+									<% var count = 0 %>
+									<% _.each(tests, function(obj, key, i){ %>
+										<div class="tab-pane <%= count === 0? 'active' : 'no'%>" id="testcase<%= count %>">
+											<pre><%= obj %></pre>
+											<% count++ %></div>
+									<%})%></div>
+							</div>
+						</div>
+					</div>
+					<div class="progress hide">
+					  <div class=" bar bar-info start" style="width: 0%;"></div>
+					  <div class=" bar bar-info pretest" style="width: 0%;"></div>
+					  <% _.each(tests, function(obj, name){ %>
+					  	<div class=" bar bar-danger tests" style="" data-name="<%= name %>"></div>
+					  <%});%> 
+					  <div class=" bar bar-warning done" style="width: 0%;"></div>
+					</div>
+					<div class = "controls clearfix">
+						<a class = "abortTests btn btn-danger  pull-right hide" data-name ="<%=name%>">Abort Tests</a>
+						<a class = "runTests   btn btn-primary pull-right" data-name ="<%=name%>">Run Tests</a>
+					</div>
+				</script>
+				<div class = "accordion clearfix">
+					<div class = "accordion-group">
+						<div class = "accordion-heading">
+							<a target = '_blank' class = 'browserscopeLink btn btn-mini pull-right'>
+								View in Browserscope
+							</a>
+							<h4>
+								<a class="accordion-toggle " data-toggle="collapse" href="#results">
+									<i class = "icon-cog"></i>
+									Results 
+								</a>
+							</h4>
+						</div>
+						<div class = "accordion-body" id = "results">
+							<div class = "accordion-inner">
+								<div class = "resultsContent clearfix">
+									<script type = "text/html">
+										<table class = "table table-hover table-bordered">
+											<tr class = "info">
+												<th>#</th>
+												<th>Name</th>
+												<th>Rank</th>
+												<th>Score</th>
+												<th>Slow by</th>
+												<th>Relative Margin of Error</th>
+											</tr>
+											<% _.each(bm, function(t, i){ %>
+												<tr>
+													<td><%= i + 1 %></td>
+													<td><%= t.name %></td>
+													<td class = "center-align"><span class = "rank badge" data-name = "<%=t.name %>"></span></td>
+													<td class = "right-align"><%= t.hz.toFixed(2)%></td>
+													<td class = "right-align"><span class = "percentSlow" data-name = "<%=t.name %>"></span> %</td>
+													<td class = "right-align"><%= t.stats.rme.toFixed(2) %>%</td>
+												</tr>
+											<%}); %></table>
+									</script>
+								</div>
+								<div class = "browserScope clearfix">
+									<div class="alert alert-error saveError hide">
+										<button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Error!</strong>
+										Could not save results to Browserscope. This could be due to a missing _bTestKey in the test.
+									</div>
+									<div class="alert alert-success saveDone hide">
+										<button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Success !</strong>
+										Results saved to Browserscope
+									</div>
+									<div class="alert alert-error loadError hide">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										<strong>Error!</strong>
+										Could not load results from Browserscope. This could be due to a missing _bTestKey in the test.
+									</div>
+									<div id = "viz"></div>
+									<p style = "text-align:center">
+										Longer graphs imply faster operations. X axis is operations per second. Uses <a target = "_blank" href = 'http://benchmarkjs.com/'>BenchmarkJs</a>.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class = "accordian clearfix">
+					<div class = "accordian-group">
+						<div class = "accordion-heading">
+							<h4>
+								<a class="accordion-toggle " data-toggle="collapse" href="#comments">
+									<i class = "icon-cog"></i>
+									Discussion
+								</a>
+							</h4>
+						</div>
+						<div class = "accordion-body" id = "comments">
+							<div class = "accordion-inner">
+								<div id="disqus_thread"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<footer>
+			<p></p>
+		</footer>
+
+	</div>
+	<!--/.fluid-container-->
+
+	<script src="../demoer/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	<script src="../demoer/beautify.js"></script>
+	<script src="//www.google.com/jsapi"></script>
+	<script src="//nparashuram.com/jquery-indexeddb/dist/jquery.indexeddb.js" ></script>
+
+	<script type="text/javascript" src = "lib/underscore.min.js"></script>
+	<script type="text/javascript" src = "lib/Faker.js"></script>
+	<script type="text/javascript" src = "lib/Benchmark.js"></script>
+
+	<script type="text/javascript" src = "main.js"></script>
+
+	<script type="text/javascript" src = "tests/1_KeyCompare.js"></script>
+	<script type="text/javascript" src = "tests/2_TableSchema_Write.js"></script>
+	<script type="text/javascript" src = "tests/3_TransactionRead.js"></script>
+	<script type="text/javascript" src = "tests/4_TransactionWrite.js"></script>
+	<script type="text/javascript" src = "tests/5_Cursor_ParallelWrite.js"></script>
+	<script type="text/javascript" src = "tests/6_Cursor_ParallelRead.js"></script>
+	<script type="text/javascript" src = "tests/8_IndexUnused.js"></script>
+	<script type="text/javascript" src = "tests/9_CursorIndexCursor.js"></script>
+	<script type="text/javascript" src = "tests/10_TransactionReadWriteIsolation.js"></script>
+	<script type="text/javascript" src = "tests/11_IndexKeyObjectCursor.js"></script>
+	<script type="text/javascript" src = "tests/12_CursorContinueAdvance.js"></script>
+	<script type="text/javascript" src = "tests/13_OpenDBVersions.js"></script>
+	<script type="text/javascript" src = "tests/14_TransactionObjectStore.js"></script>
+	<script type="text/javascript" src = "tests/15_TransactionRead.js"></script>
+	<script type="text/javascript" src = "tests/16_TransactionWrite.js"></script>
+	<script type="text/javascript" src = "tests/17_AddUpdate.js"></script>
+</body>
+</html>

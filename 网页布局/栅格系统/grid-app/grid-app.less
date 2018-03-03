@@ -1,0 +1,399 @@
+// @name: grid-app.less
+// @version: 1.0
+// @description: 移动端24列栅格
+// @Keywords: grid-app, app-grid
+// @Auther: lulongwen
+// @Date: 2016年5月16日10:59
+
+
+[class*="app-"]{
+	float: left;
+	margin-bottom:10px;
+	padding:0 5px;
+	min-height:60px;
+	background-color: #fff;
+	position:relative;
+	section{
+		height:60px;
+		background-color: #ff0;
+	}
+}
+.app{
+	padding:0 5px;
+	position:relative;
+}
+.app-ban{
+	padding:0;
+}
+
+
+// 变量
+@width: (100% / 24) * 1;
+@width2: @width * 2;
+@width3: @width * 3;
+@width4: @width * 4;
+@width5: @width * 5;
+@width6: @width * 6;
+@width7: @width * 7;
+@width8: @width * 8;
+@width9: @width * 9;
+@width10: @width * 10;
+@width11: @width * 11;
+@width12: @width * 12;
+@width13: @width * 13;
+@width14: @width * 14;
+@width15: @width * 15;
+@width16: @width * 16;
+@width17: @width * 17;
+@width18: @width * 18;
+@width19: @width * 19;
+@width20: @width * 20;
+@width21: @width * 21;
+@width22: @width * 22;
+@width23: @width * 23;
+@width24: @width * 24;
+
+
+// grid-width  @name: .app-*
+.app-1{
+	width:@width;
+}
+.app-2{
+	width:@width2;
+}
+.app-3{
+	width:@width3; // 12.5%
+}
+.app-4{
+	width:@width4;
+}
+.app-5{
+	width:@width5;
+}
+.app-6{
+	width:@width6; // 25%
+}
+.app-7{
+	width:@width7;
+}
+.app-8, .app-three{
+	width:@width8;   // 33.33333333%
+}
+.app-9{
+	width:@width9;
+}
+.app-10{
+	width:@width10;
+}
+.app-11{
+	width:@width11;
+}
+.app-12, .app-two{
+	width:@width12; // 50%
+}
+.app-13{
+	width:@width13;
+}
+.app-14{
+	width:@width14;
+}
+.app-15{
+	width:@width15; // 62.5%
+}
+.app-16{
+	width:@width16;
+}
+.app-17{
+	width:@width17;
+}
+.app-18{
+	width:@width18; // 75%
+}
+.app-19{
+	width:@width19;
+}
+.app-20{
+	width:@width20;
+}
+.app-21{
+	width:@width21; // 87.5%
+}
+.app-22{
+	width:@width22;
+}
+.app-23{
+	width:@width23;
+}
+.app-24, .app{
+	width:@width24; // 100%
+}
+// width END
+
+
+// margin-left  @name: .app-ml-*
+.app-ml-1{
+	margin-left:@width;
+}
+.app-ml-2{
+	margin-left:@width2;
+}
+.app-ml-3{
+	margin-left:@width3; // 12.5%
+}
+.app-ml-4{
+	margin-left:@width4;
+}
+.app-ml-5{
+	margin-left:@width5;
+}
+.app-ml-6{
+	margin-left:@width6; // 25%
+}
+.app-ml-7{
+	margin-left:@width7;
+}
+.app-ml-8, .app-ml-three{
+	margin-left:@width8;   // 33.33333333%
+}
+.app-ml-9{
+	margin-left:@width9;
+}
+.app-ml-10{
+	margin-left:@width10;
+}
+.app-ml-11{
+	margin-left:@width11;
+}
+.app-ml-12, .app-ml-two{
+	margin-left:@width12; // 50%
+}
+.app-ml-13{
+	margin-left:@width13;
+}
+.app-ml-14{
+	margin-left:@width14;
+}
+.app-ml-15{
+	margin-left:@width15; // 62.5%
+}
+.app-ml-16{
+	margin-left:@width16;
+}
+.app-ml-17{
+	margin-left:@width17;
+}
+.app-ml-18{
+	margin-left:@width18; // 75%
+}
+.app-ml-19{
+	margin-left:@width19;
+}
+.app-ml-20{
+	margin-left:@width20;
+}
+.app-ml-21{
+	margin-left:@width21; // 87.5%
+}
+.app-ml-22{
+	margin-left:@width22;
+}
+.app-ml-23{
+	margin-left:@width23;
+}
+.app-ml-24{
+	margin-left:@width24; // 100%
+}
+// margin-left-* END
+
+
+// position-left  @name: .app-left-*
+.app-left-1{
+	left:@width;
+}
+.app-left-2{
+	left:@width2;
+}
+.app-left-3{
+	left:@width3; // 12.5%
+}
+.app-left-4{
+	left:@width4;
+}
+.app-left-5{
+	left:@width5;
+}
+.app-left-6{
+	left:@width6; // 25%
+}
+.app-left-7{
+	left:@width7;
+}
+.app-left-8, .app-left-three{
+	left:@width8;   // 33.33333333%
+}
+.app-left-9{
+	left:@width9;
+}
+.app-left-10{
+	left:@width10;
+}
+.app-left-11{
+	left:@width11;
+}
+.app-left-12, .app-left-two{
+	left:@width12; // 50%
+}
+.app-left-13{
+	left:@width13;
+}
+.app-left-14{
+	left:@width14;
+}
+.app-left-15{
+	left:@width15; // 62.5%
+}
+.app-left-16{
+	left:@width16;
+}
+.app-left-17{
+	left:@width17;
+}
+.app-left-18{
+	left:@width18; // 75%
+}
+.app-left-19{
+	left:@width19;
+}
+.app-left-20{
+	left:@width20;
+}
+.app-left-21{
+	left:@width21; // 87.5%
+}
+.app-left-22{
+	left:@width22;
+}
+.app-left-23{
+	left:@width23;
+}
+.app-left-24{
+	left:@width24; // 100%
+}
+// position-left-* END
+
+
+// position-right  @name: .app-right-*
+.app-right-1{
+	right:@width;
+}
+.app-right-2{
+	right:@width2;
+}
+.app-right-3{
+	right:@width3; // 12.5%
+}
+.app-right-4{
+	right:@width4;
+}
+.app-right-5{
+	right:@width5;
+}
+.app-right-6{
+	right:@width6; // 25%
+}
+.app-right-7{
+	right:@width7;
+}
+.app-right-8, .app-right-three{
+	right:@width8;   // 33.33333333%
+}
+.app-right-9{
+	right:@width9;
+}
+.app-right-10{
+	right:@width10;
+}
+.app-right-11{
+	right:@width11;
+}
+.app-right-12, .app-right-two{
+	right:@width12; // 50%
+}
+.app-right-13{
+	right:@width13;
+}
+.app-right-14{
+	right:@width14;
+}
+.app-right-15{
+	right:@width15; // 62.5%
+}
+.app-right-16{
+	right:@width16;
+}
+.app-right-17{
+	right:@width17;
+}
+.app-right-18{
+	right:@width18; // 75%
+}
+.app-right-19{
+	right:@width19;
+}
+.app-right-20{
+	right:@width20;
+}
+.app-right-21{
+	right:@width21; // 87.5%
+}
+.app-right-22{
+	right:@width22;
+}
+.app-right-23{
+	right:@width23;
+}
+.app-right-24{
+	right:@width24; // 100%
+} 
+// position-right-* END
+
+
+// grid END
+
+
+.auto{
+	margin: 0 auto;
+	float:none;
+}
+
+
+// clearfix
+.clearfix::before, .clearfix:after, 
+.app::before, .app::after, .app-two::before, .app-two::after,.app-three::before, .app-three::after, 
+.app-1::before, .app-1::after, .app-2::before, .app-2::after, .app-3::before, .app-3::after,
+.app-4::before, .app-4::after, .app-5::before, .app-5::after,.app-6::before, .app-6::after,
+.app-7::before, .app-7::after, .app-8::before, .app-8::after, .app-9::before, .app-9::after,
+.app-10::before, .app-10::after, .app-11::before, .app-11::after, .app-12::before, .app-12::after,
+
+.app-13::before, .app-13::after, .app-14::before, .app-14::after, .app-15::before, .app-15::after,
+.app-16::before, .app-16::after, .app-17::before, .app-17::after, .app-18::before, .app-18::after,
+.app-19::before, .app-16::after, .app-20::before, .app-20::after, .app-21::before, .app-21::after,
+.app-22::before, .app-22::after, .app-23::before, .app-23::after, .app-24::before, .app-24::after,{
+	content:'';
+	display:table;
+}
+.clearfix::after,
+.app::after, .app-two::after, .app-three::after,
+.app-1::after, .app-2::after, .app-3::after,
+.app-4::after, .app-5::after, .app-6::after, 
+.app-7::after,.app-8::after, .app-9::after,
+.app-10::after, .app-11::after, .app-12::after,
+
+.app-13::after, .app-14::after, .app-15::after,
+.app-16::after, .app-17::after, .app-18::after, 
+.app-19::after,.app-20::after, .app-21::after,
+.app-22::after, .app-23::after, .app-24::after{
+	clear: both;
+}
+
+

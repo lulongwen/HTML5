@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie - 登陆页</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="text-center">Please sign in</h2>
+        <form name="form">
+          <div class="form-group">
+            <label for="user">用户名：</label>
+            <input type="text" class="form-control" name="user" placeholder="用户名" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" class="form-control" name="password" placeholder="密码" required>
+          </div>
+
+          <div class="form-group custom-control custom-checkbox">
+            <input type="checkbox" name="check" class="custom-control-input" id="remember">
+            <label class="custom-control-label" for="remember">
+              <small>十天内免登录</small>
+            </label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<script>
+  /**
+   * document.cookie = 'key=value; expires';
+   * cookie默认生命周期是 关闭浏览器
+   *  - 延长声明周期： key=vlaue; expires= 设置的时间
+   *  - 延长声明周期： key=vlaue; expires= 1000*60*24
+   * cookie 当用户设置了 cookie，每个浏览器中都能看到
+   *  1. 每个域名下的 cookie的大小是有限制的
+   */
+  const FORM = document.forms[0];
+  const USER = JSON.parse(getCookie('user') );
+  FORM.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    let user = this.user.value;
+    let password = this.password.value;
+    let check = this.check.checked;
+    // console.log(user,password, check);
+    if(check)
+      setCookie('user', `{"name":"${user}"}`, 10);
+    else
+      setCookie('user', `{"name":"${user}"}`);
+
+    location.href= `${location.origin}/portfolio/HTML5/webStorage/cookie/cookie.html`;
+  }, false);
+
+
+  if(USER){ // 是否登录过
+    location.href= `${location.origin}/portfolio/HTML5/webStorage/cookie/cookie.html`;
+  }
+
+
+
+  // 设置 cookie
+  function setCookie(key, val, time){
+    time = time || 0;
+    var DATE = new Date();
+    // 设置时间，获取今天的时间，在今天的基础上增加多少天
+    DATE.setDate(DATE.getDate()+ time);
+    if(time){
+      document.cookie = `${key}=${val};expires="${DATE}"`;
+    }
+    else{
+      document.cookie = `${key}=${val}`;
+    }
+  }
+
+
+  // 获取 cookie
+  function getCookie(key){
+    var cookie = document.cookie;
+    var arr = cookie.split('; ');
+    var val = '';
+
+    arr.forEach(function(elem){
+      var lock = elem.split('=')[0] == key;
+      if(lock){
+        val = elem.split('=')[1];
+      }
+    });
+    return val ? val : false;
+  }
+
+
+  // 删除 cookie，只要 cookie的时间比当前时间小，就为删除
+  function removeCookie(key, value){
+    setCookie(key, value, -1);
+  }
+</script>
+</body>
+</html>

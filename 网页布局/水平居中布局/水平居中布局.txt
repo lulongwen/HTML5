@@ -1,0 +1,20 @@
+1 水平居中布局（父盒子宽度不确定，子盒子宽度不确定）
+inline-block  的宽度是根据内容来的，内容有多宽，他就有多宽
+
+text-align:center 
+
+父盒子 text-align:center
+子盒子display：inline-block；
+子盒子的内容需要设置text-align:left；使内容居左对齐
+
+transform：translateX（-50%） IE8以下 不兼容
+
+2 垂直居中
+
+display:flex
+
+3 水平和垂直都居中
+解决方案的思路：
+1 了解CSS里面很多属性的值和一些特性，你要对特性非常掌握； 
+2 把问题分解，拆分元素然后把CSS的特性和分解的问题做一个联系，这个问题可以用哪个特性去实现，然后综合一下，拿出解决方案，去实现。
+3 

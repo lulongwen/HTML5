@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400" style="background: #F9F1F7;"></canvas>
+	<script src="Polygon.js"></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+		var polygons = [];
+		var data = [
+			{
+				X: 300, Y: 200,
+				R:100,
+				sides:5,
+				fc:'rgba(80,190,220,.5)'
+			},
+			{
+				X: 100, Y: 200,
+				R:80,
+				sides:6,
+				fc:'rgba(180,190,220,.5)'
+			},
+			{
+				X: 400, Y: 200,
+				R:90,
+				sides:7,
+				fc:'rgba(80,10,220,.5)'
+			}
+		];
+
+		function drawPolygon(polygon){
+			cxt.save();
+			cxt.beginPath();
+			polygon.stroke(cxt).fill(cxt);
+			cxt.restore();
+		}
+
+		function createPolygon(){
+			data.forEach((item,i)=>{
+				var p = new Polygon({
+					X: item.X, Y: item.Y,
+					R:item.R,
+					sides:item.sides,
+					fc:item.fc
+				});
+				polygons.push(p)
+			});
+		}
+
+		createPolygon();
+		drawPolgons();
+
+		function drawPolgons(){
+			polygons.forEach((item,i)=>{
+				drawPolygon(item);
+			});
+		}
+
+
+
+		// polygon.stroke(cxt).fill(cxt);
+
+		// var polygon2 = new Polygon({
+		// 	X: 100, Y: 200,
+		// 	R:80,
+		// 	sides:6,
+		// 	fc:'rgba(180,190,220,.5)'
+		// });
+
+		// polygon2.stroke(cxt).fill(cxt);
+
+		// var polygon3 = new Polygon({
+		// 	X: 400, Y: 100,
+		// 	R:90,
+		// 	sides:7,
+		// 	fc:'rgba(80,10,220,.5)'
+		// });
+
+		// polygon3.stroke(cxt).fill(cxt);
+
+		canvas.onclick = function(e){
+			var x = e.offsetX, y = e.offsetY;
+			polygons.forEach((item,i)=>{
+				item.createPath(cxt);
+				if(cxt.isPointInPath(x,y)){
+					console.log(i);
+				}
+			});
+		}
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+<style>
+	*{
+		box-sizing:border-box;
+	}
+	body{
+		margin:0;
+		background: #333;
+	}
+	div{
+		width:600px;
+		height:600px;
+		margin:30px auto;
+	}
+	#canvas{
+		background-color: #fff;
+	}
+</style>
+</head>
+<body>
+
+<div>
+
+	<!-- canvas 默认宽 300px， 高 150px
+		一定要在标签上写宽高，在样式里写宽高有问题
+		样式里写宽高的Bug：
+			1 样式里写的宽高是在默认的宽高的基础上缩放的；
+			canvas里面写的宽高，才是画布真正的宽高
+
+		canvas是以像素的方式来渲染的，
+		缩放的时候把像素进行了缩放，所以会失真
+	 -->
+	<canvas id="canvas" width="600" height="600">
+		浏览器不支持canvans
+	</canvas>
+
+</div>
+	
+<script>
+
+
+	// 获取canvas
+	var canvas =document.getElementById('canvas');
+
+	//获得绘制环境 .getContext('2d');  // webgl 3D绘图
+	var ctx =canvas.getContext('2d');
+	
+    
+	// .fillStyle 要写在 .fillRect前面
+	ctx.fillStyle="#f60";
+	ctx.lineWidth="10px";
+
+	// 绘制方块，默认黑色 .fillRect(x, y, W, H) 
+		// 	x 坐标，y 坐标， Width -宽，Height -高 
+		// 	默认颜色-黑色
+	ctx.fillRect(50, 50, 100, 100);
+	
+
+	// .strokeRect(x, y, Width, Height) 带边框的方块，没有背景色
+		// 	默认: 1px 黑色边框
+		// 	显示出来的不一样的原因
+			//content.strokeRect(50.5, 50.5, 100, 100);
+	// ctx.strokeRect(50.5, 50.5, 100, 100);
+
+
+	
+
+</script>
+</body>
+</html>

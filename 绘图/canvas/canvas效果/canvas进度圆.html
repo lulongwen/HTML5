@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+<style>
+  #canvas{
+    display: block;
+    margin:50px auto;
+    background-color: #000;
+  }
+</style>
+</head>
+<body>
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <script>
+    var canvas =document.getElementById('canvas'),
+        ctx =canvas.getContext('2d'),
+        x =canvas.width/2, // canvas中心点的x轴
+        y =canvas.height/2, // canvas中心点的y轴
+        angle =Math.PI*2/100, // 将360度分成100份，那么每一份就是angle度
+        speed =.1; //加载速度控制
+
+    // 蓝色外圈
+    function outside(n){
+      ctx.save();
+      ctx.strokeStyle ="#fff";
+      ctx.lineWidth =5;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 100, -Math.PI/2, -Math.PI/2 + n*angle, false);
+      //.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
+    };
+
+
+    // 白色内圈
+    function inside(){
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle ="#fff";
+      ctx.arc(x, y, 100, 0, Math.PI*2, false);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.restore();
+    };
+
+
+    // 百分比文字
+    function text(n){
+      ctx.save(); //save和restore可以保证样式属性只运用于该段canvas元素
+      ctx.strokeStyle ="#fff";
+
+      ctx.font ="40px Arial"; // 设置大小和字体
+      ctx.strokeText(n.toFixed(0) +'%', x-25, y+10);
+      ctx.stroke();
+      ctx.restore();
+    };
+
+    // 循环动画， 匿名函数自执行
+    (function draw(){
+      window.requestAnimationFrame(draw, canvas);
+      // 清除画布
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if(speed > 100){
+        speed =0;
+      }
+      speed += .1;
+      inside();
+      text(speed);
+      outside(speed);
+      
+    })();   
+    
+    
+  </script> 
+</body>
+</html>

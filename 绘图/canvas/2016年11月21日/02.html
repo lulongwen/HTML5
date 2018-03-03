@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas {
+			display: block;
+			margin: 0 auto;
+			border: 1px solid pink;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var cxt = canvas.getContext('2d');
+
+		// canvas.width = 800;
+		// canvas.height = 600;
+
+		cxt.canvas.width = 800;
+		cxt.canvas.height = 600;
+
+
+		// cxt.stroke();  //把状态 绘制出来
+		// cxt.lineWidth = 10;
+		// cxt.strokeStyle = 'rgba(250,20,20,.5)';
+		// cxt.moveTo(530,50);
+		// cxt.lineTo(530,400);
+		// cxt.lineTo(700,400);
+		// cxt.closePath();
+
+		// cxt.stroke();
+
+
+		cxt.lineWidth = 10;
+
+		cxt.beginPath();
+		cxt.lineCap = 'round'
+		cxt.strokeStyle = 'rgba(250,20,20,.5)';
+		cxt.lineTo(50,50);
+		cxt.lineTo(500,50);
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.lineCap = 'square'  //方头 宽度为线段的一半
+		cxt.strokeStyle = 'red';
+		cxt.lineTo(50,100);
+		cxt.lineTo(500,100);
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.strokeStyle = 'blue';
+		cxt.lineCap = 'butt'  //
+		cxt.lineTo(50,200);
+		cxt.lineTo(500,200);
+		cxt.stroke();
+
+		cxt.beginPath();
+		cxt.lineWidth = 1;
+		cxt.lineTo(50,0);
+		cxt.lineTo(50,600);
+		cxt.stroke();
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

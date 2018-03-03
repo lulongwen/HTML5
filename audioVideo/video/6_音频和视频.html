@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript">
+window.onload = function(){
+	var v = document.querySelector('video');
+	var playBtn = document.querySelector('input');
+	var timeSpan = document.querySelector('.time');
+	var currentSpan = document.querySelector('.palyTime');
+	var timer = 0;
+	var palyBar = document.querySelector('#palyBar');
+	//播放
+	getTime();
+	playBtn.onclick = function(){
+		if(v.paused){
+			v.play();
+			getCurrent();
+			this.value = "暂停";
+		} else {
+			clearInterval(timer);
+			v.pause();
+			this.value = "播放";
+		}
+	};
+	function getTime(){
+		var min = DB(parseInt(v.duration/60));
+		var sec = DB(Math.ceil(v.duration%60));
+		palyBar.max = v.duration*1000;
+		timeSpan.innerHTML = min+":"+sec;
+	}
+	function getCurrent(){
+		clearInterval(timer);
+		timer = setInterval(function(){
+			if(v.duration == v.currentTime){
+				clearInterval(timer);
+				console.log("播放完了");
+			}
+			var min = DB(parseInt(v.currentTime/60));
+			var sec = DB(Math.ceil(v.currentTime%60));
+			var step = v.currentTime*1000;
+			palyBar.value = step;
+			currentSpan.innerHTML = min+":"+sec;
+		},20);
+	}
+	function DB(nub){
+		return nub < 10? "0"+nub:""+nub;
+	}
+	/*
+	document.ontouchstart = function(){
+		
+	}
+	*/
+};
+
+</script>	
+</head>
+<body>
+<video width="600" autobuffer>
+	<source src="video/Intermission-Walk-in_512kb.mp4">
+</video>
+<br/>
+<input type="button" value="播放">
+<span class="palyTime">00:00</span>
+<input type="range" value="0" min="0" max="100" step="1" id="palyBar" style="width: 300px">
+<span class="time">00:00</span>
+<input type="button" value="静音">
+<input type="range" value="0" min="0" max="100" step="1">
+<input type="button" value="全屏播放">
+</body>
+</html>

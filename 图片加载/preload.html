@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>图片预加载</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <style>
+    .preload{
+      display: inline-block;
+      width: 300px;
+      height: 260px;
+    }
+    .preload img{
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/default.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/default.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/gift.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/default.jpg" alt=""></div>
+      <div class="preload"><img data-src="../assets/images/snow.jpg" alt=""></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script>
+  var APP = {
+    win: $(window),
+    preload : $('.preload'),
+    init: function(){
+      this.offsetTop();
+      this.ishow();
+      this.scroll();
+    },
+    offsetTop: function(){
+      var self = this;
+      $.each(this.preload, function(i, el){
+        $(el).attr({
+          // 如果图片的 offsetTop -window的高度 < 滚动的高度，说明在可视区域内
+          top: el.offsetTop - self.win.height(),
+          status: 'wait'
+        });
+      });
+    },
+    ishow: function(){
+      var srcollTop = this.win.scrollTop();
+      // 利用 image容器判断是否进入视口，而不是图片本身
+      $.each(this.preload, function(i, el){
+        // console.log($(el).attr('top') , srcollTop)
+        if( $(el).attr('status') === 'ok') return;
+        if( $(el).attr('top') <= srcollTop){
+          $(el).find('img[data-src]').each(function(){
+            this.src = $(this).attr('data-src');
+          });
+          $(el).attr('status', 'ok');
+        }
+      });
+    },
+    scroll: function(){
+      var self = this;
+      this.win.on('scroll', function(){
+        self.ishow();
+      })
+    }
+  }
+
+  APP.init();
+
+
+</script>
+</body>
+</html>

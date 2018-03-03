@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="400" style="border: 1px solid red;"></canvas>
+	<script>
+	var canvas = document.getElementById('canvas');
+	var cxt = canvas.getContext('2d');
+	
+
+	
+	cxt.fillStyle = '#f88';
+
+	cxt.save();  //保存之前的状态
+	cxt.translate(300,200);
+	cxt.lineWidth = 5;
+	cxt.beginPath()
+	cxt.strokeStyle = 'rgba(80,190,230,1)';
+	//填充规则，非0环绕规则
+	cxt.arc(-100,0,150,0,Math.PI*2,true);
+	cxt.stroke();
+	cxt.fill();
+	cxt.restore(); //恢复之前的状态
+
+	cxt.beginPath()
+	cxt.fillStyle = '#f00';
+	cxt.strokeStyle = 'rgba(80,190,230,1)';
+	//填充规则，非0环绕规则
+	cxt.arc(0,0,150,0,Math.PI*2,true);
+	cxt.stroke();
+	cxt.fill();
+	
+
+
+
+
+
+	</script>
+</body>
+</html>

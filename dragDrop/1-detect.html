@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <p class="alert alert-success" id="statusMessage" role="alert"></p>
+    </header>
+  </div>
+</div>
+
+<script src="../assets/js/support.js"></script>
+<script>
+  init();
+  function init(){
+    if(delectDragAndDrop()){
+      statusMessage('浏览器支持HTML5 drag & drop');
+    }
+    else{
+      statusMessage('浏览器不支持HTML5 拖拽');
+    }
+  }
+
+
+  function delectDragAndDrop(){
+    // IE 10 及以下
+    var browser = navigator.appName == 'Microsoft Internet Explorer';
+    if(browser){
+      var UA = navigator.userAgent;
+      var REG = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+      if(REG.exec(UA)){
+        var version = parseFloat( RegExp.$1 );
+        if(version >= 6.0) return true;
+      }
+      return false;
+    }
+
+    if('draggable' in document.createElement('span')) return true;
+    return false;
+  }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>indexedDB</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+
+//创建一个数据库
+
+function createDb(){
+    var res=window.indexedDB.open('testDB');
+    res.onerror=function(e){
+        alert("Database error:"+e.target.errorCode);
+    };
+    res.onsuccess=function(event){
+        alert("Database Create!");
+    };
+}
+
+//删除数据库
+
+function deleteDataBase(){
+    var deleteDb=window.indexedDB.deleteDatabase("testDB");
+    deleteDb.onsuccess=function(e){
+        alert("deleteDb success!");
+    }
+    deleteDb.onerror=function(e){
+        alert("deleteDb error:"+e.target.errorCode);
+    }
+}
+
+//创建一个与之前不同版本的数据库
+
+function CreateVersion(){
+    var res=window.indexedDB.open('testDB',2);
+    res.onerror=function(e){
+        alert("Database error:"+e.target.errorCode);
+    };
+    res.onsuccess=function(e){
+        alert("Database Create!");
+    };
+    res.onupgradeneeded=function(e){
+        alert("Database Version Changed!")
+    }
+}
+
+function createObjStore(){
+    var res=indexedDB.open('testDB',3);
+    res.onupgradeneeded=function(e){
+        var db=e.target.result;
+        if(!db.objectStoreNames.contains('students')){
+            db.createObjectStore('students',{keyPath:"id"});
+        }
+        alert('DB version changed');
+    };
+}
+// createDb();
+
+// createObjStore();
+
+
+function addData(obj,dbname,version,data){
+    //了解异步https://stackoverflow.com/questions/24256202/uncaught-typeerror-cannot-read-property-transaction-of-null-with-an-indexeddb
+
+    var res =indexedDB.open(dbname,version);
+
+    res.onsuccess = function (evt) {
+        var db = evt.target.result;
+
+        //使用事务
+
+        var store =db.transaction(obj, "readwrite").objectStore(obj);
+        store.add(data);
+    }
+
+}
+//addData();
+
+
+//创建索引
+
+function createIndex(){
+    var req=window.indexedDB.open('testDB',7);
+
+    req.onsuccess=function(e){
+        console.log("success");
+    }
+
+    req.onupgradeneeded=function(e){
+        var db=e.target.result;
+        var store=db.createObjectStore("teachers",{keyPath:"id"});
+        //创建索引
+
+        store.createIndex('nameIndex','name',{unique:false});
+        store.createIndex('idIndex','id',{unique:true});
+        store.createIndex("ageIndex","age",{unique:false});
+    }   
+}
+
+//createIndex();
+
+
+//var data={"id":"0","name":"teacher0","age":"20"};
+
+//addData("teachers","testDB",7,data);
+
+
+//根据索引查询
+
+function findByIndex(obj,db){
+    var req=window.indexedDB.open("testDB");
+
+    req.onsuccess=function(e){
+        var db=e.target.result;
+        var store=db.transaction(obj).objectStore(obj);
+        var index=store.index("nameIndex");
+        index.get("teacher0").onsuccess=function(e){
+            var teacher=e.target.result;
+            console.log(teacher);
+        }
+    }
+}
+
+//findByIndex("teachers","testDB");
+
+
+//游标
+
+function findByCursor(stoeName){
+    var req=window.indexedDB.open("testDB");
+        
+        req.onsuccess=function(e){
+        var db=e.target.result;
+        var store=db.transaction(stoeName).objectStore(stoeName);
+
+        //打开游标
+
+        var res=store.openCursor();
+        res.onsuccess=function(evt){
+            var cursor=evt.target.result;
+            if(cursor){
+                console.log(cursor.key,cursor.value);
+                cursor.continue();
+            }
+        }
+    }
+}
+
+
+// var data={"id":"1","name":"teacher1","age":"21"};
+
+// addData("teachers","testDB",7,data);
+
+// findByCursor("teachers");
+
+
+//索引和游标的结合
+
+function findByIndexAndCursor(storeName){
+    var req=window.indexedDB.open("testDB");
+        
+        req.onsuccess=function(e){
+        var db=e.target.result;
+        var store=db.transaction(storeName).objectStore(storeName);
+
+        var index=store.index("nameIndex");
+        //打开游标
+
+        var res=index.openCursor(IDBKeyRange.only('teacher1'));
+        res.onsuccess=function(evt){
+            var cursor=evt.target.result;
+            if(cursor){
+                console.log(cursor.key,cursor.value);
+                cursor.continue();
+            }
+        }
+    }
+}
+
+// var data={"id":"2","name":"teacher1","age":"23"};
+
+// addData("teachers","testDB",7,data);
+
+
+// findByIndexAndCursor("teachers");
+
+
+function updateData(storeName){
+    var req=window.indexedDB.open("testDB");
+        
+        req.onsuccess=function(e){
+        var db=e.target.result;
+        var store=db.transaction(storeName,"readwrite").objectStore(storeName);
+
+        //更新id为100的学生信息
+
+        store.get("100").onsuccess=function(evt){
+            var student=evt.target.result;
+            student.name="newtest";
+            var res=store.put(student);
+            res.onsuccess=function(){
+                console.log("success");
+            }
+        }
+    }
+}
+
+//updateData("students");
+
+
+//删除
+
+function deleteData(storeName){
+    var req=window.indexedDB.open("testDB");
+        
+        req.onsuccess=function(e){
+        var db=e.target.result;
+        //删除id为100的学生信息
+
+        var res=db.transaction(storeName,"readwrite").objectStore(storeName).delete("100");
+
+        res.onsuccess=function(){
+            console.log("delete success");
+        }
+    }
+}
+
+deleteData("students");
+</script>
+</html>

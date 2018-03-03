@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>网页标题</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="" />
+	<style type="text/css">
+		*{/*初始化代码*/
+			margin:0;padding:0; 
+			font-size:12px;
+			font-family:宋体,Arial;
+			letter-spacing:normal;
+		}
+		.p{/*父盒子*/
+			border:solid 1px red;
+			padding:0px;
+			width:500px;
+			font-size:0px; /*inline-block布局的核心代码 1 ,父盒子的font-size:0;*/
+			letter-spacing:-8px; /*兼容苹果浏览器，负值对其他浏览器无效*/
+			margin:5px auto;
+			text-align:center; /*inline-block布局的辅助代码1 */
+		}
+		.p div{/*子盒子*/
+			display:inline-block; /*inline-block布局的核心代码 2 */
+			border:solid 1px red;
+			vertical-align:top; /*inline-block布局的辅助代码 2 */
+		}
+		.p div{
+			*display:inline;/*补充的兼容代码：专门给IE6和IE7用的兼容语法，只有这样IE6/7才表现为inline-block的样子*/
+		}
+
+		.p span{border:solid 1px red;}
+	</style>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="p">
+		<img src="images/foot_a.jpg" width="150" /><img src="images/foot_a.jpg" width="30" /><img src="images/foot_a.jpg" width="70" />
+		<img src="images/foot_a.jpg" width="120" />
+		<img src="images/foot_a.jpg" width="130" />
+	</div>
+	<div class="p">
+		<span style="" >1111111111111111111</span>
+		<span style="" >2222</span>
+		<span style="" >33333333</span>
+		<span style="" >444444444444444</span>
+		<span style="" >55 55 55 55 55 5</span>
+	</div>
+	<div class="p">
+		<div style="width:150px;height:150px;" >1</div>
+		<div style="width:28px;height:30px; margin-left:2px;" >2</div>
+		<div style="width:70px; margin-left:2px;" >3 3 3 3 3 3 3 3 33 33 3 3 33 333 333 3</div>
+		<div style="width:118px;height:120px; margin-left:2px;" >4</div>
+		<div style="width:116px;height:130px; margin-left:2px;" >5</div>
+
+	</div>
+	<br />
+	<div class="p">
+		<div style="width:150px;height:150px;" >1</div>
+		<div style="width:120px;height:120px;" >4</div>
+		<div style="width:88px;height:130px;" >5</div>
+		<div style="width:30px;height:30px;" >2</div>
+		<div style="width:70px;height:70px;" >3</div>
+	</div>
+</body>
+</html>

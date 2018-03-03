@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>indexedDB</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <style>
+    .form-row .col-auto{
+      padding-top: 2rem;
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', init, false);
+    document.addEventListener('click', addDatabase, false);
+    function init(){
+      openDataBase();
+      createDataBase();
+
+      document.form.addEventListener('submit', function(ev){
+        ev.preventDefault();
+      }, false);
+    }
+
+    function addDatabase(ev){
+      ev.preventDefault();
+      var self = ev.target.className.indexOf('btn-success') != -1;
+      // console.log(self, 'self')
+      if(self){
+
+
+        populateDataBase();
+      }
+
+    }
+    //////////////////////////////////////////////////////////////
+
+
+    var localDataBase = {
+      db: null,
+      dbName : 'hero',
+      version : 1,
+      indexedDB : window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB,
+      IDBKeyRange : window.IDBKeyRange || window.webkitIDBKeyRange,
+      IDBTransaction : window.IDBTransaction || window.webkitIDBTransaction
+    };
+
+    // error
+    localDataBase.indexedDB.onerror = function(ev){
+      console.log(`indexedDB Error: ${ev.target.errorCode}`);
+    }
+
+    // openDataBase 打开数据库最新版本
+    function openDataBase(){
+      var openRequest = localDataBase.indexedDB.open(localDataBase.dbName);
+
+      openRequest.onerror = function(ev){
+        console.log(`indexedDB Error: ${ev.target.errorCode}`);
+      }
+      openRequest.onsuccess = function(ev){
+        localDataBase.db = openRequest.result;
+      }
+    }
+
+
+    // createDataBase
+    function createDataBase(){
+      console.log('deleting local database');
+      // var deleteRequest = localDataBase.indexedDB.deleteDatabase(localDataBase.dbName);
+
+      // deleteRequest.onsuccess = function(ev){
+      //   console.log('delete database');
+        var openRequest = localDataBase.indexedDB.open(localDataBase.dbName, localDataBase.version);
+
+        openRequest.onerror = function(ev){
+          console.log(`database error: ${ev.target.errorCode}`);
+        }
+
+        openRequest.onsuccess = function(ev){
+          console.log(`database created`);
+          localDataBase.db = openRequest.result;
+        }
+
+        openRequest.onupgradeneeded = function(ev){
+          console.log(`create object stores`);
+          var objectStorage = ev.currentTarget.result.createObjectStore("person",  {keyPath: "id"});
+          objectStorage.createIndex("name", "name", {unique: false});
+          objectStorage.createIndex('id', "id", {unique: true});
+        }
+
+        // deleteRequest.onerror = function(ev){
+        //   console.log(`database error: ${ev.target.errorCode}`);
+        // }
+      // }
+    }
+
+
+    // populateDataBase
+    function populateDataBase(){
+      console.log(`populating database`);
+      console.log(localDataBase.db)
+      var transaction = localDataBase.db.transaction(['person'], 'readwrite');
+      var objectStorage = transaction.objectStore('person');
+      if(localDataBase != null && localDataBase.db != null){
+        var form = document.form;
+        var obj = {};
+        obj.name = form.name.value;
+        obj.phone = form.phone.value;
+        obj.address = form.address.value;
+        obj.id = null;
+        console.log(obj)
+
+        var request = objectStorage.add(obj);
+        request.onsuccess = function(ev){
+          console.log(`add database ok`);
+        }
+
+        request.onerror = function(ev){
+          console.log(ev.value, 'error');
+        }
+      }
+    }
+
+  </script>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>IndexedDB 实例</h1>
+      <hr>
+      <form name="form">
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="">姓名：</label>
+            <input type="text" name="name" id="" class="form-control">
+          </div>
+          <div class="form-group col">
+            <label for="">电话：</label>
+            <input type="text" name="phone" id="" class="form-control">
+          </div>
+          <div class="form-group col">
+            <label for="">地址：</label>
+            <input type="text" name="address" id="" class="form-control">
+          </div>
+          <div class="form-group col-auto">
+            <button class="btn btn-success" onclick="populateDataBase()">添加</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="">姓名：</label>
+            <input type="text" name="getName" id="" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-primary">查询</button>
+            <button class="btn btn-danger">删除数据库</button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>地址</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>&nbsp;</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

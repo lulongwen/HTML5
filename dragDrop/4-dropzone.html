@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <hr>
+      <div>
+        <figure class="figure">
+          <img data-value="拖拽的是石头" src="../assets/images/rock.png" id="img" class="figure-img img-fluid rounded" alt="rock" draggable="true">
+          <figcaption class="figure-caption">石头</figcaption>
+        </figure>
+        <figure class="figure">
+          <img draggable="true" data-value="拖拽的是剪刀" src="../assets/images/scissors.png" id="img2" class="figure-img img-fluid rounded" alt="剪刀" draggable="true">
+          <figcaption class="figure-caption">剪刀</figcaption>
+        </figure>
+        <figure class="figure">
+          <img data-value="拖拽的是布" src="../assets/images/paper.png" id="img3" class="figure-img img-fluid rounded" alt="布" draggable="true">
+          <figcaption class="figure-caption">布</figcaption>
+        </figure>
+
+        <figure class="figure" id="dropzone">
+          <img src="../assets/images/dropzone.png" class="figure-img img-fluid rounded" alt="拖放">
+          <figcaption class="figure-caption">拖拽到这里</figcaption>
+        </figure>
+      </div>
+      <p class="alert alert-success" id="statusMessage" role="alert">&nbsp;</p>
+    </header>
+  </div>
+</div>
+
+<script src="../assets/js/support.js"></script>
+<script>
+  var count = 0;
+  var type = 'text/plain';
+  var payloads = {
+    img: '石头',
+    img2: '剪刀',
+    img3: '布',
+  };
+  var sourceId;
+
+  init();
+  function init(){
+    if(!delectDragAndDrop()){
+      statusMessage('浏览器不支持HTML5 拖拽');
+      return false;
+    }
+    // statusMessage('浏览器支持HTML5 drag & drop');
+
+    // 从操作系统向浏览器中拖动文件时，不会触发dragstart 和dragend 事件
+    element('img').addEventListener('dragstart',dragStart, false);
+    element('img2').addEventListener('dragstart',dragStart, false);
+    element('img3').addEventListener('dragstart',dragStart, false);
+
+    element('dropzone').addEventListener('dragover', dragOver, false);
+    element('dropzone').addEventListener('drop', drop, false);
+  }
+
+  function dragStart(ev){
+    ev.stopPropagation();
+    sourceId = this.id;
+    console.log('dragStart',sourceId, ev);
+    statusMessage(`开始拖拽：${payloads[sourceId]} ${ev.target.dataset.value}`);
+
+    // copy, move, or link
+    ev.dataTransfer.effectAllowed = 'move';
+    ev.dataTransfer.setData(type, ev.target.dataset.value);
+    return false;
+  }
+  function dragEnd(){
+    statusMessage('drag End');
+  }
+
+  function dragOver(ev){
+    ev.preventDefault();
+
+    return false;
+  }
+
+  function drop(ev){
+    ev.preventDefault();
+    ev.stopPropagation(); // 禁止冒泡，否则firefox拖拽会打开新标签页
+    console.log('dropEvent', ev);
+    var data = ev.dataTransfer.getData(type);
+    statusMessage(`拖拽次数：${payloads[sourceId]} ${++count} ${data}`);
+  }
+
+
+
+  function delectDragAndDrop(){
+    // IE 10 及以下
+    var browser = navigator.appName == 'Microsoft Internet Explorer';
+    if(browser){
+      var UA = navigator.userAgent;
+      var REG = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+      if(REG.exec(UA)){
+        var version = parseFloat( RegExp.$1 );
+        if(version >= 6.0) return true;
+      }
+      return false;
+    }
+
+    if('draggable' in document.createElement('span')) return true;
+    return false;
+  }
+
+
+
+</script>
+</body>
+</html>

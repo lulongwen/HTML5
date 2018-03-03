@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>鼠标画线 canvas</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+<style>
+    body{
+        margin:0
+    }    
+    #canvas{
+        background-color: rgba(32, 139, 218, 0.35);
+    }
+</style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="600">
+        canvas默认： width: 300px, height:150px
+    </canvas>
+    
+<script>
+    var canvas =document.getElementById('canvas');
+    var ctx =canvas.getContext('2d');
+    
+    // 当鼠标在canvas上按下的时候
+    canvas.onmousedown = function(ev){
+        var ev =ev || window.event;
+        
+        //1 moveTo(x, y)移动到绘制的新目标点（起始点）
+        ctx.moveTo(ev.clientX -canvas.offsetLeft, ev.clientY -canvas.offsetTop);
+        
+        // 当鼠标移动的时候
+        document.onmousemove= function(ev){
+            var ev =ev ||window.event;
+            
+            //2  lineTo(x, y) 新的目标点 （结束点）
+            ctx.lineTo(ev.clientX - canvas.offsetLeft, ev.clientY -canvas.offsetTop);
+            
+            // 线条颜色
+            ctx.strokeStyle= 'red';
+            
+            //3 stroke() 画线（绘制定义的路径），默认黑色
+            ctx.stroke();
+            
+           
+        };
+        
+        // 鼠标抬起要结束画线，不结束的话，线条一直在画
+        document.onmouseup= function(){
+            document.onmousemove =null;
+            document.onmouseup =null;
+        }
+    };
+</script>
+</body>
+</html>

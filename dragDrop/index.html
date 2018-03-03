@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <style>
+    figure {
+      -webkit-transition: -webkit-transform 0.2s ease-out;
+      transition: transform 0.2s ease-out;
+    }
+    figure.moving {
+      opacity: 0.25;
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <hr>
+    </header>
+    <div class="col">
+      <figure class="figure" id="img" data-id="rock">
+        <img data-value="拖拽的是石头" src="../assets/images/rock.png" class="figure-img img-fluid rounded" alt="rock" draggable="true">
+        <figcaption class="figure-caption">石头</figcaption>
+      </figure>
+      <figure class="figure" id="img2" data-id="scissors">
+        <img draggable="true" data-value="拖拽的是剪刀" src="../assets/images/scissors.png" class="figure-img img-fluid rounded" alt="剪刀" draggable="true">
+        <figcaption class="figure-caption">剪刀</figcaption>
+      </figure>
+      <figure class="figure" id="img3" data-id="paper">
+        <img data-value="拖拽的是布" src="../assets/images/paper.png" class="figure-img img-fluid rounded" alt="布" draggable="true">
+        <figcaption class="figure-caption">布</figcaption>
+      </figure>
+      <p class="alert alert-success" id="statusMessage" role="alert">&nbsp;</p>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/support.js"></script>
+<script>
+  var APP = {
+    elems : new Array(), // 所有拖拽的元素
+    dragging: null, // 正在拖拽的元素
+    count: 0, // 拖拽次数
+    winners:{
+      rock: '布',
+      paper: '剪刀',
+      scissors: '石头'
+    },
+    active: '2px dashed #f00',
+    normal: '2px solid transparent',
+
+    // 获取 img, figcaption
+    getElem: function(elem, tagName){
+      var children = elem.children;
+      var length = children.length;
+      for(var i=0;i<length; i++){
+        var lock = children[i].nodeName.toLowerCase() === tagName;
+        if(lock) return children[i];
+      }
+      return undefined;
+    },
+
+    // 那个获胜
+    isWinner: function(under, over){
+      var underTitle = this.getElem(under, 'figcaption').innerHTML;
+      var overTitle = this.getElem(over, 'figcaption').innerHTML;
+      var underId = under.dataset.id;
+      console.log(under.dataset.id, overTitle ,this.winners[underId])
+      if(overTitle == this.winners[underId]){
+        this.swapRPS(under, over);
+        statusMessage(`${overTitle} 赢了 ${underTitle}`);
+      }
+      else{
+        statusMessage(`${overTitle} 不能覆盖 ${underTitle}`);
+      }
+    },
+
+    //
+    swapRPS: function(a,b){
+      var hold = new Object();
+      hold.img = this.getElem(a, 'img');
+      hold.src = hold.img.src;
+      hold.alt = hold.img.alt;
+      hold.value = hold.img.dataset.value;
+
+      hold.figcaption = this.getElem(a, 'figcaption');
+      hold.title = hold.figcaption.innerHTML;
+      hold.id = a.dataset.id;
+
+
+      a.dataset.id = b.dataset.id;
+      hold.img.src = this.getElem(b, 'img').src;
+      hold.img.alt =  this.getElem(b, 'img').alt;
+      hold.img.value = this.getElem(b, 'img').dataset.value;
+      hold.figcaption.innerHTML = this.getElem(b, 'figcaption').innerHTML;
+
+      this.getElem(b, 'img').src = hold.src;
+      this.getElem(b, 'img').alt = hold.alt;
+      this.getElem(b, 'img').dataset.value = hold.value;
+      this.getElem(b, 'figcaption').innerHTML = hold.title;
+      b.dataset.id = hold.id;
+    }
+  }
+  APP.elems.push(element('img'), element('img2'), element('img3'));
+
+  init();
+  function init(){
+    if(!delectDragAndDrop()){
+      return statusMessage('浏览器不支持HTML5 拖拽');
+    }
+    for(let i=0; length=APP.elems.length, i<length; i++){
+      var elem = APP.elems[i];
+      elem.addEventListener('dragstart',dragStart, false);
+      elem.addEventListener('dragend',dragEnd, false);
+
+      elem.addEventListener('dragover',dragOver, false);
+      elem.addEventListener('dragenter',dragEnter, false);
+      elem.addEventListener('dragleave',dragLeave, false);
+      elem.addEventListener('drop',drop, false);
+    }
+  }
+
+  function dragStart(ev){
+    ev.stopPropagation();
+    var value = ev.target.dataset.value;
+
+    var elem = APP.getElem(this, 'figcaption').innerHTML;
+    APP.dragging = this;
+    APP.dragging.classList.add('moving');
+    this.style.opacity = '.4';
+    this.style.border = APP.active;
+    statusMessage(`开始拖拽：${elem}`);
+
+    // copy, move, or link
+    ev.dataTransfer.effectAllowed = 'move';
+    // 设置拖拽图片大小
+    ev.dataTransfer.setDragImage(APP.getElem(this, 'img'), 120, 120);
+  }
+  function dragEnd(ev){
+    ev.preventDefault();
+    this.style.opacity = 1;
+    APP.dragging.classList.remove('moving');
+    APP.dragging = null;
+
+    for(var i=0; i<APP.elems.length; i++){
+      APP.elems[i].style.border = APP.normal;
+    }
+    // statusMessage('drag End');
+  }
+
+  // 拖拽放到图片上面触发
+  function dragOver(ev){
+    ev.preventDefault();
+    this.style.border = APP.active;
+    return false;
+  }
+
+  function dragEnter(ev){
+    ev.preventDefault();
+    this.style.border = APP.active;
+    if(this !== APP.dragging){
+      var dragging = APP.getElem(APP.dragging, 'figcaption').innerHTML;
+      var self = APP.getElem(this, 'figcaption').innerHTML;
+      statusMessage(`hover ${dragging}, over ${self}`);
+    }
+  }
+  function dragLeave(ev){
+    ev.preventDefault();
+    this.style.border = APP.normal;
+  }
+
+  function drop(ev){
+    ev.preventDefault();
+    ev.stopPropagation(); // 禁止冒泡，否则firefox拖拽会打开新标签页
+
+    if(this.id === APP.dragging.id) return;
+    else
+      APP.isWinner(this, APP.dragging);
+    // statusMessage(`拖拽次数：${++APP.count}`);
+  }
+
+
+
+  function delectDragAndDrop(){
+    // IE 10 及以下
+    var browser = navigator.appName == 'Microsoft Internet Explorer';
+    if(browser){
+      var UA = navigator.userAgent;
+      var REG = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+      if(REG.exec(UA)){
+        var version = parseFloat( RegExp.$1 );
+        if(version >= 6.0) return true;
+      }
+      return false;
+    }
+
+    if('draggable' in document.createElement('span')) return true;
+    return false;
+  }
+
+
+
+</script>
+</body>
+</html>

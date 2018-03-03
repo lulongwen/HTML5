@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>用户登录首页</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <style>
+    body{
+      padding-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">退出</button>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center"></h1>
+    </div>
+  </div>
+
+  <script src="cookie.js"></script>
+  <script>
+    const TITLE = document.querySelector('h1');
+    const USER = JSON.parse(cookie.get('user') );
+
+    if(USER){ // 登录过
+      TITLE.innerHTML = `欢迎管理员：${USER.name}`;
+      console.log(USER.name)
+    }
+
+    document.addEventListener('click', function(ev){
+      let self = ev.target.tagName.toLocaleLowerCase();
+      if(self !=='button') return;
+
+      cookie.remove('user', '{"name":"${USER.name}"}');
+      location.href= `${location.origin}/portfolio/HTML5/webStorage/cookie/login.html`;
+    }, false);
+  </script>
+</body>
+</html>

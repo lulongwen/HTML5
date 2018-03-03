@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+    canvas{
+        background:#000;
+        /* width: 500px;
+        height: 500px; */
+    }
+    </style>
+</head>
+<body>
+<!-- <input type="color" name="" id="" /> -->
+<canvas width="500" height="500">
+您的浏览器不支持canvas，请升级浏览器或者换一个。
+</canvas>
+<script type="text/javascript">
+var canvas = document.querySelector('canvas');
+//创建2d绘图环境
+var ctx = canvas.getContext("2d");
+
+
+//填充颜色
+ctx.fillStyle = '#fff';
+//填充的矩形
+ctx.fillRect(100, 100, 200, 200);
+
+//描边颜色
+// ctx.strokeStyle = 'yellow';
+ctx.strokeStyle = 'rgba(255,255,0,0.5)';
+//线宽度
+ctx.lineWidth = 20;
+//带边框的矩形
+ctx.strokeRect(100, 100, 200, 200);
+</script>
+</body>
+</html>

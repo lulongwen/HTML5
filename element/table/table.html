@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table</title>
+	<style>
+		body{
+			margin:0;
+			font-family: '微软雅黑', '思源合体';
+			font-size: 14px;
+		}
+		.list, .footer{
+			width: 100%;
+			margin:1em 0;
+			padding:0;
+			list-style-type: none;
+			display: table;
+		}
+		.list li, .footer li{
+			display: table-cell;
+			vertical-align: top;
+		}
+		.footer.page{
+			text-align: center;
+		}
+		.footer.page span{
+			padding-left: 50px;
+		}
+		.header h3{
+			margin: 0;
+			border-bottom: 2px solid #666;
+		    padding-bottom: 5px;
+		    text-align: center;
+		}
+		.header .date{
+			float: right;
+		    padding-right: 15px;
+		    font-weight: 500;
+		    font-size: 13px;
+		}
+		.table-box{
+			width: 1000px;
+			margin: 30px auto;
+			position: relative;
+		}
+		.table-box .side{
+			position: absolute;
+		    top: 66px;
+		    right: -110px;
+		    width: 100px;
+		}
+		.table-box .side p{
+			margin: 5px 0;
+		}
+		.table{
+			width: 100%;
+			border-spacing: 0;
+    		border-collapse: collapse;
+    		border: 3px solid #666;
+		}
+		.table>tbody>tr>td, 
+		.table>thead>tr>th {
+		    padding: 8px;
+		    line-height: 1.42857143;
+		    vertical-align: top;
+		    border: 1px solid #ddd;
+		    text-align: left;
+		}
+		.table>thead>tr>th {
+		    border-bottom-width: 2px;
+		    background-color: #eee;
+		}
+		.table>tbody td .txt{
+			float: right;
+		}
+	</style>
+	
+</head>
+<body>
+	
+	<div class="table-box">
+		<div class="header">
+			<h3>咱家农业有限公司销售单 <span class="date">日期：2017-08-30</span></h3>
+			<ul class="list">
+				<li><label>客户：</label> 零售客户</li>
+				<li><label>地址：</label> 北京市宣武区珠市口大街88号宝庆银楼</li>
+				<li><label>电话：</label> 18915676789</li>
+				<li><label>编号：</label> EWEREWRWERRR234124212</li>
+			</ul>
+		</div>
+			
+		<table class="table">
+			<thead>
+				<tr>
+					<th>商品代码</th>
+					<th>商品名称</th>
+					<th>规格型号</th>
+					<th>单位</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>仓库</th>
+					<th>备注</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>10.13.12</td>
+					<td>拉芳洗发露</td>
+					<td>焗油柔顺</td>
+					<td>瓶</td>
+					<td>10.00</td>
+					<td>23.39</td>
+					<td>233.90</td>
+					<td>总部仓库</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="4">合计金额：698.89 <span class="txt">（大写）陆佰玖拾捌圆捌角玖分</span></td>
+					<td>合计数量：162</td>
+					<td colspan="2">本页数量：<span class="txt">16</span></td>
+					<td colspan="2">本页金额：<span class="txt">987.89</span></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<ul class="footer">
+			<li><label>地址：</label>赵宇路90号批发市场</li>
+			<li><label>联系电话：</label> 19912345678 15078963215</li>
+			<li><label>客户签字：</label> 赵玉婷</li>
+		</ul>
+		<ul class="footer page">
+			<li>第 一 页 <span>共 8 页</span></li>
+		</ul>
+
+		<div class="side">
+			<p><label>白联：</label> 存根</p>
+			<p><label>红联：</label> 出库</p>
+			<p><label>黄联：</label> 客户</p>
+		</div>
+	</div>
+</body>
+</html>

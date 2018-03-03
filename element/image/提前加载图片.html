@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>幻灯片提前加载图片</title>
+</head>
+<body>
+	<!-- 
+		图片加载过一次以后，如果再有对该图片的请求时，
+		由于浏览器已经缓存住这张图片了，不会再发起一次新的请求，而是直接从缓存中载入图片
+	 -->
+	<script>
+		function preload(url, callback){
+			var img = new Image(); // 创建一个 image对象，实现图片的预加载
+			img.src= url;
+
+			if(img.complete){ // 如果图片已经存在浏览器缓存，直接调用回调函数，然后 return
+				callback.call(img);
+				return;
+			}
+
+			img.onload =function(){ // 图片下载完成时异步调用callback函数
+				callback.call(img); // 将回调函数的 this 替换为 image对象
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5-drag and drop</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <style>
+    img{
+      width: 160px;
+    }
+    .dropzone{
+      height: 200px;
+      line-height: 200px;
+      border: 2px dashed #ddd;
+      border-radius: 3px;
+      color: #ccc;
+      text-align: center;
+    }
+    .figure-img {
+      -webkit-transition: -webkit-transform 0.2s ease-out;
+      transition: transform 0.2s ease-out;
+    }
+    .figure-img.moving{
+      opacity: 0.25;
+      -webkit-transform: scale(0.8);
+      transform: scale(0.8);
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 Drag and Drop</h1>
+      <hr>
+    </header>
+    <div class="col">
+      <figure class="figure" id="img" draggable="true">
+        <img src="../assets/images/rock.png" class="figure-img img-fluid rounded" alt="石头">
+        <figcaption class="figure-caption">石头</figcaption>
+      </figure>
+      <figure class="figure" id="img2" draggable="true">
+        <img src="../assets/images/scissors.png" class="figure-img img-fluid rounded" alt="剪刀">
+        <figcaption class="figure-caption">剪刀</figcaption>
+      </figure>
+      <figure class="figure" id="img3" draggable="true">
+        <img src="../assets/images/paper.png" class="figure-img img-fluid rounded" alt="布">
+        <figcaption class="figure-caption">布</figcaption>
+      </figure>
+      <figure class="figure" id="img4" draggable="true">
+        <img src="../assets/images/default.jpg" class="figure-img img-fluid rounded" alt="光晕">
+        <figcaption class="figure-caption">光晕</figcaption>
+      </figure>
+      <div id="dropzone" class="dropzone">
+        拖拽到这里
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * << 符号是"左位移"运算符
+   * ~~ 是由2个~组成,~是位运算 NOT, 将 ~~视为parseInt的简写
+   * math.random() 0.0 ~ 1.0 之间的一个伪随机double数值
+   * ~~( Math.random()* (1<<24) ) 得到一个0 到 16777216之间的值
+   * ( ~~(Math.random()*(1<<24)) ).toString(16)
+   *  其实是一个10进制的颜色值(随机生成数值)，转换成16进制就是,像白色FFFFFF，蓝色0000FF等
+   */
+  var APP = {
+    dragging: null,
+    parent: document.querySelector('.col'),
+    elems: document.querySelectorAll('.figure-img'),
+    dropzone: document.getElementById('dropzone'),
+    color: ( ~~(Math.random()*(1<<24)) ).toString(16)
+  };
+
+  init();
+  function init(){
+    for(let i=0; length=APP.elems.length, i<length; i++){
+      var elem = APP.elems[i];
+      // 拖拽开始
+      elem.addEventListener('dragstart', dragStart, false);
+
+      // 拖拽结束
+     elem.addEventListener('dragend', dragEnd, false);
+    }
+  }
+
+  function dragStart(ev){
+    APP.dragging = ev.target;
+    APP.dragging.style.opacity = .4;
+    APP.dragging.classList.add('moving');
+    // console.log('dragging',APP.dragging == this)
+    ev.dataTransfer.effectAllowed = 'move';
+  }
+  function dragEnd(ev){
+    ev.target.style.opacity = 1;
+    APP.dropzone.style.borderColor = `#ddd`;
+    APP.dragging.classList.remove('moving');
+    APP.dragging = null;
+  }
+
+
+
+  // 拖拽在目标元素上移动
+  APP.dropzone.addEventListener('dragover', function(ev){
+    ev.preventDefault();
+
+  }, false);
+
+  // 拖拽进入目标元素
+  APP.dropzone.addEventListener('dragenter', function(ev){
+    if(this.className.indexOf('dropzone') != -1){
+      this.style.borderColor = `#${APP.color}`;
+      this.innerHTML = 'drag enter';
+    }
+  }, false);
+
+  // 拖拽离开目标元素
+  APP.dropzone.addEventListener('dragleave', function(ev){
+    var color = ( ~~(Math.random()*(1<<24)) ).toString(16);
+    console.log('dragleave',this)
+    if(this.className.indexOf('dropzone') != -1){
+      this.style.borderColor = `#${color}`;
+      this.innerHTML = `drag leave`;
+    }
+  }, false);
+
+  // 拖拽放在目标元素上
+  APP.dropzone.addEventListener('drop', function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    if(ev.target.className.indexOf('dropzone') != -1 && APP.dragging){
+      var parent = APP.dragging.parentElement;
+      APP.parent.removeChild(parent);
+      this.style.borderColor =`#f00`;
+      this.innerHTML = `删除了：${APP.dragging.alt}`;
+    }
+  }, false);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

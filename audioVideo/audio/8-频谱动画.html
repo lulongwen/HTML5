@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<canvas width="700" height="400" id="cas" style="background:#FEB">
+    您的浏览器不支持canvas，请升级浏览器或者换一个。
+</canvas>
+<input type="file" id="f" />
+<script type="text/javascript">
+     var file = document.getElementById('f');
+     var cas = document.querySelector('#cas');
+     var ctx = cas.getContext("2d");
+     var gradient1 = ctx.createLinearGradient(0, 0, 0, 250);
+     gradient1.addColorStop(0, 'red');
+     gradient1.addColorStop(0.5, 'blue');
+     gradient1.addColorStop(1, 'green');
+     var gradient2 = ctx.createLinearGradient(0, 250, 0, 500);
+     gradient2.addColorStop(0, 'rgba(120,255,120,1)');
+     gradient2.addColorStop(0.5, 'rgba(120,120,255,0.4)');
+     gradient2.addColorStop(1, 'rgba(255,120,120,0.1)');
+     file.onchange = function(){
+
+        var f1 = this.files[0];
+        //解析文件
+        var fr = new FileReader();
+        //解析完成的时候触发
+        fr.onload = function(ev){
+            //解析之后的数据
+            var data = ev.target.result;
+            var ac = new AudioContext();
+
+            ac.decodeAudioData(data,function(buffer){
+
+                var source = ac.createBufferSource();
+                var analyser = ac.createAnalyser();
+
+                source.connect(analyser);
+                analyser.connect(ac.destination);
+
+                source.buffer = buffer;
+
+                source.start(0);
+                var arr = new Uint8Array(analyser.frequencyBinCount);
+                //按浏览器帧数获取频谱值并且绘画。
+                (function(){
+                    var arg = arguments;
+                    requestAnimationFrame(function(){
+                        analyser.getByteFrequencyData(arr);
+
+                        ctx.clearRect(0, 0, 700, 500);
+                        for(var i=0;i<arr.length;i++){
+                            ctx.fillStyle = gradient1;
+                            ctx.fillRect(i*2, 250-arr[i], 1, arr[i]);
+
+                            ctx.fillStyle = gradient2;
+                            ctx.fillRect(i*3, 250, 1, arr[i]);
+
+                        }
+
+                        arg.callee();
+                    });
+                })();
+
+            },function(error){
+
+            });
+        };
+        //解析为arraybuffer
+        fr.readAsArrayBuffer(f1);
+     };
+
+</script>
+</body>
+</html>

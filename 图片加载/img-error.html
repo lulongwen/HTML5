@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>图片加载失败替换图片</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <style>
+    body{
+      margin: 0;
+    }
+    body img{
+      max-width: 100%;
+      vertical-align: middle;
+    }
+    #mask{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      z-index: 9;
+      transition:opacity 1s ease-in;
+      background-color: rgba(0,0,0,.65);
+    }
+    .progress{
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%);
+    }
+  </style>
+</head>
+<body>
+  <!--
+  对于图片
+  onload 事件监听是否加载完成
+  onerror 图片加载失败
+
+  某张图片报错，用这个属性，查看是那张图片
+  ev.path[0].attributes[0].nodeValue
+  -->
+  <div id="mask">
+    <progress value="0" max="100" class="progress"></progress>
+  </div>
+
+  <script>
+    let mask = document.querySelector('#mask');
+    let progress = document.querySelector('.progress');
+    let num = 0;
+    const array = [
+      'http://lulongwen/img/big.jpg',
+      'http://lulongwen/img/bg.jpg',
+      'http://lulongwen/img/123.jpg',
+      'http://lulongwen/img/ask.jpg',
+      'http://lulongwen/img/3.jpg',
+      'http://lulongwen/img/4.jpg',
+      'http://lulongwen/img/5.jpg',
+      'http://lulongwen/img/6.jpg',
+      'http://lulongwen/img/7.jpg',
+      'http://lulongwen/img/8.jpg',
+      'http://lulongwen/img/9.jpg',
+      'http://lulongwen/img/10.jpg',
+      'http://lulongwen/img/13.jpg',
+      'http://lulongwen/img/14.jpg',
+      'http://lulongwen/img/15.jpg',
+      'http://lulongwen/img/26.jpg',
+      'http://lulongwen/img/97.jpg',
+      'http://lulongwen/img/58.jpg',
+      'http://lulongwen/img/69.jpg',
+      'http://lulongwen/img/89.jpg'
+    ];
+    const LENGTH = array.length;
+
+    for(var i=0; i<LENGTH;i++){
+      var img = new Image();
+      img.src= `http://lulongwen.com/${i}.jpg`;
+
+      // load
+      img.onload = function(){
+        num++;
+        progress.value = Math.round(num/LENGTH*100);
+        if(progress.value == 100){
+          mask.style.opacity =0;
+          mask.ontransitionend = function(){
+            mask.style.display = 'none';
+          }
+        }
+      }
+
+      // error
+      img.onerror = function(ev){
+        var img = document.createElement('img');
+        img.src = 'default.jpg';
+        num++;
+        progress.value = Math.round(num/LENGTH*100);
+
+        document.body.appendChild(img);
+        if(progress.value ==100){
+          mask.style.opacity = 0;
+          mask.ontransitionend = function(){
+            mask.style.display = 'none';
+          }
+        }
+      }
+
+      /**
+       * $("img").error(function(){
+          $(this).replaceWith("<p><b>图片未加载！</b></p>");
+        });
+       */
+
+  </script>
+</body>
+</html>

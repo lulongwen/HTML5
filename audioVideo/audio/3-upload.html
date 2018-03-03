@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<input type="file" id="f" />
+<script type="text/javascript">
+     var file = document.getElementById('f');
+
+     file.onchange = function(){
+        /*
+
+            file.files  类数组集合
+
+            files中的每一个就是选中的文件
+
+            文件的name代表选中文件的名称
+            size 文件大小
+            type 文件类型
+
+         */
+        // console.log(1);
+        // console.dir(this);
+        //
+        var f1 = this.files[0];
+        //解析文件
+        var fr = new FileReader();
+        //解析完成的时候触发
+        fr.onload = function(ev){
+            //解析之后的数据
+            var data = ev.target.result;
+            var ac = new AudioContext();
+
+            ac.decodeAudioData(data,function(buffer){
+
+                var source = ac.createBufferSource();
+                var analyser = ac.createAnalyser();
+
+                source.connect(analyser);
+                analyser.connect(ac.destination);
+
+                source.buffer = buffer;
+
+                source.start(0);
+                var arr = new Uint8Array(analyser.frequencyBinCount);
+
+                setTimeout(function(){
+                    analyser.getByteFrequencyData(arr);
+                    console.log(arr);
+                },100);
+            },function(error){
+
+            });
+        };
+        //解析为arraybuffer
+        fr.readAsArrayBuffer(f1);
+     };
+
+</script>
+</body>
+</html>

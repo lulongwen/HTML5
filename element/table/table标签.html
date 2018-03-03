@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>标准的表格模型</title>
+</head>
+<body>
+	
+
+<table border="1">
+	<caption>表格说明</caption>
+	<thead>
+		<tr>
+			<th>表格标题</th> 
+			<th>表格头部</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>表格标题</td> 
+			<td>表格内容</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td>表格标题</td> 
+			<td>表格尾部</td>
+		</tr>
+	</tfoot>
+</table>
+
+
+<pre>
+th为表格标题，属性summar为摘要，th是粗体，还是居中的
+caption标签为首部说明，也是居中的，而且如果table有border的话则caption不在border之内
+thead标签为表格头部，
+tbody标签为表格主体内容，
+tfoot标签为表格尾部，任何给定的 table 对象都只能定义一个 tfoot。
+tfoot元素内包含的有效标签有： th   tr   td
+
+
+rowspan　设置单元格所占的行数
+
+colspan　设置单元格所占的列数
+
+
+table是作为一个整体解释的，使用TBODY可以优化显示。如果表格很长，
+用tbody分段，可以一部分一部分地显示，不用等整个表格都下载完成。下载一块显示一块，表格巨大时有比较好的效果。
+
+tbody包含行的内容下载完优先显示，不必等待表格结束
+
+表格行本来是从上向下显示的。但是，应用了thead/tbody/tfoot以后，就“从头到脚”显示，不管你的行代码顺序如何。
+也就是说如果thead写在了tbody的后面，html显示时，还是以先thead后tbody显示。
+
+table是tr的上层标签
+tr必须在一个table里面,它不能单独使用,相当于table的属性标签. 
+table标示一个表格,tr标示这个表格中间的一个行 
+td标示行中的一个列,需要嵌套在tr中间
+</pre>
+
+</body>
+</html>

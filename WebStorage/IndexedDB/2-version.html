@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>indexedDB</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script>
+    // var request = window.indexedDB.open('testDB');
+    // console.log(request, 'request');
+
+    var myDB = {
+      name : 'test',
+      version: 3,
+      db: null
+    };
+    openDB(myDB.name, myDB.version);
+
+    function openDB(name, version) {
+      if (!('indexedDB' in window)) {
+        window.indexedDB = window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+      }
+      var version = version || 1;
+      var request = indexedDB.open(name, version);
+
+      // 请求失败
+      request.onerror = function (ev) {
+        console.log(ev.currentTarget.error.message);
+      }
+      /** 请求成功
+       * 把request 获取的DB对象赋值给了myDB的db属性，
+       * 这样就可以使用myDB.db来访问创建的indexedDB
+       */
+      request.onsuccess = function (ev) {
+        myDB.db = ev.target.result;
+      }
+      // 请求的数据库的版本 和已存在的数据库版本号不一致的时候调用
+      request.onupgradeneeded = function(ev){
+        console.log(`DB version changed to${version}`);
+      }
+    }
+
+
+    // 关闭数据库，调用 数据库对象的 close方法
+    function closeDB(db){
+      return db.close();
+    }
+
+    // 删除数据库使用indexedDB对象的 deleteDatabase方法
+    function deleteDB(name){
+      return indexedDB.deleteDatabase(name);
+    }
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

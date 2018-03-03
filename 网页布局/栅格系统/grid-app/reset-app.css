@@ -1,0 +1,192 @@
+/* ==LESS Document
+	@description: CSS reset for Moblie
+	@Auther: lulongwen
+	@site: weixin.carzone.cn
+	@Date: 2016-04-19
+   ====================================
+*/
+@charset "utf8";
+/* reset default */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+/* 表单元素并不继承父元素 font */
+body,
+button,
+input,
+select,
+textarea {
+  margin:0;
+  font: 300 1em/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+  background-color: #fff;
+  color:#123;
+}
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+mark {
+  background: #fffdd1;
+  border-bottom: 1px solid #ffedce;
+  padding: 2px;
+  margin: 0 5px;
+}
+/* reset default END */
+/* Box Modal */
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.hide {
+  display: none;
+}
+/* position 定位 */
+.por {
+  position: relative;
+}
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+/* 文字多出隐藏 多出隐藏的元素要有宽度 */
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  /*文本不换行，强制一行显示*/
+}
+/* 清除浮动 */
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+/* text style */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  font-weight: 300;
+  color: #000;
+  line-height: 1.35;
+}
+h1,
+.h1 {
+  font-size: 2em;
+}
+h2,
+.h2 {
+  font-size: 2em;
+}
+h3,
+.h3 {
+  font-size: 2em;
+}
+h4,
+.h4 {
+  font-size: 2em;
+}
+h5,
+.h5 {
+  font-size: 2em;
+}
+h6,
+.h6 {
+  font-size: 0.75em;
+}
+small,
+.small {
+  font-size: .75em;
+}
+.error {
+  color: #F00;
+  font-size: 0.75em;
+}
+i,
+em {
+  font-style: normal;
+}
+/* table 表格 去掉table cell 的边距并让其边重合 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.table-layout {
+  table-layout: fixed;
+}
+/* 列表 */
+.ul,
+.ol {
+  list-style: none;
+}
+/* form 表单
+	@ -webkit-appearance:none导致无法获取checkbox值
+		给这个元素重新赋上-webkit-appearance:checkbox就好了
+ */
+button {
+  -webkit-appearance: button;
+  border: 0;
+  background: none;
+}
+input[type=checkbox],
+input[type=radio] {
+  vertical-align: middle;
+}
+/* 取消 webkit的padding值 */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+/* 下划线 */
+a {
+  -webkit-touch-callout: none;
+  text-decoration: none;
+}
+:focus {
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

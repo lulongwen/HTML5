@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>随机图片加载</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <style>
+    .img{
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 15px;
+    }
+    .img img{
+      width: 100%;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2" id="box">
+      <div class="img"><img src="../assets/images/f1.png" alt="喜鹊报喜"></div>
+      <div class="img"><img src="../assets/images/f2.png" alt="姹紫嫣红"></div>
+      <div class="img"><img src="../assets/images/f3.png" alt="水墨风情"></div>
+      <div class="img"><img src="../assets/images/f4.png" alt="含苞盛放"></div>
+      <div class="img"><img src="../assets/images/f5.png" alt="含苞盛放"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script>
+  var speed = 200;
+  var timer;
+  $('img').hide();
+
+  $(function(){
+    timer = setInterval(function(){
+      var loadimg = $('#box img').not('.loaded');
+      var length = loadimg.length;
+      if(!length) clearInterval(timer);
+      loadimg.eq( Math.floor( Math.random()* length) ).fadeIn(300).addClass('loaded');
+    }, speed);
+  })
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 input新增属性</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <header class="col-md-12">
+      <h1>HTML5 input 新增属性</h1>
+    </header>
+
+    <form action="" name="form" id="myform">
+      <p>
+        <label>邮箱:</label>
+        <input type="email" name="url">
+      </p>
+      <p>
+        <label>网址:</label>
+        <input type="url" name="url">
+      </p>
+      <p>
+        <label>电话号码:</label>
+        <input type="tel" name="tel">
+      </p>
+      <p>
+        <label>搜索:</label>
+        <!-- autofocus 自动获得焦点 -->
+        <input type="search" name="search" id="search" autofocus required>
+      </p>
+      <p>
+        <label>数字:</label>
+        <input type="number" name="number" min="0" max="100" step="10">
+      </p>
+      <p>
+        <label>颜色:</label>
+        <input type="color" name="color">
+      </p>
+
+      <p>
+        <label>数值:</label>
+        <input type=range" name="range" min="1" max="30">
+      </p>
+      <p>
+        <label>图片:</label>
+        <input type=image" src="btn.jpg" width="100" height="100">
+      </p>
+      <p>
+        <label>上传文件:</label>
+        <input type="file" name="file" multiple>
+      </p>
+
+
+      <p>
+        <label>输入日期:</label>
+        <input type="date" name="date">
+      </p>
+      <p>
+        <label>输入月份:</label>
+        <input type="month" name="month">
+      </p>
+      <p>
+        <label>年份和星期:</label>
+        <input type="week" name="week">
+      </p>
+      <p>
+        <label>选择或输入时间:</label>
+        <input type="time" step="5" value="18:00" name="time">
+      </p>
+      <p>
+        <label>选择或输入时间:</label>
+        <input type="datetime" name="datetime">
+      </p>
+
+      <p>
+        <label>选择或输入时间:</label>
+        <input type="datetime-local" name="datetime_local">
+      </p>
+
+
+      <input type="url" name="url_list" list="link">
+      <datalist id="link">
+        <option label="新浪" value="http://www.sina.com.cn" />
+        <option label="搜狐" value="http://www.sohu.com" />
+        <option label="网易" value="http://www.163.com" />
+      </datalist>
+      <br><br>
+
+      <button type="submit" autofocus="on">提交</button>
+      <button type="submit" formaction="list.php">提交列表</button>
+      <button type="submit" formaction="image.php">提交图片</button>
+      <br>
+    </form>
+
+    <!--
+    输入框在 form 元素之外，但因为指定的form属性，并且值为表单的id，所以该输入框仍然是表单的一部分。    -->
+    <p>
+      <label>请输入邮编:</label>
+      <input type="text" pattern="[0-9]{6}" name="zipcode" form="myform">
+    </p>
+  </div>
+</div>
+
+<script>
+  var lock = 'autofocus' in document.createElement('input');
+  console.log(lock, 'lock')
+  if(!lock){
+    document.getElementById('search').focus();
+  }
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

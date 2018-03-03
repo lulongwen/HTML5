@@ -1,0 +1,106 @@
+根元素  html
+
+
+元数据和脚本
+	head 、title 、meta 、base 、link 、style 、script 、noscript
+
+
+嵌入资源
+	img 、area 、map 、embed 、object 、param 、source 、iframe
+	canvas 、track 、audio 、 video
+	<video controls poster="poster.jpg">
+		<source src="movie.mp4" type="video/mp4"></source>
+		<source src="movie.webm" type="video/webm"></source>
+		<source src="movie.ogg" type="video/ogg"></source>
+		<track kind="sbutitles" src="video.srt" label="chinese"></track>
+		您的浏览器不支持video标签
+	</video>
+		controls 控制条
+		poster 封面
+		track 字幕
+		autoplay 自动播放
+		loop 循环播放
+
+	<object data="" type="application/x-shockwave-flash">
+		<param name="movie" value="http://pafReader.swf">
+		<param name="flashvars" value="http://book.pdf">
+	</object>
+
+	<embed src="http://pdf.swf" type="application/x-shockwave-flash" width="600" height="300">
+
+
+文档的章节
+	body 、section 、article 、header 、nav 、aside 、hgroup 、footer
+	address 、h1 、h2 、h3 、h4 、h5 、h6 
+
+
+表格数据
+	table 、tr 、td 、th 、thead 、tbody 、tfoot 、caption 、col
+	colspan 、rowspan 、colgroup
+
+
+列表-组合内容
+	div 、dl 、dt 、dd 、ul 、li 、ol 、p 、pre 、blockquot 、br
+	hr 、figcaption 、 figure
+
+
+表单
+	form 、input 、select 、option 、label 、textarea 、legend 、progress
+	meter 、fieldset 、button 、output 、optgroup 、datalist 、keygen
+
+
+input类型
+		input type
+		text、button、checkbox 、password、radio、hidden
+		email、url、number、tel、search、rang、color
+		date picker（date，month，week，time，datetime，datetime-local）
+
+	表单属性
+		checked 选中
+		disabled 禁用
+		selected 选中
+
+		placeholder = " " 提示信息 
+		文本框只能看 readonly
+		隐藏文本框 hidden
+	<label for="myway">我的路线</label>
+	<select name="" id="myway">
+		<optgroup label="去北方">
+			<option value="">内蒙古</option>
+			<option value="">贝加尔湖</option>
+		</optgroup>
+		<optgroup label="去东方">
+			<option value="">山东郡</option>
+			<option value="">观沧海</option>
+		</optgroup>
+			<option value="">中央府</option>
+	</select>
+
+
+文本级别语义
+	strong 、em 、a 、span 、i 、b 、big 、small 、del 、s 、u 、cite
+	code 、mark 、kbd 、wbr 、ins 、bdi 、bdo 、ruby 、dfn 、abbr 、q
+	sub 、sup 、rt 、rp 、time 、var 、samp 
+
+range 一定范围内的数据
+	引用
+		cite 、q
+
+	<a href="mailto:lulongwen@live.com,lulongwen@lulongwen.com">卢珑文</a>
+	<a href="tel:18912345678">18912345678</a> 
+	<!-- 用在移动端较多 -->
+	
+	
+交互元素
+	menu 、command 、summary 、details
+
+@规则
+	@media 响应式布局
+	@keyframes CSS3动画
+	@font-face 定义字体图标
+	@import、@charset、@namespace、@page、@supports、@document
+
+语义化标签的好处
+1 利于 SEO
+2 可访问性
+3 提高代码的可读性

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file"  id="file">
+	<script type="text/javascript">
+	var f = document.getElementById('file');
+
+	f.onchange = function(){
+		var file = this.files[0];
+		
+		var fr = new FileReader();
+
+		fr.onload = function(ev){
+			var result = ev.target.result;
+			var context = new AudioContext();
+			//对音频数据进行解码。
+			context.decodeAudioData(
+				result,
+				function(buffer){//解码成功做的操作。
+					//创建音频节点。
+					var source = context.createBufferSource();
+					//创建频谱解析的节点。
+					var analyser = context.createAnalyser(); 
+					
+					source.connect(analyser);
+					//链接播放器节点。
+					analyser.connect(context.destination)
+					//添加音频数据
+					source.buffer = buffer;
+					//播放
+					source.start(0);
+
+					var array = new Uint8Array(analyser.frequencyBinCount)
+
+					setInterval(function(){
+						analyser.getByteFrequencyData(array);
+						console.log(array);
+					}, 2000);
+				},
+				function(error){//解码失败做的操作。
+					console.log(error);
+				}
+			);
+		};
+
+		fr.readAsArrayBuffer(file);
+	};
+
+	</script>
+</body>
+</html>

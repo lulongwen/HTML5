@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>网页标题</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+
+	<link rel="stylesheet" type="text/css" href="css/init.css" />
+
+	<style type="text/css">
+		/*inline-block布局的外面盒子*/
+		.out{
+			font-size:0px;/*inline-block布局的核心代码1*/
+			letter-spacing:-8px;/*兼容苹果浏览器，负值对其他浏览器无效*/
+		}
+		/*inline-block布局的里面盒子*/
+		.in{
+			display:inline-block;/*inline-block布局的核心代码1*/
+			vertical-align:top;/*最常见情形的辅助代码（所有并列盒子顶部对齐*/
+		}
+		.in{
+			*display:inline;/*补充的兼容代码：专门给IE6和IE7用的兼容语法，只有这样IE6/7才表现为inline-block的样子*/
+		}
+
+		#head{
+			height:99px;
+			background:url(images/guagua_01.jpg) center top;
+		}
+		#head .headBody{
+			height:99px;
+			width:960px;
+			margin:0 auto;
+			font-size:0px;
+			letter-spacing:-8px;
+		}
+		#head .left{
+			display:inline-block;
+			height:73px;
+			width:190px;
+			vertical-align:top;
+			padding-top:26px;
+			padding-left:10px;
+		}
+		#head .left{
+			*display:inline;
+		}
+		#head .right{
+			display:inline-block;
+			height:87px;
+			width:710px;
+			vertical-align:top;
+			padding-top:12px;
+			padding-right:50px;
+			text-align:right;
+		}
+		#head .right{
+			*display:inline;
+		}
+
+		/*导航*/
+		#nav{
+			background:url(images/banner.jpg);
+			margin:3px 0;
+		}
+		#nav ul{
+			width:960px;
+			margin:0 auto;
+			font-size:0px;
+			letter-spacing:-8px;
+		}
+		#nav ul li{
+			display:inline-block;
+			width:94px;
+			text-align:center;
+			line-height:38px;
+			background:url("images/nav_line.gif") no-repeat right top;
+		}
+		#nav ul li{
+			*display:inline;
+		}
+		#nav ul li a{
+			display:block;
+			color:white;
+			font-size:14px;
+			width:92px;
+			height:38px;
+		}
+		#nav ul li a:hover{
+			background:url(images/nav_hover.gif) no-repeat;
+		}
+
+		/*公告*/
+		#gonggao{
+			background:url(images/soso2.jpg);
+			height:30px;
+		}
+		#gonggao .gg{
+			width:960px;
+			margin:0 auto;
+			line-height:30px;
+		}
+		#gonggao .gg .left{
+			width:700px;
+		}
+		#gonggao .gg .right{
+			width:260px;
+			text-align:right;
+		}
+
+		/*banner图*/
+		#banner{
+			text-align:center;
+			margin:4px auto;
+		}
+
+		/*主体部分*/
+		#main{
+			width:960px;
+			margin:0 auto;
+		}
+		#main .mainLeft{
+			width:700px;
+			height:200px;
+		}
+		#main .mainLeft .lefttop{
+			
+		}
+		#main .mainLeft .lefttop .lefttop1{
+			width:25px;
+			height:35px;
+			background:url(images/menu.gif);
+		}
+		#main .mainLeft .lefttop .lefttop2{
+			width:670px;
+			height:35px;
+			background:url(images/menu-line.gif) right top;
+		}
+		#main .mainLeft .lefttop .lefttop2 .lt21{
+			line-height:35px;
+			color:blue;
+			font-size:14px;
+			font-weight:bold;
+			width:200px;
+			padding-left:10px;
+		}
+		#main .mainLeft .lefttop .lefttop2 .lt22{
+			line-height:35px;
+			color:blue;
+			font-size:14px;
+			font-weight:bold;
+			width:460px;
+			text-align:right;
+		}
+		#main .mainLeft .lefttop .lefttop3{
+			width:5px;
+			height:35px;
+			background:url(images/menu.gif) right top;
+		}
+		#main .mainLeft .leftMid{
+			padding:10px;
+			background:yellow;
+			border-left:solid 1px gray;
+			border-right:solid 1px gray;
+		}
+		#main .mainLeft .leftMid1{
+			height:200px;
+			width:160px;
+			margin-right:10px;
+			background:#ff9966;
+		}
+		#main .mainLeft .leftMid2{
+			height:200px;
+			width:260px;
+			margin-right:10px;
+			background:#ffffcc;
+		}
+		#main .mainLeft .leftMid2 h1{
+			height:25px;
+			margin-bottom:3px;
+			background:#99ff33;
+		}
+		#main .mainLeft .leftMid2 ul{
+			height:170px;
+			background:#ffcc00;
+		}
+		#main .mainLeft .leftMid2 ul li
+		{
+			border-bottom: dotted 1px gray;
+			line-height:28px;
+		}
+		#main .mainLeft .leftMid3{
+			height:200px;
+			width:238px;
+			background:#ccff99;
+		}
+
+		#main .mainRight{
+			margin-left:10px;
+			width:250px;
+			background:pink;
+			height:200px;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="head">
+		<div class="headBody">
+			<div class="left"><img src="images/head1.jpg" /></div>
+			<div class="right">
+				  <a href="#">登录</a>
+				 - 
+				  <a href="#">注册</a> - 
+				  <a href="#">忘记密码</a> - 
+				  <a href="#">帮助</a> 
+				  <a href="#">加入收藏</a> 
+				  <a href="#">设为首页</a> 
+			</div>
+		</div>
+	</div>
+	<div id="nav">
+		<ul>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">软件下载</a></li>
+			<li><a href="#">瓜瓜商城</a></li>
+			<li><a href="#">软件下载</a></li>
+			<li><a href="#">软件下载</a></li>
+			<li><a href="#">软件下载</a></li>
+			<li><a href="#">软件下载</a></li>
+			<li><a href="#">软件下载</a></li>
+		</ul>
+	</div>
+	<div id="gonggao">
+		<div class="gg out">
+			<div class="left in"> 呱呱公告：呱呱视频社区严惩低俗24举报流程通告</div>
+			<div class="right in">今天是2011年1月20日 星期四
+</div>
+		</div>
+	</div>
+	<div id="banner"><img src="images/banner4.jpg" /></div>
+	<div id="main" class="out">
+		<div class="mainLeft in">
+			<div class="lefttop out">
+				<div class="lefttop1 in"></div>
+				<div class="lefttop2 in out">
+					<div class="lt21 in">中华情</div>
+					<div class="lt22 in">MORE&gt;&gt;&gt;</div>
+				</div>
+				<div class="lefttop3 in"></div>
+			</div>
+			<div class="leftMid out">
+				<div class="leftMid1 in"></div>
+				<div class="leftMid2 in">
+					<h1></h1>
+					<ul>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+						<li>[报道]首届网络朗诵大赛再添辉煌</li>
+					</ul>
+				</div>
+				<div class="leftMid3 in"></div>
+			</div>
+			<div>主体左下</div>
+		</div>
+		<div class="mainRight in"></div>
+	</div>
+	<div id="">6</div>
+	<div id="">7</div>
+</body>
+</html>

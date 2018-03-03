@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas width="700" height="500" id="canvas" style="background:black"></canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+	var gc = canvas.getContext("2d");
+
+	gc.fillStyle = '#fff';
+	
+	for(var i=0;i<30;i++){
+		gc.fillRect(100+i*15, 100, 10, 200);
+	}
+	
+
+	</script>
+</body>
+</html>

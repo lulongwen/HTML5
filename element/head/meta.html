@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>meta 标签</title>
+
+	<!-- 页面不缓存 -->
+	<meta http-equiv="pragma" content="no-cache"> 
+	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"> 
+	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"> 
+	<meta http-equiv="expires" content="0">
+	<!-- 
+		
+html头文件设置常用之<meta>设置缓存
+ 
+<meta http-equiv="pragma" content="no-cache">,pragma与no-cache用于定义页面缓存,不缓存页面(为了提高速度一些浏览器会缓存浏览者浏览过的页面,通过下面的定义,浏览器一般不会缓存页面,而且浏览器无法脱机浏览.)
+ <meta http-equiv="cache-control" content="no-cache">,常见的取值有private、no-cache、max-age、must-revalidate等，默认为private,其作用根据不同的重新浏览方式分为以下几种情况：
+1） 打开新窗口 值为private、no-cache、must-revalidate，那么打开新窗口访问时都会重新访问服务器。 而如果指定了max-age值，那么在此值内的时间里就不会重新访问服务器，例如： Cache-control: max-age=5(表示当访问此网页后的5秒内再次访问不会去服务器) 
+2） 在地址栏回车 值为private或must-revalidate则只有第一次访问时会访问服务器，以后就不再访问。 值为no-cache，那么每次都会访问。 值为max-age，则在过期之前不会重复访问。
+3） 按后退按扭 值为private、must-revalidate、max-age，则不会重访问， 值为no-cache，则每次都重复访问 
+4） 按刷新按扭 无论为何值，都会重复访问 Cache-control值为“no-cache”时，访问此页面不会在Internet临时文件夹留下页面备份。
+ <meta http-equiv="expires" content="0"> ,指定Expires值为一个早已过去的时间，那么访问此网时若重复在地址栏按回车，那么每次都会重复访问： Expires: Fri, 31 Dec 1999 16:00:00 GMT 比如：禁止页面在IE中缓存 http响应消息头部设置： CacheControl = no-cache Pragma=no-cache Expires = -1 Expires是个好东东，如果服务器上的网页经常变化，就把它设置为0，表示立即过期
+	 -->
+
+	39.在规定时间内跳转
+<META http-equiv=V="REFRESH" content="5;URL=http://www.51js.com"> 
+
+40.网页是否被检索
+<meta name="ROBOTS" content="属性值">
+　　其中属性值有以下一些:
+　　属性值为"all": 文件将被检索，且页上链接可被查询；
+　　属性值为"none": 文件不被检索，而且不查询页上的链接；
+　　属性值为"index": 文件将被检索；
+　　属性值为"follow": 查询页上的链接；
+　　属性值为"noindex": 文件不检索，但可被查询链接；
+　　属性值为"nofollow": 文件不被检索，但可查询页上的链接。 
+
+页面进入和退出的特效
+进入页面<meta http-equiv="Page-Enter" content="revealTrans(duration=x, transition=y)">
+推出页面<meta http-equiv="Page-Exit" content="revealTrans(duration=x, transition=y)"> 
+这个是页面被载入和调出时的一些特效。Duration表示特效的持续时间，以秒为单位。Transition表示使
+
+用哪种特效，取值为1-23:
+　　0 矩形缩小 
+　　1 矩形扩大 
+　　2 圆形缩小
+　　3 圆形扩大 
+　　4 下到上刷新 
+　　5 上到下刷新
+　　6 左到右刷新 
+　　7 右到左刷新 
+　　8 竖百叶窗
+　　9 横百叶窗 
+　　10 错位横百叶窗 
+　　11 错位竖百叶窗
+　　12 点扩散 
+　　13 左右到中间刷新 
+　　14 中间到左右刷新
+　　15 中间到上下
+　　16 上下到中间 
+　　17 右下到左上
+　　18 右上到左下 
+　　19 左上到右下 
+　　20 左下到右上
+　　21 横条 
+　　22 竖条 
+　　23 以上22种随机选择一种
+
+
+</head>
+<body>
+	
+</body>
+</html>

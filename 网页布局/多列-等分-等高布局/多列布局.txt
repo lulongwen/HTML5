@@ -1,0 +1,6 @@
+display:table-cell 的 margin是不能设置的,可以设置padding值
+
+table-layout:fixed；布局优先
+
+flex 通常做小范围的布局，不做大范围的布局，而且性能也是个问题，意思就是（flex 里面的内容不要太多，不要太复杂，内容太多了，就影响到性能）
+
