@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5 移动端可视化报告</title>
+	<link rel="stylesheet" href="assets/css/componentBase.css">
+<style>
+	body{
+		margin: 0;
+		background-color: #222;
+	}
+	.phone{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		
+		width: 360px;
+		height:560px;
+		background-color: #fff;
+	}
+</style>
+</head>
+<body>
+	<!--	测试 H5  componentBase - 基本的图文组件 -->
+	<div class="phone">
+		
+	</div>
+	
+	
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+<script src="assets/js/componentBase.js"></script>
+<script>
+
+	var cfg = {
+		type: 'base',
+		//text:  '基本 图文组件',
+		width: 514,
+		height: 306,
+		
+		css: {
+			bottom: -80,
+			left: '50%',
+			backgroundImage: 'url(assets/images/p1_people.png)',
+			opacity: 0
+		},
+		center: true,
+		
+		animateIn: {
+			bottom: 80,
+			opacity: 1
+		},
+		animateOut: {
+			bottom: -80,
+			opacity: 0
+		}
+		
+	};
+	
+	var component = new ComponentBase('myName',cfg);
+	//console.log(component)
+	
+	$('.phone').append(component);
+	
+	
+	// 点击切换动画
+	var lock = true;
+	$(document).on('click', function(){
+		/*
+		if(lock){
+			$('.component').trigger('onLoad');
+			
+		}else{
+			$('.component').trigger('onLeave')
+		};
+		*/
+		// 三目运算
+		$('.component').trigger( lock ? 'onLoad' : 'onLeave' );
+		lock = !lock;
+	});
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+
+/*
+	 折线图 style
+*/
+body, .phone{
+	overflow: hidden;
+}
+.component-polyline{
+	position: relative;
+}
+
+/* 用canvas来做动画，需要分成好几个层，层的话要用z-index 分高低
+
+*/
+.component-polyline canvas{
+	position: absolute;
+	top:0;
+	left:0;
+	background-color: #fafafa;
+}
+
+.component-polyline .text{
+	position: absolute;
+	z-index: 9;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	text-align: center;
+	/* chrome 不会显示小于12px的字体，要显示10px的字体，就要 scale  缩放
+		transform: scale(.8);
+	*/
+	
+}
+
+
+
+
+
+
+
+
+
+
+

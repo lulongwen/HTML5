@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localForage- indexedDB</title>
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+  <style>
+    .form-row .col-auto{
+      padding-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>IndexedDB 实例</h1>
+        <hr>
+        <form name="form">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="">姓名：</label>
+              <input type="text" name="name" id="" class="form-control">
+            </div>
+            <div class="form-group col">
+              <label for="">电话：</label>
+              <input type="text" name="phone" id="" class="form-control">
+            </div>
+            <div class="form-group col">
+              <label for="">地址：</label>
+              <input type="text" name="address" id="" class="form-control">
+            </div>
+            <div class="form-group col-auto">
+              <button class="btn btn-success">添加</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="">姓名：</label>
+              <input type="text" name="getName" id="" class="form-control">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-primary">查询</button>
+              <button class="btn btn-danger">删除数据库</button>
+            </div>
+          </div>
+        </form>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+          <tr>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>地址</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../node_modules/localforage/dist/localforage.js"></script>
+  <script>
+    document.addEventListener('click', addDatabase, false);
+    function addDatabase(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      const TABLE = document.querySelector('.table tbody');
+      var self = ev.target.className.indexOf('btn-success') != -1;
+
+      var form = document.form;
+      var obj = {};
+          obj.name = form.name.value;
+          obj.phone = form.phone.value;
+          obj.address = form.address.value;
+      var user = new Array();
+          user.push(obj);
+      if(!self) return;
+
+      var data =null;
+
+
+      // setItem
+      localforage.setItem('user', user, function(result){
+        console.log(result, 'set');
+
+      })
+      .then((result)=>{
+        // return localforage.getItem('user');
+        var tr = '';
+        result.forEach((item, i)=>{
+          tr += `<tr>
+                  <td>${item.name}</td><td>${item.phone}</td>
+                  <td>${item.address}</td><td><button class="btn btn-danger btn-sm">删除</button></td>
+                </tr>`;
+        });
+        TABLE.innerHTML = tr;
+
+      })
+      .then((error)=>{
+        // 错误信息
+        // console.log(error);
+      });
+    }
+  </script>
+</body>
+</html>

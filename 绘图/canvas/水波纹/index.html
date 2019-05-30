@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <title>Water drops effect</title>
+        <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <link rel="stylesheet" href="http://www.yyyweb.com/demo/common/init.css">
+        <style>
+            body {
+                margin-top: 25px;
+            }
+            .top-banner {
+                background-color: #666;
+            }
+            #water {
+                height: 330px;
+            }
+            .example {
+                margin-top: 50px;
+            }
+        </style>        
+        <script src="js/vector2d.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/waterfall.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div class="example">
+
+            <canvas id="water">HTML5 compliant browser required</canvas>
+            <div id="switcher">
+                <img onclick='watereff.changePicture(this.src);' src="data_images/underwater1.jpg" />
+                <img onclick='watereff.changePicture(this.src);' src="data_images/underwater2.jpg" />
+            </div>
+            <div id="fps"></div>
+        </div>
+        <div class="footer-banner" style="width:728px; margin:0px auto"></div>
+        <script src="http://www.yyyweb.com/demo/common/jquery.min.js"></script>
+        <script src="http://www.yyyweb.com/demo/common/init.js"></script>
+    </body>
+</html>

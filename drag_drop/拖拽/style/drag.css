@@ -1,0 +1,5 @@
+html,body,h1,h2,h3,h4,h5,h6,div,ul,ol,li,dl,dt,dd,iframe,textarea,input,button,p,strong,b,i,a,span,del,pre,table,tr,th,td,form,fieldset,.pr,.pc{margin:0; padding:0; word-wrap: break-word; font-family:"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei", "Î¢ÈíÑÅºÚ", tahoma, arial, simsun, "ËÎÌå";}
+body,ul,ol,li,dl,dd,p,h1,h2,h3,h4,h5,h6,form,fieldset,.pr,.pc,em,del{font-style:normal; font-size:100%;}
+ul,ol,dl{list-style:none;}
+
+#uploadbox{margin:100px auto; width:800px; height:150px; line-height:150px; text-align:center; font-size:24px; color:#999; border:3px #c0c0c0 dashed; position:relative;}

@@ -1,0 +1,14 @@
+
+/*
+	 基本图文组件对象
+*/
+body, .phone{
+	overflow: hidden;
+}
+
+.component{
+	position: absolute;
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}

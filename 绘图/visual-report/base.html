@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5 移动端可视化报告</title>
+	<link rel="stylesheet" href="assets/css/jquery.fullpage.min.css">
+<style>
+	.component{
+		display: none;
+		width: 50%;
+		height:200px;
+		margin-bottom: 20px;
+		background-color: #A42B09;
+	}
+</style>
+</head>
+<body>
+	<!--	fullpage  模块 -->
+	<div id="h5">
+		<div class="page1 section" id="page1">
+			<section class="component">
+				<h2> page1 </h2>
+			</section>
+		</div>
+		
+		<div class="page2 section" id="page2">
+			<section class="component">
+				<h2> page2 </h2>
+			</section>
+		</div>
+		
+		<div class="page3 section" id="page3">
+			<section class="component">
+				<h2> page3 </h2>
+			</section>
+		</div>
+		
+		<div class="page4 section" id="page4">
+			<section class="component">
+				<h2> page4	</h2>
+			</section>
+		</div>
+		
+		<div class="page5 section" id="page5">
+			<section class="component">
+				<h2> page5	</h2>
+			</section>
+		</div>
+	</div>
+	
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+<script src="assets/js/jquery.fullpage.min.js"></script>
+<script>
+$(function(){
+
+	// fullpage
+	$('#h5').fullpage({
+		sectionsColor: ['#FF6138', '#FFFF9D', '#BEEB9F', '#79BD8F', '#00A388'],
+		onLeave: function(index, nextIndex,direction){
+			// onLeave  将要离开时，先触发 onLeave，后触发 afterLoad
+			// debugger
+			
+			$('#h5').find('.section').eq(index-1).trigger('onLeave');	
+		},
+		afterLoad: function(anchorLink, index){
+			// console.log('afterLoad的索引值==>>', index)
+			
+			$('#h5').find('.section').eq(index-1).trigger('onLoad');
+		}
+	}); // fullpage
+	
+	
+	
+	
+	
+	/*
+	单纯的并不会触发 onLeave 事件，或 onLoad事件，需要和 fullpage的 onLeave 回调函数绑定
+	页面 onleave 事件
+	 
+	页面 afterLoad 事件，统一叫 onLoad
+	*/
+	$('.section').on('onLeave', function(){
+		// console.log( $(this).attr('id'), '==>>', 'onLeave' );
+		
+		$(this).find('.component').triggerHandler('onLeave');
+	});
+	
+	$('.section').on('onLoad', function(){
+		// console.log( $(this).attr('id'), '==>>', 'onLoad' );
+		
+		$(this).find('.component').triggerHandler('onLoad');
+		/*
+		此处事件有 bug, DOM Event的循环传播，无限循环
+			- 因为 .section 和 .component 侦听的事件名字都是一样的， 会导致一个事件传递的死循环
+			- 当 .section 触发 onLeave 事件的时候，会触发页面下的所有 .component 的onLeave 事件，
+			- .component 触发 onLeave 事件的时候， 会冒泡到父元素上，.section会接着触发 onLeave 事件，然后会触发子元素 .component的 onLeave事件，如此循环 onLeave事件，会一直不断地触发 onLeave事件，进入死循环
+		
+		解决方案：
+			- 子元素 .component用 .triggerHandler();
+				- triggerHandler() 不会冒泡，不会执行事件的默认行为
+				- trigger() 会冒泡，会提交表单，执行事件的默认行为
+			
+			- return false;
+				- 组织浏览器默认行为，事件冒泡
+		*/
+	});
+
+	
+	
+	
+	
+	/*
+	组件的入场-出场动画
+		- onLoad 入场动画 执行 fadeIn
+		- onLeave 出场动画 执行 fadeOut
+		- .component 单纯的不会触发 onLoad & onLeave 事件，
+		- 需要结合 fullpage页面的切换，去把页面 $('.section')去做这件事情，把这个页面里面所有的组件也去执行这样一个动画
+	*/
+	$('.component').on('onLoad', function(){
+		$(this).fadeIn();
+		
+		//return false;
+	});
+	
+	$('.component').on('onLeave', function(){
+		$(this).fadeOut();
+		
+		//return false;
+	});
+	
+	// 第一个页面应该主动触发 onLoad Event
+	$('#page1').find('.component').trigger('onLoad')
+});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

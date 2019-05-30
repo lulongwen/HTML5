@@ -1,0 +1,24 @@
+html,body,h1,h2,h3,h4,h5,h6,div,ul,ol,li,dl,dt,dd,iframe,textarea,input,button,p,strong,b,i,a,span,del,pre,table,tr,th,td,form,fieldset,.pr,.pc{margin:0; padding:0; word-wrap: break-word; font-family:"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei", "Î¢ÈíÑÅºÚ", tahoma, arial, simsun, "ËÎÌå";}
+body,ul,ol,li,dl,dd,p,h1,h2,h3,h4,h5,h6,form,fieldset,.pr,.pc,em,del{font-style:normal; font-size:100%;}
+ul,ol,dl{list-style:none;}
+
+::-webkit-scrollbar{width:8px; height:8px;}
+::-webkit-scrollbar-button{display:none;}
+::-webkit-scrollbar-track{background-color:#000;}
+::-webkit-scrollbar-track-piece{background:#ddd;}
+::-webkit-scrollbar-thumb{border-radius:5px; background-color:#8e8e8e;}
+::-webkit-scrollbar-thumb:hover{background-color:#3b3b3b;}
+::-webkit-scrollbar-corner{background-color:#535353;}
+::-webkit-scrollbar-resizer{background-color:#ff6e00;}
+
+body{background:#eee;}
+#content{margin:100px auto; width:600px; height:340px; border:1px #05a solid; text-align:center; font-size:24px; color:#999; background:#fff; overflow:hidden; position:relative;}
+#content #uploadbox{margin:5px; width:584px; height:322px; line-height:322px; border:3px #c0c0c0 dashed;}
+#content #filelist{padding:5px 0;}
+#content #filelist li{margin-left:5px; width:193px; height:111px; float:left; position:relative;}
+#content #filelist li img{display:block; padding:1px; width:189px; height:101px; border:1px #d1d1d1 solid;}
+#content #filelist li .progress,#content #filelist li .percentage{left:2px; overflow:hidden; position:absolute;}
+#content #filelist li .progress{bottom:9px; width:189px; background:#000; opacity:.5;}
+#content #filelist li .percentage{top:50%; left:50%; margin:-38px 0 0 -34px; width:69px; height:69px; text-align:center; font-size:18px; line-height:69px; color:#fff; border-radius:34px; background:rgba(0, 0, 0, .8);}
+#content #filelist li.done .progress{display:none;}
+#content #filelist li.done .percentage{text-indent:-1000em; background:url(../images/done.png) no-repeat center center;}

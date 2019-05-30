@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookie - 登陆页</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="generator" content="PHPStorm">
+  <meta name="author" content="卢珑文">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="text-center">Please sign in</h2>
+        <form name="form">
+          <div class="form-group">
+            <label for="user">用户名：</label>
+            <input type="text" class="form-control" name="user" placeholder="用户名" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="password">密码：</label>
+            <input type="password" class="form-control" name="password" placeholder="密码" required>
+          </div>
+
+          <div class="form-group custom-control custom-checkbox">
+            <input type="checkbox" name="check" class="custom-control-input" id="remember">
+            <label class="custom-control-label" for="remember">
+              <small>十天内免登录</small>
+            </label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">登录</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script src="../../node_modules/js-cookie/src/js.cookie.js"></script>
+<script>
+  /**
+    设置 cookie
+    Cookie.set('name, 'value');
+
+    设置 7天过期
+    Cookies.set('name', 'value',{expires: 7});
+
+    设置 path
+    Cookies.set('name', 'value', { expires: 7, path: '' });
+
+    获取 cookie 
+    Cookies.get('name'); // value
+    Cookies.get('nothing); // undefined
+
+    获取所有 cookie
+    Cookies.get();
+
+    获取 JSON格式，不兼容 IE8以下
+    Cookies.getJSON('name'); // => { foo: 'bar' }
+    Cookies.getJSON(); // => { name: { foo: 'bar' } }
+
+
+    删除 cookie
+    Cookies.set('name','value', {path: ''});
+    Cookies.remove('name'); // fail!
+    Cookies.remove('name', { path: '' }); // removed!
+
+    // Assign the js-cookie api to a different variable and restore the original "window.Cookies"
+    var Cookies2 = Cookies.noConflict();
+    Cookies2.set('name', 'value');
+   */
+   const obj = {
+      "token": "GQiLCJ0aWQiOjEsInNpZCI6MX0.AxTcSyB4KEycAGxmMo0c8JNK8TN7wOO3XItYcL7T-h8", 
+      "expires": 604800 
+    };
+  console.log('cookie', Cookies)
+
+  const FORM = document.forms[0];
+  const USER = JSON.parse(getCookie('user') );
+  FORM.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    let user = this.user.value;
+    let password = this.password.value;
+    let check = this.check.checked;
+    // console.log(user,password, check);
+    if(check)
+      setCookie('user', `{"name":"${user}"}`, 1000);
+    else
+      setCookie('user', `{"name":"${user}"}`);
+
+
+    location.href= `${location.origin}/HTML5/webStorage/cookie/cookie.html`;
+  }, false);
+
+
+  if(USER){ // 是否登录过
+    location.href= `${location.origin}/HTML5/webStorage/cookie/cookie.html`;
+  }
+
+</script>
+</body>
+</html>

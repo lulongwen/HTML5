@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>store</title>
+</head>
+<body>
+<script src="./store.modern.min.js"></script>
+<script>
+  console.log(store);
+
+  // Store current user
+  store.set('user', { name:'Marcus' })
+
+  // Get current user
+  store.get('user')
+
+  // Remove current user
+  // store.remove('user')
+
+  // Clear all keys
+  // store.clearAll()
+
+  // Loop over all stored values
+  store.each(function(value, key) {
+    console.log(key, '==', value)
+  })
+</script>
+</body>
+</html>

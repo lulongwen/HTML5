@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var W = canvas.width = 800;
+    var H = canvas.height = 600;
+
+    canvas.style.boxShadow = '4px 4px 8px rgba(59, 64, 63, 0.69)';
+
+    var rect = ctx.createImageData(100,100); // dw dh
+    var imgData = rect.data;
+
+    //console.log(imgData);//http://blog.csdn.net/lichwei1983/article/details/43893025
+
+    for(var i=0; i<imgData.length; i+=4){
+      imgData[i] = 255;
+      imgData[i + 1] = 0;
+      imgData[i + 2] = 0;
+      imgData[i + 3] = 255;
+    }
+
+    ctx.putImageData(rect,0,0);
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML5 Video Player</title>
+  <script src="yui.js"></script>
+  <script src="MiranaVideo.js" type="text/javascript" charset="gb2312"></script>
+  <link rel="stylesheet" href="MiranaVideo.css" type="text/css"  charset="gb2312">
+</head>
+<body>
+  <script>
+ /********************************by »¨ÎÇµÀ*****************************************/
+	 (function(){
+		 var Y = YAHOO,
+			 U = YAHOO.util,
+			 D = U.Dom,
+			 E = U.Event;
+		 E.onDOMReady(function(){
+			var db = D.getElementsByClassName("miranavideo-js","video")[0];
+			if(Mirana.isSupportsVideo()){
+				Mirana.Video(db);
+			}
+		 });
+	 })();
+		
+ /*************************************************************************/
+</script>
+  <!-- Begin MiranaVideo -->
+  <div class="miranavideo-js-box">
+    <video id="video" class="miranavideo-js" width="640" height="264" poster="http://img08.taobaocdn.com/tps/i8/T1OlXCXnNsXXXXXXXX-637-261.png" preload >
+		<source src="billyBrowsers.ogg" type="video/ogg" />
+		<object width="640" height="264" type="application/x-shockwave-flash"
+            data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">
+            <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+            <param name="allowfullscreen" value="true" />
+            <param name="flashvars" value='config={"clip":"http://video-js.zencoder.com/oceans-clip.mp4"}' />
+            <img src="http://video-js.zencoder.com/oceans-clip.png" width="640" height="264" alt="Poster Image" 
+              title="No video playback capabilities." />
+        </object>
+    </video>
+  </div>
+  <!-- End MiranaVideo -->
+  
+</body>
+</html>

@@ -6,12 +6,7 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>localForage- indexedDB</title>
-  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-  <style>
-    .form-row .col-auto{
-      padding-top: 2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
   <div class="container">
@@ -70,50 +65,42 @@
       </div>
     </div>
   </div>
-  <script src="dist/localforage.js"></script>
+
+  <script src="../../node_modules/localforage/dist/localforage.js"></script>
   <script>
-    document.addEventListener('click', addDatabase, false);
-    function addDatabase(ev){
-      ev.preventDefault();
-      ev.stopPropagation();
-      const TABLE = document.querySelector('.table tbody');
-      var self = ev.target.className.indexOf('btn-success') != -1;
-
-      var form = document.form;
-      var obj = {};
-          obj.name = form.name.value;
-          obj.phone = form.phone.value;
-          obj.address = form.address.value;
-      var user = new Array();
-          user.push(obj);
-      if(!self) return;
-
-      var data =null;
-
-
-      // setItem
-      localforage.setItem('user', user, function(result){
-        console.log(result, 'set');
-
+    // 1 存储 字符串
+    const db = localforage.setItem('str', 'string2')
+      .then(res => {
+        // 当值被存储后，可执行其他操作
+        // console.log('str', res)
       })
-      .then((result)=>{
-        // return localforage.getItem('user');
-        var tr = '';
-        result.forEach((item, i)=>{
-          tr += `<tr>
-                  <td>${item.name}</td><td>${item.phone}</td>
-                  <td>${item.address}</td><td><button class="btn btn-danger btn-sm">删除</button></td>
-                </tr>`;
-        });
-        TABLE.innerHTML = tr;
-
+      .catch(err => {
+        // 当出错时，此处代码运行
+        console.log('str',err);
       })
-      .then((error)=>{
-        // 错误信息
-        // console.log(error);
-      });
-    }
 
+
+
+    // 2 存储对象，不同于 localStorage，你可以存储非字符串类型
+    localforage.setItem('arr', [1, 2, 'three']).then(res => {
+        // 如下输出 `1`
+        // console.log('arr', res)
+    })
+    .catch(function(err) {
+      // 当出错时，此处代码运行
+      console.log('arr', err)
+    })
+
+
+    // 获取值
+    localforage.getItem('arr').then(res => {
+        // 如下输出 `1`
+        console.log('get arr', res)
+    })
+    .catch(function(err) {
+      // 当出错时，此处代码运行
+      console.log('arr', err)
+    })
   </script>
 </body>
 </html>

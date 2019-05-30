@@ -1,0 +1,80 @@
+
+/*
+	 柱状图 style
+*/
+body, .phone{
+	overflow: hidden;
+}
+
+.component-bar .line{
+	height:15px;
+	line-height: 15px;
+	margin-bottom: 15px;
+	position: relative;
+}
+/* .name 柱图名字 */
+.component-bar .line .name{
+	float:left;
+	width:86px;
+	margin-left: 5px;
+	color:#000;
+	text-align: center;
+}
+
+/* .process 进度 */ 
+.component-bar .line .process{
+	float: left;
+	height:15px;
+/*	background-color: #686E6A;*/
+	position: relative;
+}
+/* process .bg 生长动画 ，宽度是 process的宽度*/
+.component .line .bg{
+	position: absolute;
+	top:0;
+	left:0;
+	width: 0%;
+	height: 100%;
+	background-color: #CAE860;
+}
+/* 载入后 bg的 style 过渡效果,动画*/
+.unit-bar_load .line .bg{
+	width: 100%;
+	transition: width 1s .5s;
+}
+
+/* 离开后 bg的 style */
+.unit-bar_leave .line .bg{
+	width: 0;
+}
+
+
+
+/* .percent  百分比进度 % */
+.component .line .percent{
+	float: left;
+	margin-left:5px;
+	color:#999;
+	opacity:0;
+}
+
+/* 进度动画完成后，显示文字 */
+.unit-bar_load .line .percent{
+		/* 过渡属性 动画时间 延迟时间 */
+	transition: all 1s 1s;
+	opacity: 1;
+}
+.unit-bar_leave .line .percent{
+	opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+

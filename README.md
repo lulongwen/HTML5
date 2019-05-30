@@ -1,3 +1,75 @@
+# HTML5 核心知识点
+
+## 语义化标签
+```
+  time, output, rt, rp, math, ruby, nest, keygen,
+  datalist
+  embed, dialog, mark, event-source 
+
+```
+
+
+## 新增的属性
+```
+  output, autofocus, data-*
+  spellcheck, pattern
+  
+  contextmenu, dropzone, autocomplete, min, max, hidden,
+  accept, inputmode, step
+
+```
+
+
+## 用户交互相关
+```
+  SVG
+  Media
+  History
+  Drag & Drop
+  Canvas 2D Context
+  Canvas 3D Context => WebGL
+
+```
+
+
+## 本地存储
+```
+  Local Storage
+  Session Storage
+  WebSQL Database
+  IndexDB Database
+
+```
+
+
+
+## 本地资源
+```
+  File
+  Clipboard
+  Geolocation
+  Web Workers
+  Web Messaging
+  Client-Side Storage
+
+```
+
+
+
+## 服务器相关
+```
+  webSocket
+  Server-Sent-Event
+  XMLHttpRequest Level2
+  Offline Application Caching
+
+```
+
+
+
+
+
+
 
 # HTML5 API的总结：
 - 跨域通信postMessage

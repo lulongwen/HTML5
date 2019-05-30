@@ -1,0 +1,35 @@
+<!-- 下载文件，download指示浏览器下载文件，而不是跳转页面 -->
+<a href="" download></a>
+
+<Button icon="download" @click="fnDownload">下载模板</Button>
+
+
+<script>
+  // 当前窗口打开下载
+  window.location.href = "url"
+
+  // 新窗口下载
+  window.open(url, '_blank')
+
+
+
+  fnDownload() {
+    // 获取 下载链接进行下载
+    if (this.downloadURL) return this.download()
+    this.$axios.get('/api/manager/template/excel/query/1')
+      .then(res => {
+        if (res.status !== 200) return
+        this.downloadURL = res.data.download_url
+        this.download()
+      })
+  },
+  download() {
+    let form = document.createElement('form')
+    form.method = 'get'
+    form.action = this.downloadURL
+
+    document.body.append(form)
+    form.submit()
+    document.body.removeChild(form)
+  },
+</script>

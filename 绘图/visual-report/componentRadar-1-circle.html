@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>雷达图组件</title>
+	<link rel="stylesheet" href="assets/css/componentBase.css">
+	<link rel="stylesheet" href="assets/css/vendor/componentRadar.css">
+<style>
+	body{
+		margin: 0;
+		background-color: #222;
+	}
+	.phone{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		
+		width: 375px;
+		height:667px;
+		background-color: #fff;
+	}
+</style>
+</head>
+<body>
+	<!-- componentRader- 雷达图文组件 -->
+	<div class="phone">
+		
+	</div>
+	
+	
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+<script src="assets/js/componentBase.js"></script>
+<script src="assets/js/vendor/componentRadar-circle.js"></script>
+
+
+<script>
+
+	var cfg = {
+		type: 'radar',
+		//text:  'H5 ComponentRadar',
+		width: 600,
+		height: 600,
+		data: [
+			['HTML5', .4, '#f06'],
+			['JavaScript', .2],
+			['CSS3', .3],
+			['React', .26],
+			['Vue', .08],
+			['jQuery', .12],
+			['AngularJS', .59]
+		],
+		css: {
+			top: 200,
+			opacity: 0
+		},
+		center: true,
+		animateIn: { // 当前DOM的入场和出场动画
+			top: 150,
+			opacity: 1
+		},
+		animateOut: {
+			top: 200,
+			opacity: 0
+		}
+		
+	};
+	
+	var component = new ComponentRadar('radar',cfg);
+	//console.log(component)
+	
+	$('.phone').append(component);
+	
+	
+	// 点击切换动画
+	var lock = true;
+	$(document).on('click', function(){
+		$('.component').trigger( lock ? 'onLoad' : 'onLeave' );
+		lock = !lock;
+	});
+	
+	
+	
+</script>
+</body>
+</html>

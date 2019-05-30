@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas1" width="300" height="300"></canvas>
+  <canvas id="canvas2" width="300" height="300"></canvas>
+  <input type="button" name="" value="按钮">
+  <script>
+    var canvas1 = document.getElementById('canvas1');
+    var ctx1 = canvas1.getContext('2d');
+
+    var canvas2 = document.getElementById('canvas2');
+    var ctx2 = canvas2.getContext('2d');
+
+    var btn = document.querySelector('input');
+
+    var W = canvas1.width = canvas2.width = 500;
+    var H = canvas1.height = canvas2.height = 500;
+
+    canvas1.style.boxShadow = canvas2.style.boxShadow= '4px 4px 8px rgba(59, 64, 63, 0.69)';
+
+    //var rect = ctx.createImageData(100,100);
+
+    //drawImage()
+
+    var img = new Image();
+    img.src = './猴哥.jpg';
+    img.onload = function(){
+      //ctx1.drawImage(this,100,50); // 后面两个参数 绘制的起始点坐标
+      //ctx1.drawImage(this,0,0,500,500); // 后面四个 用来制定绘制的位置和大小
+      //ctx1.drawImage(this,0,0,400,150,0,0,400,150); //sx,sy,sw,sh,dx,dy,dw,dh
+      ctx1.drawImage(this,0,0);
+      btn.onclick = function(){
+        var imgData = ctx1.getImageData(0,0,W,H);
+        var data = imgData.data;
+        //console.log(data);
+        for(var i=0; i<data.length; i+=4){
+          var r = data[i];
+          var g = data[i+1];
+          var b = data[i+2];
+
+          // var grey = 0.3*r + 0.59*g + 0.11*b;
+          //
+          // if(grey < 255/2){
+          //   grey = 0;
+          // }else{
+          //   grey = 255;
+          // }
+
+          // data[i] = 255 - r;
+          // data[i+1] = 255 - g;
+          // data[i+2] = 255 - b;
+
+        }
+        //ctx2.putImageData(imgData,0,0） // 绘制到canvas的某个位置
+        ctx2.putImageData(imgData,0,0,50,50,300,150) //绘制到canvas上的位置  从原图像上截取的其实位置会累加到 canvas 的绘制位置坐标 最后两个参数就是从原图像截取多大
+      }
+    }
+  </script>
+</body>
+</html>

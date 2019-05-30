@@ -1,0 +1,25 @@
+
+/*
+	 雷达图 style
+*/
+body, .phone{
+	overflow: hidden;
+}
+
+.component-radar{
+	
+}
+.component-radar canvas{
+	position: absolute;
+	top:0;
+	left:0;
+	z-index:1;
+	/*	background-color: #eee;*/
+}
+
+.component-radar .text{
+	position: absolute;
+	z-index:9;
+	font-size: 12px;
+	opacity: 0;
+}

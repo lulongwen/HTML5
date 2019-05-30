@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js canvas 黑客帝国</title>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="300" height="300"></canvas>
+
+  <script>
+    init();
+    function init() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+    
+      window.onresize = () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.onresize();
+      
+
+      let str = '架构师{}ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789人闲桂花落，夜静春山空。月出惊山鸟，时鸣春涧中【】前端开发工程师';
+      let arrText = str.split('');
+      let color= 'rgb(51, 255, 51)';
+      
+      let drop = [];
+      let fontSize = 16;
+      let columns = Math.ceil(width / 16);
+
+      for(let i = 0; i < columns; i++) {
+        drop.push(0);
+      }
+
+      function render() {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.font = '16px Arial';
+
+        // 生成随机数
+        for(let i = 0, length = drop.length; i < length; i++) {
+          let letter = arrText[ Math.floor( Math.random() * arrText.length ) ];
+          ctx.fillText(letter, i*fontSize, drop[i]*fontSize);
+
+          if( (drop[i]*fontSize > height) && Math.random() > .9 ) drop[i] = 0;
+          drop[i]++;
+        }
+        ctx.restore();
+      }
+
+      function update() {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(0, 0, 0, .2)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+
+        render();
+        requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+  </script>
+</body>
+</html>

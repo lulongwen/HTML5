@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>H5 对象添加若干页面，页面以动画效果切换</title>
+	<link rel="stylesheet" href="assets/css/vendor/h5.css">
+	<link rel="stylesheet" href="assets/css/jquery.fullpage.min.css">
+
+</head>
+<body>
+	<!-- 测试内容组织功能 
+		- 通过 H5对象，添加 若干页面，页面以动画效果切换
+		- 实现将组件添加到页面的功能
+	-->
+	
+<!-- fullpage -->
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+<script src="assets/js/jquery.fullpage.min.js"></script>
+
+<!-- 添加页面 & 添加组件 -->
+<script src="assets/js/componentBase.js"></script>
+<script src="assets/js/vendor/H5.js"></script>
+<script>
+$(function(){
+	// 实例化一个 H5对象
+	var unit = new H5();
+	//console.log( unit)
+	
+	// 链式调用 == 链式调用如何实现的 ？？
+	unit.addPage('index', '首页')
+			.addComponent('logo',{
+				type: 'base-test',
+				text:  '基本 图文组件',
+				width: 514,
+				height: 306,
+				name: 'myName',
+				css: {
+					
+					bottom: -80,
+					left: '50%',
+					backgroundImage: 'url(assets/images/p1_people.png)',
+					opacity: 0
+				},
+				center: true,
+
+				animateIn: {
+					bottom: 80,
+					opacity: 1
+				},
+				animateOut: {
+					bottom: -80,
+					opacity: 0
+				}
+			})
+		.addComponent('slogan',{
+			text: 'slogan',
+			width: 400,
+			height: 200,
+			css: {
+					
+					top: 80,
+					left: '50%',
+					opacity: 0
+				},
+				center: true,
+
+				animateIn: {
+					top: 80,
+					opacity: 1
+				},
+				animateOut: {
+					top: '-100%',
+					opacity: 0
+				}
+		})
+		.addPage('description','核心理念')
+		.addComponent('caption', {
+			text: '核心理念的二级标题',
+			width: 400,
+			height: 200,
+			css:{
+				backgroundColor: '#f60',
+				top: 100
+			}
+		})
+		.addPage('page3','课程分布方向')
+		.addComponent('caption', {'text': '课程方向分布'})
+		.loader();
+});
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

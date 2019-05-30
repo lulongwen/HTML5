@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var W = canvas.width = 800;
+    var H = canvas.height = 600;
+
+    canvas.style.boxShadow = '4px 4px 8px rgba(59, 64, 63, 0.69)';
+
+    ctx.beginPath();
+    ctx.moveTo(W/2, 0);
+    ctx.lineTo(W/2, H);
+    ctx.moveTo(0, H/2);
+    ctx.lineTo(W, H/2);
+    ctx.stroke();
+
+
+    ctx.font = 'bold 80px Arial';
+    ctx.textAlign = 'right';  //默认是left  可以指定center 和 right
+    ctx.textBaseline = 'top'; //alphabetic/top/hanging/middle/bottom
+    //ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(204, 81, 81, 0.76)';
+    //ctx.fillText('123abc', W/2, H/2);
+    //ctx.strokeText('123abc', W/2, H/2);
+
+    var str = 'abc';
+
+    var w = ctx.measureText(str).width;
+
+    console.log(w);
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

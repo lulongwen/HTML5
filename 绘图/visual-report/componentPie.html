@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pie 饼图组件</title>
+	<link rel="stylesheet" href="assets/css/componentBase.css">
+	<link rel="stylesheet" href="assets/css/vendor/componentPie.css">
+<style>
+	body{
+		margin: 0;
+		background-color: #222;
+	}
+	.phone{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		
+		width: 375px;
+		height:667px;
+		background-color: #fff;
+	}
+</style>
+</head>
+<body>
+	<!-- 饼图组件开发 -->
+	<div class="phone">
+		
+	</div>
+	
+	
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+<script src="assets/js/componentBase.js"></script>
+<script src="assets/js/vendor/componentPie.js"></script>
+
+
+<script>
+
+	var cfg = {
+		type: 'pie',
+		//text:  'ComponentPie',
+		width: 600,
+		height: 600,
+		data: [ // 数据加起来不能 超过 1 ，
+			['HTML5', .06, '#f06'],
+			['JavaScript', .04],
+			['CSS3', .12],
+			['React', .2],
+			['Vue', .13],
+			['jQuery', .17],
+			['AngularJS', .28]
+		],
+		css: {
+			top: 200,
+			opacity: 0
+		},
+		center: true,
+		animateIn: { // 当前DOM的入场和出场动画
+			top: 150,
+			opacity: 1
+		},
+		animateOut: {
+			top: 200,
+			opacity: 0
+		}
+		
+	};
+	
+	var component = new ComponentPie('pie',cfg);
+	//console.log(component)
+	
+	$('.phone').append(component);
+	
+	
+	// 点击切换动画
+	var lock = true;
+	$(document).on('click', function(){
+		$('.component').trigger( lock ? 'onLoad' : 'onLeave' );
+		lock = !lock;
+	});
+	
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿1 锚链接：
+<a href="#html">html</a>
+<a name="html" id="html"></a>
+
+2 图像的热点链接：实现一张图像上同时做多个链接
+热点链接就是把一幅图片划分为不同的热点区域，再让不同的区域进行超链接。要完成地图区域超链接要用到三种标签：
+  <img>
+    <map>
+      <area>
+    </map>
+demo :
+
+  <img src="02.png" usemap="#Map">
+  <map name="Map" id="map">
+       <!-- 多边形链接 -->
+    <area shape="poly" coords="203,199,271,222,246,318,147,325,99,234" href="#">
+    <area shape="poly" coords="390,213,402,149,439,180" href="#">
+
+       <!-- 正方形链接 -->
+    <area shape="rect" coords="3,181,206,346" href="#" alt="">
+    <area shape="rect" coords="224,191,559,339" href="#" alt="">
+    
+        <!-- 圆形形链接 -->
+    <area shape="circle" coords="135,290,119" href="#" alt="">
+    <area shape="circle" coords="422,234,110" href="#" alt="">
+  </map>
+
+说明：
+    <img src="图片路径" usemap="#图片的名称" alt="">
+    <map name="图片的名称">
+        <area shape="形状"   coords="区域座标列表" href="">
+            <!--可根据需要定义多少个热点区域-->
+        <area shape="rect"   coords="区域座标列表" href="">
+    </map>
+
+【1】shape -- 定义热点形状
+          shape="rect"   矩形
+          shape="circle" 圆形
+          shape="poly"  多边形
+
+【2】coords -- 定义区域点的坐标
+     a.矩形：必须使用四个数字，前两个数字为左上角座标，后两个数字为右下角座标                                
+        （左上角）x，y , x，y（右下角）
+        例：<area shape="rect"  coords="100,50,200,75"  href="URL">
+
+     b.圆形：必须使用三个数字，前两个数字为圆心的座标，最后一个数字为半径长度                                                 x,y,半径长度
+         例：<area shape="circle"  coords="85,155,30"  href="URL">
+
+     c.任意图形（多边形）：将图形之每一转折点座标依序填入
+         例：<area shape="poly" coords="232,70,285,70,300,90,250,90,200,78"  href="URL">
+
+
+  
+
+   
+
+
